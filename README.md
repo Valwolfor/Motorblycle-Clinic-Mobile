@@ -15,6 +15,8 @@ mostrará los servicios y estado asociados.
 
 Se usará Git Flow.
 
+Vamos a trabajar predominantemente en GitHub, pero vamos a probar GitLab ///Esto esta en readme
+
 Para inicializar el git flow debe dar el siguiente comando: git flow init.
 Esto abrirá un sistema que facilita la gestión de las ramas. Se configura con está guía https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
 
