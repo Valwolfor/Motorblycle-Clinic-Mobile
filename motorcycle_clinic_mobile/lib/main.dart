@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:motorcycle_clinic_mobile/login.dart';
+import 'package:motorcycle_clinic_mobile/registro.dart';
+
 void main(List<String> args) {
   runApp(const MyApp());
 }
@@ -58,7 +61,7 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
-      drawer: myDrawer(),
+      drawer: myDrawer(context),
       body: myBody(),
     );
   }
@@ -228,7 +231,7 @@ Widget myBody() {
 }
 
 /// Menú izquierdo
-Widget myDrawer() {
+Widget myDrawer(context) {
   return Drawer(
     backgroundColor: const Color(0xffFEFAE0),
     child: SingleChildScrollView(
@@ -240,13 +243,21 @@ Widget myDrawer() {
                 leading: const Icon(Icons.person),
                 title: const Text("Ingresar"),
                 onTap: () {
-                  // My Pfofile button action
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CuerpoLogin()));
                 }),
             ListTile(
                 leading: const Icon(Icons.app_registration_rounded),
                 title: const Text("Registrame"),
                 onTap: () {
-                  // Find peoples button action
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Registro()));
                 }),
             ListTile(
                 title: const Text("App Versión 0.1.0"),
