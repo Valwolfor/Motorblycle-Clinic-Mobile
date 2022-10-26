@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:motorcycle_clinic_mobile/login.dart';
-import 'package:motorcycle_clinic_mobile/registro.dart';
+import 'package:motorcycle_clinic_mobile/pages/login.dart';
+import 'package:motorcycle_clinic_mobile/pages/registro.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
@@ -26,6 +26,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffFEFAE0),
       appBar: AppBar(
         title: const Center(
           child: Text("Bienvenido"),
@@ -37,23 +38,28 @@ class Home extends StatelessWidget {
             itemBuilder: (context) {
               return [
                 const PopupMenuItem(
-                  child: Text(
-                    "Configuración",
+                  child: ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text("Configuración"),
+                    //Puede llevar onTap para darle las opciones.
                   ),
                 ),
                 const PopupMenuItem(
-                  child: Text(
-                    "Danos tu opinión",
+                  child: ListTile(
+                    leading: Icon(Icons.message_rounded),
+                    title: Text("Danos tu opinión"),
                   ),
                 ),
                 const PopupMenuItem(
-                  child: Text(
-                    "Ayuda",
+                  child: ListTile(
+                    leading: Icon(Icons.help),
+                    title: Text("Ayuda"),
                   ),
                 ),
                 const PopupMenuItem(
-                  child: Text(
-                    "Acerca de nosotros",
+                  child: ListTile(
+                    leading: Icon(Icons.group),
+                    title: Text("Acerca de nosotros"),
                   ),
                 )
               ];
@@ -69,163 +75,164 @@ class Home extends StatelessWidget {
 
 Widget myBody() {
   return Container(
-    color: const Color(0xffFEFAE0),
     padding: const EdgeInsets.symmetric(horizontal: 20),
-    child: Column(
-      children: <Widget>[
-        const SizedBox(
-          height: 2,
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 20),
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(90),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Color(0xffBA5C0B),
-                spreadRadius: 0.2,
-                blurRadius: 10,
-                offset: Offset(0, .5),
+    child: SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          const SizedBox(
+            height: 2,
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 20),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(90),
               ),
-            ],
-          ),
-          child: const Padding(
-            padding: EdgeInsets.all(1),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/logo.png'),
-              radius: 70,
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xffBA5C0B),
+                  spreadRadius: 0.2,
+                  blurRadius: 10,
+                  offset: Offset(0, .5),
+                ),
+              ],
+            ),
+            child: const Padding(
+              padding: EdgeInsets.all(1),
+              child: CircleAvatar(
+                backgroundImage: AssetImage('assets/logo.png'),
+                radius: 70,
+              ),
             ),
           ),
-        ),
-        Center(
-          child: FractionallySizedBox(
-            widthFactor: .70,
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                color: const Color(0xffBA5C0B),
-                border: Border.all(
-                  width: 1,
-                  color: const Color(0x44EEA15E),
+          Center(
+            child: FractionallySizedBox(
+              widthFactor: .70,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: const Color(0xffBA5C0B),
+                  border: Border.all(
+                    width: 1,
+                    color: const Color(0x44EEA15E),
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(
+                          10.0) //                 <--- border radius here
+                      ),
+                  // ignore: prefer_const_literals_to_create_immutables
+                  boxShadow: [
+                    // ignore: prefer_const_constructors
+                    BoxShadow(
+                      color: const Color(0xffEEA15E),
+                      spreadRadius: 1,
+                      blurRadius: 4,
+                      offset: const Offset(0, .5),
+                    ),
+                  ],
                 ),
-                borderRadius: const BorderRadius.all(Radius.circular(
+                child: const Center(
+                  child: Text(
+                    "Motorcycle Clinic App",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  child: Column(
+                    children: const <Widget>[
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Text(
+                            "Nuestros clientes siempre obtienen la mejor calidad"),
+                      ),
+                    ],
+                  ),
+                  // ignore: todo
+                  //TODO: dinamico.
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(1),
+                  child: Column(
+                    children: const <Widget>[
+                      Icon(Icons.star_border),
+                      Text("41"),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const <Widget>[
+                Expanded(
+                  child: Text(
+                    "Nuestra aplicación busca facilitar el registro de las ordenes de servicios que llevan los taller de mecánica, específicamente los de motocicletas. Con nuestra App podrás llevar registro de histórico de los ingresos de todos los vehículos que ingresan a tu taller, así como ver una historia clinica de todos los diagnósticos y los servicios prestados en las diferentes ocaciones. ",
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+              decoration: const BoxDecoration(
+                color: Color(0xffEEA15E),
+                borderRadius: BorderRadius.all(Radius.circular(
                         10.0) //                 <--- border radius here
                     ),
                 // ignore: prefer_const_literals_to_create_immutables
                 boxShadow: [
                   // ignore: prefer_const_constructors
                   BoxShadow(
-                    color: const Color(0xffEEA15E),
+                    color: Color(0xffEEA15E),
                     spreadRadius: 1,
                     blurRadius: 4,
-                    offset: const Offset(0, .5),
+                    offset: Offset(0, .5),
                   ),
                 ],
               ),
-              child: const Center(
-                child: Text(
-                  "Motorcycle Clinic App",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+              margin: const EdgeInsets.all(15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Column(
+                    children: const <Widget>[
+                      Icon(Icons.phone),
+                      Text("Llamanos"),
+                    ],
                   ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        Center(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Expanded(
-                child: Column(
-                  children: const <Widget>[
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                          "Nuestros clientes siempre obtienen la mejor calidad"),
-                    ),
-                  ],
-                ),
-                // ignore: todo
-                //TODO: dinamico.
-              ),
-              Padding(
-                padding: const EdgeInsets.all(1),
-                child: Column(
-                  children: const <Widget>[
-                    Icon(Icons.star_border),
-                    Text("41"),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
-              Expanded(
-                child: Text(
-                  "Nuestra aplicación busca facilitar el registro de las ordenes de servicios que llevan los taller de mecánica, específicamente los de motocicletas. Con nuestra App podrás llevar registro de histórico de los ingresos de todos los vehículos que ingresan a tu taller, así como ver una historia clinica de todos los diagnósticos y los servicios prestados en las diferentes ocaciones. ",
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Center(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-            decoration: const BoxDecoration(
-              color: Color(0xffEEA15E),
-              borderRadius: BorderRadius.all(Radius.circular(
-                      10.0) //                 <--- border radius here
+                  Column(
+                    children: const <Widget>[
+                      Icon(Icons.motorcycle),
+                      Text("Unete"),
+                    ],
                   ),
-              // ignore: prefer_const_literals_to_create_immutables
-              boxShadow: [
-                // ignore: prefer_const_constructors
-                BoxShadow(
-                  color: Color(0xffEEA15E),
-                  spreadRadius: 1,
-                  blurRadius: 4,
-                  offset: Offset(0, .5),
-                ),
-              ],
-            ),
-            margin: const EdgeInsets.all(15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Column(
-                  children: const <Widget>[
-                    Icon(Icons.phone),
-                    Text("Llamanos"),
-                  ],
-                ),
-                Column(
-                  children: const <Widget>[
-                    Icon(Icons.motorcycle),
-                    Text("Unete"),
-                  ],
-                ),
-                Column(
-                  children: const <Widget>[
-                    Icon(Icons.share),
-                    Text("Compartir"),
-                  ],
-                ),
-              ],
+                  Column(
+                    children: const <Widget>[
+                      Icon(Icons.share),
+                      Text("Compartir"),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }
