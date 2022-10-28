@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '/widgets/logo.dart';
 import '/widgets/favoriteButton.dart';
 import '/widgets/myDrawer.dart';
 import '/widgets/iconsBar.dart';
@@ -30,6 +31,7 @@ class _HomeState extends State<Home> {
       ),
       drawer: myDrawer(context),
       body: myBody(),
+      bottomNavigationBar: const IconsBar(),
     );
   }
 }
@@ -43,33 +45,12 @@ Widget myBody() {
           const SizedBox(
             height: 2,
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 20),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(90),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Color(0xffBA5C0B),
-                  spreadRadius: 0.2,
-                  blurRadius: 10,
-                  offset: Offset(0, .5),
-                ),
-              ],
-            ),
-            child: const Padding(
-              padding: EdgeInsets.all(1),
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/logo.png'),
-                radius: 70,
-              ),
-            ),
-          ),
-          Center(
+          //Imagen logo
+          const Logo(),
+          const Center(
             child: TitleBar(),
           ),
-          Center(
+          const Center(
             child: StarButton(),
           ),
           Center(
@@ -87,7 +68,6 @@ Widget myBody() {
             ),
           ),
           //barrita final
-          const IconsBar(),
         ],
       ),
     ),

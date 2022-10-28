@@ -1,6 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+
+import '/widgets/logo.dart';
 
 class CuerpoLogin extends StatefulWidget {
   const CuerpoLogin({super.key});
@@ -57,29 +57,7 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
             const SizedBox(
               height: 2,
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 30.0),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(90),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0xffBA5C0B),
-                    spreadRadius: 0.2,
-                    blurRadius: 10,
-                    offset: Offset(0, .5),
-                  ),
-                ],
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(1),
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/logo.png'),
-                  radius: 70,
-                ),
-              ),
-            ),
+            const Logo(),
             Row(
               children: [
                 Expanded(
