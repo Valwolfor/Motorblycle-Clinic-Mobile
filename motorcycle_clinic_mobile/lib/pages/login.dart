@@ -41,51 +41,53 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
       child: Container(
         color: const Color(0xffFEFAE0),
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const SizedBox(
-              height: 2,
-            ),
-            const Logo(),
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      mailField(),
-                      passwordField(),
-                      botonLogin(),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      const Text(
-                        "También puedes loguearte con: ",
-                        style: TextStyle(
-                          fontSize: 16.0,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              const SizedBox(
+                height: 2,
+              ),
+              const Logo(),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        mailField(),
+                        passwordField(),
+                        botonLogin(),
+                        const SizedBox(
+                          height: 15.0,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 15.0,
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          botonFace(),
-                          botonGoogle(),
-                        ],
-                      ),
-                      botonRegistro(),
-                      //TODO: ingreso con cuenta de google.
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ],
+                        const Text(
+                          "También puedes loguearte con: ",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15.0,
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            botonFace(),
+                            botonGoogle(),
+                          ],
+                        ),
+                        botonRegistro(),
+                        //TODO: ingreso con cuenta de google.
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
