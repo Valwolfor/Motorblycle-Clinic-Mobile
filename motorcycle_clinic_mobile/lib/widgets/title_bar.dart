@@ -6,10 +6,10 @@ class TitleBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
-      widthFactor: .75,
+      widthFactor: .95,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 20),
-        padding: const EdgeInsets.all(8),
+        margin: const EdgeInsets.only(bottom: 20.0),
+        padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           color: const Color(0xffBA5C0B),
           border: Border.all(
@@ -35,7 +35,7 @@ class TitleBar extends StatelessWidget {
             "Motorcycle Clinic App",
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 24.0,
+              fontSize: 25.0,
             ),
           ),
         ),

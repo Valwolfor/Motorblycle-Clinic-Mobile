@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../pages/login.dart';
-import '../pages/registro.dart';
+import '/pages/login.dart';
+import '/pages/registro.dart';
 
 /// Menú izquierdo para home con ingreso y registro
 Widget myDrawer(context) {
@@ -14,7 +14,10 @@ Widget myDrawer(context) {
           children: <Widget>[
             ListTile(
                 leading: const Icon(Icons.person),
-                title: const Text("Ingresar"),
+                title: const Text(
+                  "Ingresar",
+                  style: TextStyle(fontSize: 18.0),
+                ),
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.push(
@@ -24,7 +27,10 @@ Widget myDrawer(context) {
                 }),
             ListTile(
                 leading: const Icon(Icons.app_registration_rounded),
-                title: const Text("Registrame"),
+                title: const Text(
+                  "Registrame",
+                  style: TextStyle(fontSize: 18.0),
+                ),
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.push(
@@ -33,7 +39,10 @@ Widget myDrawer(context) {
                           builder: (context) => const Registro()));
                 }),
             ListTile(
-                title: const Text("App Versión 0.1.0"),
+                title: const Text(
+                  "App Versión 0.1.0",
+                  style: TextStyle(fontSize: 16.0),
+                ),
                 onTap: () {
                   // Find peoples button action
                 })

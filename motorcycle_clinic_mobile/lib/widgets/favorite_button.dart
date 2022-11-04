@@ -20,7 +20,7 @@ class _StarButtonState extends State<StarButton> {
           child: Column(
             children: const <Widget>[
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: EdgeInsets.symmetric(vertical: 5.0),
                 child: Text(
                   "Nuestros clientes siempre obtienen la mejor calidad",
                   style: TextStyle(fontSize: 18.0),
@@ -32,7 +32,7 @@ class _StarButtonState extends State<StarButton> {
           //TODO: dinamico.
         ),
         Padding(
-          padding: const EdgeInsets.all(1.0),
+          padding: const EdgeInsets.all(0.0),
           child: Column(
             children: <Widget>[
               IconButton(
@@ -43,14 +43,10 @@ class _StarButtonState extends State<StarButton> {
                   setState(
                     () {
                       if (_isFavorited) {
-                        print(_isFavorited);
                         _isFavorited = !_isFavorited;
-                        print(_isFavorited);
                         _favoriteCount--;
                       } else {
-                        print(_isFavorited);
                         _isFavorited = !_isFavorited;
-                        print(_isFavorited);
                         _favoriteCount++;
                       }
                     },

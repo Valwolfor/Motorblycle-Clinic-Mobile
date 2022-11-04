@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '/widgets/logo.dart';
-import '/widgets/favoriteButton.dart';
-import '/widgets/myDrawer.dart';
-import '/widgets/iconsBar.dart';
-import '/widgets/titleBar.dart';
-import '/widgets/appBM.dart';
+import '/widgets/favorite_button.dart';
+import '/widgets/my_drawer.dart';
+import '/widgets/icons_bar.dart';
+import '/widgets/title_bar.dart';
+import '/widgets/app_bar_menu.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -67,7 +67,7 @@ Widget myBody() {
               ],
             ),
           ),
-          //barrita final
+          // Slider fotos
         ],
       ),
     ),

@@ -13,8 +13,13 @@ class _RegistroState extends State<Registro> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text("Registro"),
+          child: Text(
+            "Registro",
+            style: TextStyle(fontSize: 23.0),
+          ),
         ),
+
+        //TODO: aquí vamos mañana sigo esto
         backgroundColor: const Color(0xff4D581C),
         actions: <Widget>[
           PopupMenuButton<Text>(
