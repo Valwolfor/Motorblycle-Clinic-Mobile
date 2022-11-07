@@ -122,7 +122,7 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
             ),
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(15.0),
           ),
         ),
       ),
@@ -160,7 +160,7 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
           hintText: 'Contraseña',
           helperText: 'Constraseña',
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(15.0),
           ),
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
