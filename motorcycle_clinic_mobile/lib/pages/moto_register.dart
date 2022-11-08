@@ -6,6 +6,7 @@ import 'cliente_tab_register.dart';
 import 'dx_tab_register.dart';
 import 'motivo_tab_register.dart';
 import 'moto_tab_register.dart';
+import 'servicios_tab_register.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
@@ -186,20 +187,20 @@ class _RegisterBikecycleState extends State<RegisterBikecycle>
     return Expanded(
       child: TabBarView(
         controller: _tabController,
-        children: [
-          const SingleChildScrollView(
+        children: const [
+          SingleChildScrollView(
             child: ViewCliente(),
           ),
-          const SingleChildScrollView(
+          SingleChildScrollView(
             child: ViewMoto(),
           ),
-          const SingleChildScrollView(
+          SingleChildScrollView(
             child: ViewMotivo(),
           ),
-          const SingleChildScrollView(
+          SingleChildScrollView(
             child: ViewDx(),
           ),
-          SingleChildScrollView(child: Column()),
+          SingleChildScrollView(child: ViewServicios()),
         ],
       ),
     );
