@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '/widgets/my_drawer.dart';
-import '/widgets/app_bar_menu.dart';
+import '../widgets/my_drawer.dart';
+import '../widgets/app_bar_menu.dart';
 import 'cliente_tab_register.dart';
 import 'dx_tab_register.dart';
 import 'motivo_tab_register.dart';

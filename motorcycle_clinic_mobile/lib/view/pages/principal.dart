@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/widgets/app_bar_menu.dart';
+import '../widgets/app_bar_menu.dart';
 
 class Principal extends StatefulWidget {
   const Principal({super.key});

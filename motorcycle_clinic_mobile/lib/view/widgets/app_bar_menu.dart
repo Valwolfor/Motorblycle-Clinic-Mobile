@@ -12,6 +12,7 @@ class _AppBMenuState extends State<AppBMenu> {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<Text>(
+      iconSize: 32.0,
       color: const Color(0xffFEFAE0),
       itemBuilder: (context) {
         return [

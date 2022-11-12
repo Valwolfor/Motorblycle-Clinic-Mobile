@@ -1,11 +1,13 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
-import '/widgets/logo.dart';
-import '/widgets/favorite_button.dart';
-import '/widgets/my_drawer.dart';
-import '/widgets/icons_bar.dart';
-import '/widgets/title_bar.dart';
-import '/widgets/app_bar_menu.dart';
+import '../widgets/logo.dart';
+import '../widgets/favorite_button.dart';
+import '../widgets/my_drawer.dart';
+import '../widgets/icons_bar.dart';
+import '../widgets/title_bar.dart';
+import '../widgets/app_bar_menu.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -21,6 +23,18 @@ class _HomeState extends State<Home> {
       backgroundColor: const Color(0xffFEFAE0),
       appBar: AppBar(
         backgroundColor: const Color(0xff4D581C),
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(
+                Icons.menu,
+                size: 32.0,
+              ),
+              onPressed: () => Scaffold.of(context)
+                  .openDrawer(), //función que llama al drawer.
+            );
+          },
+        ),
         title: const Center(
           child: Text(
             "Bienvenido",

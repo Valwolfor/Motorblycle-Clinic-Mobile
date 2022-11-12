@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '/pages/login.dart';
-import '/pages/registro.dart';
+import '../pages/login.dart';
+import '../pages/registro.dart';
 
 /// Menú izquierdo para home con ingreso y registro
 Widget myDrawer(context) {

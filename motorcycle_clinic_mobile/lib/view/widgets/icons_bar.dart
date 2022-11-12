@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/pages/registro.dart';
+import '../pages/registro.dart';
 
 class IconsBar extends StatefulWidget {
   const IconsBar({super.key});

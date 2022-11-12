@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '/widgets/logo.dart';
-import '/widgets/app_bar_menu.dart';
+import '../widgets/logo.dart';
+import '../widgets/app_bar_menu.dart';
 import 'login.dart';
 
 class Registro extends StatefulWidget {
@@ -202,7 +202,7 @@ class _RegistroState extends State<Registro> {
             Icons.person,
             color: Color(0xffBA5C0B),
           ),
-          hintText: 'Usuario',
+          hintText: 'Usuario@correo.com',
           helperText: 'Usuario',
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(

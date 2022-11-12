@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '/pages/principal.dart';
-import '/pages/registro.dart';
+import '/controller/request/login_request.dart';
+import '/controller/login_controller.dart';
+import 'principal.dart';
+import 'registro.dart';
 
-import '/widgets/logo.dart';
-import '/widgets/app_bar_menu.dart';
+import '../widgets/logo.dart';
+import '../widgets/app_bar_menu.dart';
 
 class CuerpoLogin extends StatefulWidget {
   const CuerpoLogin({super.key});
@@ -16,10 +18,13 @@ class CuerpoLogin extends StatefulWidget {
 class _CuerpoLoginState extends State<CuerpoLogin> {
   bool _isObscure = true;
   final formKey = GlobalKey<FormState>();
+  late LoginController _controller = LoginController();
+  late LoginRequest _loginRequest = LoginRequest();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffFEFAE0),
       appBar: AppBar(
         title: const Center(
             child: Text(
@@ -31,11 +36,11 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
           AppBMenu(),
         ],
       ),
-      body: formLogin(),
+      body: formLogin(context),
     );
   }
 
-  Widget formLogin() {
+  Widget formLogin(BuildContext context) {
     return Form(
       key: formKey, //para validar datos
       child: Container(
@@ -65,6 +70,7 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
                           "También puedes loguearte con: ",
                           style: TextStyle(
                             fontSize: 16.0,
+                            // fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(
@@ -101,10 +107,11 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
           if (value == null || value.isEmpty) {
             return "El correo electronico es obligatorio";
           }
-          if (value.contains("@") && value.contains(".")) {
+
+          if (!value.contains("@") && !value.contains(".")) {
             return "El correo tiene un formato invalido";
           }
-          //no recuerdo pa que es el null, jaja.
+          //Siempre pide retornar algo y pues null
           return null;
         },
         maxLength: 40,
@@ -114,7 +121,7 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
             Icons.person,
             color: Color(0xffBA5C0B),
           ),
-          hintText: 'Usuario',
+          hintText: 'Usuario@correo.com',
           helperText: 'Usuario',
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(
@@ -125,6 +132,9 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
+        onSaved: (newValue) {
+          _loginRequest.email = newValue!;
+        },
       ),
     );
   }
@@ -137,7 +147,7 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
           if (value == null || value.isEmpty) {
             return "La contraseña es obligatoria";
           }
-          if (value.length > 6) {
+          if (value.length < 6) {
             return "La constraseña debe tener mínimo seis caracteres";
           }
           return null; //por si no entra nada.
@@ -168,6 +178,9 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
             ),
           ),
         ),
+        onSaved: (newValue) {
+          _loginRequest.password = newValue!;
+        },
       ),
     );
   }
@@ -184,14 +197,26 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
       ),
       onPressed: () {
         if (formKey.currentState!.validate()) {
-          //TODO: validar en BD
-          Navigator.of(context).pop();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const Principal(),
-            ),
-          );
+          //si es diferente a null se ejecuta.
+          //save guarda todo los campos con onSaved
+          formKey.currentState!.save();
+          try {
+            _controller.validateLogin(_loginRequest);
+
+            Navigator.of(context).pop();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Principal(),
+              ),
+            );
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(
+                e.toString(),
+              ),
+            ));
+          }
         }
       },
       child: const Text("Ingresar"),
@@ -201,11 +226,11 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
   Widget botonFace() {
     return IconButton(
       alignment: Alignment.center,
-      padding: const EdgeInsets.all(0.0),
+      padding: const EdgeInsets.only(bottom: 40.0),
       icon: const Icon(
         Icons.facebook,
         color: Colors.blueAccent,
-        size: 60.0,
+        size: 65.0,
       ),
       onPressed: () {
         if (true) {
