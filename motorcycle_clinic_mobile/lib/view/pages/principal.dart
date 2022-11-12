@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/app_bar_menu.dart';
+import '../widgets/drawer_admin.dart';
 
-class Principal extends StatefulWidget {
-  const Principal({super.key});
+class Principal extends StatelessWidget {
+  final String email;
+  final String name;
+  const Principal({super.key, required this.email, required this.name});
 
-  @override
-  State<Principal> createState() => _PrincipalState();
-}
-
-class _PrincipalState extends State<Principal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(
+                Icons.menu,
+                size: 32.0,
+              ),
+              onPressed: () => Scaffold.of(context)
+                  .openDrawer(), //función que llama al drawer.
+            );
+          },
+        ),
         title: const Center(
           child: Text(
             "Principal",
@@ -25,6 +35,7 @@ class _PrincipalState extends State<Principal> {
           AppBMenu(),
         ],
       ),
+      drawer: DrawerAdmin(email: email, name: name),
     );
   }
 }

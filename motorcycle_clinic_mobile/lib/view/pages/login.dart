@@ -201,13 +201,14 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
           //save guarda todo los campos con onSaved
           formKey.currentState!.save();
           try {
-            _controller.validateLogin(_loginRequest);
+            var name = _controller.validateLogin(_loginRequest);
 
             Navigator.of(context).pop();
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const Principal(),
+                builder: (context) =>
+                    Principal(email: _loginRequest.email, name: name),
               ),
             );
           } catch (e) {
@@ -235,11 +236,13 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
       onPressed: () {
         if (true) {
           //TODO: validar en BD
+          var name = "name";
           Navigator.of(context).pop();
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const Principal(),
+              builder: (context) =>
+                  Principal(email: _loginRequest.email, name: name),
             ),
           );
         }
@@ -259,13 +262,16 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 17.0),
       ),
       onPressed: () {
+        //Aquí simulando
+        var name = "name";
         if (true) {
           //TODO: validar en BD
           Navigator.of(context).pop();
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const Principal(),
+              builder: (context) =>
+                  Principal(email: _loginRequest.email, name: name),
             ),
           );
         }
