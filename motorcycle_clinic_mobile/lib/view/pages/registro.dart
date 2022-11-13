@@ -14,9 +14,13 @@ class Registro extends StatefulWidget {
 class _RegistroState extends State<Registro> {
   bool _isObscure = true;
   final formKey = GlobalKey<FormState>();
+  //verificar contraseñas
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfirmationController =
       TextEditingController();
+
+  // late RegisterController _controller = RegisterController();
+  // late RegisterRequest _loginRequest = LogiRegisterRequestnRequest();
 
   @override
   void dispose() {
@@ -72,6 +76,7 @@ class _RegistroState extends State<Registro> {
                           style: TextStyle(
                             fontSize: 18.0,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                         const SizedBox(
                           height: 18.0,
@@ -105,7 +110,6 @@ class _RegistroState extends State<Registro> {
           if (value == null || value.isEmpty) {
             return "Por favor ingrese su nombre";
           }
-          //no recuerdo pa que es el null, jaja.
           return null;
         },
         maxLength: 50,
@@ -134,7 +138,6 @@ class _RegistroState extends State<Registro> {
           if (value == null || value.isEmpty) {
             return "Por favor ingrese su apellido(s)";
           }
-          //no recuerdo pa que es el null, jaja.
           return null;
         },
         maxLength: 50,
@@ -159,6 +162,12 @@ class _RegistroState extends State<Registro> {
     return Container(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "Por favor ingrese un número de contacto.";
+          }
+          return null;
+        },
         maxLength: 10,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
@@ -189,7 +198,7 @@ class _RegistroState extends State<Registro> {
           if (value == null || value.isEmpty) {
             return "El correo electronico es obligatorio";
           }
-          if (value.contains("@") && value.contains(".")) {
+          if (!value.contains("@") && !value.contains(".")) {
             return "El correo tiene un formato invalido";
           }
           //no recuerdo pa que es el null, jaja.

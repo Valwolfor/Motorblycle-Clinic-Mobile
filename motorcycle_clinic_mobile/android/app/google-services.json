@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "234873274464",
+    "project_id": "motorcycle-clinic",
+    "storage_bucket": "motorcycle-clinic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234873274464:android:620c155b89dd70fca94305",
+        "android_client_info": {
+          "package_name": "com.example.motorcycle_clinic_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234873274464-qrdlua3t6k4tiu9po40brib2nhv19em1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXG22U58jBE2Pr8WCtgXFVxw2xzqml89A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234873274464-qrdlua3t6k4tiu9po40brib2nhv19em1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

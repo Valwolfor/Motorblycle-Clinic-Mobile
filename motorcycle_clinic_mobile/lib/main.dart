@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'view/pages/home.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main(List<String> args) {
+// ...
+
+void main() async {
+  //este es por un error porque inicia antes de que pase la ejecución del run App
+  WidgetsFlutterBinding.ensureInitialized();
+  //para conectar a Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

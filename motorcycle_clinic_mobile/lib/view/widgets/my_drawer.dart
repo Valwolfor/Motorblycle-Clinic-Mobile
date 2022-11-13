@@ -6,6 +6,7 @@ import '../pages/registro.dart';
 /// Menú izquierdo para home con ingreso y registro
 Widget myDrawer(context) {
   return Drawer(
+    //TODO: pues dejarlos formateado correcamente.
     backgroundColor: const Color(0xffFEFAE0),
     child: SingleChildScrollView(
       child: Container(

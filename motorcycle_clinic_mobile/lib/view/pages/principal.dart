@@ -36,6 +36,7 @@ class Principal extends StatelessWidget {
         ],
       ),
       drawer: DrawerAdmin(email: email, name: name),
+      //TODO: el recibidor del adminsitrador.
     );
   }
 }
