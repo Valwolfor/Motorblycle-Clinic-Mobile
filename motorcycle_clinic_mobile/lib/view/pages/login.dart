@@ -195,13 +195,13 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 12.0),
       ),
-      onPressed: () {
+      onPressed: () async {
         if (formKey.currentState!.validate()) {
           //si es diferente a null se ejecuta.
           //save guarda todo los campos con onSaved
           formKey.currentState!.save();
           try {
-            var name = _controller.validateLogin(_loginRequest);
+            var name = await _controller.validateLogin(_loginRequest);
 
             Navigator.of(context).pop();
             Navigator.push(

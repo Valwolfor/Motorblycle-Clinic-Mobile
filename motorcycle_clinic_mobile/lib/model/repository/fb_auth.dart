@@ -32,4 +32,17 @@ class FirebaseAuthenticationRepository {
   void saveData(UserEntity user) {
     print(user);
   }
+
+  Future<void> singInWithEmailAndPassword(String email, String password) async {
+    try {
+      final credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return Future.error('No existe usuarios registrados con ese correo');
+      } else if (e.code == 'wrong-password') {
+        return Future.error('Los datos ingresados son incorrectos');
+      }
+    }
+  }
 }
