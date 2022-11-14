@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '/controller/request/login_request.dart';
 import '/controller/login_controller.dart';
+import 'moto_register.dart';
 import 'principal.dart';
 import 'registro.dart';
 
@@ -207,10 +208,12 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    Principal(email: _loginRequest.email, name: name),
+                builder: (context) => RegisterMotorcycle(),
+                // Principal(email: _loginRequest.email, name: name),
               ),
             );
+
+            //TODO: Aquí quedé, pero registra el doc con aleatorio, necesito con id, validar botom de validación
           } catch (e) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(

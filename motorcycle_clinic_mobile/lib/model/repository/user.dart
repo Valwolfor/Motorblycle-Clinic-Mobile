@@ -12,6 +12,7 @@ class UserRepository {
 
   Future<UserEntity> findByEmail(String email) async {
     //el value el la entidad que se manda "email"
+    //el converte lo vuelve objeto, porque usa el factory
     final query = await _collectionReference
         .withConverter(
           fromFirestore: UserEntity.fromFirestore,
@@ -20,7 +21,7 @@ class UserRepository {
         .where("email", isEqualTo: email)
         .get();
 //el cast convierte los dato al formato toFirestore
-    var users = query.docs.cast().map((e) => e.data());
+    var users = query.docs.cast().map((item) => item.data());
 
     if (users.isEmpty) {
       return Future.error("El usuario no existe.");

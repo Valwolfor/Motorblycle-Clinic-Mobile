@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '/model/entity/motorcycle.dart';
+import '/controller/service_order_controller.dart';
+
 class ViewMoto extends StatefulWidget {
   const ViewMoto({super.key});
 
@@ -9,6 +12,10 @@ class ViewMoto extends StatefulWidget {
 
 class _ViewMotoState extends State<ViewMoto> {
   final formKeyMotocycle = GlobalKey<FormState>();
+
+  late final ServiceOrderController _controller = ServiceOrderController();
+  late final MotorcycleEntity _motorcycle = MotorcycleEntity();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -110,6 +117,9 @@ class _ViewMotoState extends State<ViewMoto> {
               borderRadius: BorderRadius.circular(15.0),
               borderSide: const BorderSide(color: Color(0xffBA5C0B))),
         ),
+        onSaved: (newValue) {
+          _motorcycle.plate = newValue!;
+        },
       ),
     );
   }
@@ -165,6 +175,9 @@ class _ViewMotoState extends State<ViewMoto> {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
+        onSaved: (newValue) {
+          _motorcycle.idMotor = newValue!;
+        },
       ),
     );
   }
@@ -198,6 +211,9 @@ class _ViewMotoState extends State<ViewMoto> {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
+        onSaved: (newValue) {
+          _motorcycle.idchassis = newValue!;
+        },
       ),
     );
   }
@@ -231,6 +247,9 @@ class _ViewMotoState extends State<ViewMoto> {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
+        onSaved: (newValue) {
+          _motorcycle.brand = newValue!;
+        },
       ),
     );
   }
@@ -264,6 +283,9 @@ class _ViewMotoState extends State<ViewMoto> {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
+        onSaved: (newValue) {
+          _motorcycle.model = newValue!;
+        },
       ),
     );
   }
@@ -304,6 +326,9 @@ class _ViewMotoState extends State<ViewMoto> {
             borderRadius: BorderRadius.circular(15.0),
             borderSide: const BorderSide(color: Color(0xffBA5C0B))),
       ),
+      onSaved: (newValue) {
+        _motorcycle.registerYear = int.tryParse(newValue!);
+      },
     );
   }
 
@@ -317,10 +342,33 @@ class _ViewMotoState extends State<ViewMoto> {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 12.0),
       ),
-      onPressed: () {
+      onPressed: () async {
         if (formKeyMotocycle.currentState!.validate()) {
-          //TODO: validar en BD
-          Navigator.of(context).pop();
+          formKeyMotocycle.currentState!.save();
+          try {
+            await _controller.saveMotorcycle(_motorcycle);
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("El registro de la moto fue exitoso"),
+              ),
+            );
+            //TODO: pasarla a la siguiente pestaña, tal vez setstate de la pestaña.
+            // Navigator.of(context).pop();
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => const ViewMoto(),
+            //   ),
+            // );
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(e.toString()),
+              ),
+            );
+          }
+          print(_motorcycle);
         }
       },
       child: const Text("Regisrar"),

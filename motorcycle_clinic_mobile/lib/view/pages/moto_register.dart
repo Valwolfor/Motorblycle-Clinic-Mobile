@@ -2,37 +2,37 @@ import 'package:flutter/material.dart';
 
 import '../widgets/my_drawer.dart';
 import '../widgets/app_bar_menu.dart';
-import 'cliente_tab_register.dart';
-import 'dx_tab_register.dart';
-import 'motivo_tab_register.dart';
-import 'moto_tab_register.dart';
-import 'servicios_tab_register.dart';
+import 'tabs/customer_tab_register.dart';
+import 'tabs/dx_tab_register.dart';
+import 'tabs/motivo_tab_register.dart';
+import 'tabs/motorcycle_tab_register.dart';
+import 'tabs/servicios_tab_register.dart';
 
-void main(List<String> args) {
-  runApp(const MyApp());
-}
+// void main(List<String> args) {
+//   runApp(const MyApp());
+// }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       title: "Motorcycle Clinic App",
+//       debugShowCheckedModeBanner: false,
+//       home: RegisterBikecycle(),
+//     );
+//   }
+// }
+
+class RegisterMotorcycle extends StatefulWidget {
+  const RegisterMotorcycle({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: "Motorcycle Clinic App",
-      debugShowCheckedModeBanner: false,
-      home: RegisterBikecycle(),
-    );
-  }
+  State<RegisterMotorcycle> createState() => _RegisterMotorcycleState();
 }
 
-class RegisterBikecycle extends StatefulWidget {
-  const RegisterBikecycle({super.key});
-
-  @override
-  State<RegisterBikecycle> createState() => _RegisterBikecycleState();
-}
-
-class _RegisterBikecycleState extends State<RegisterBikecycle>
+class _RegisterMotorcycleState extends State<RegisterMotorcycle>
     with SingleTickerProviderStateMixin {
   //el with es para darle contexto al this.
   int selectedPage = 0;

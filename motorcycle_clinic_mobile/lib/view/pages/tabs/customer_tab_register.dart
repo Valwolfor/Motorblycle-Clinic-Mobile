@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:motorcycle_clinic_mobile/view/pages/tabs/motorcycle_tab_register.dart';
+
+import '/model/entity/customer.dart';
+import '/controller/service_order_controller.dart';
 
 class ViewCliente extends StatefulWidget {
   const ViewCliente({super.key});
@@ -17,6 +21,9 @@ class _ViewClienteState extends State<ViewCliente> {
   ];
 
   final formKeyCustomer = GlobalKey<FormState>();
+
+  late final ServiceOrderController _controller = ServiceOrderController();
+  late final CustomerEntity _customer = CustomerEntity();
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +110,7 @@ class _ViewClienteState extends State<ViewCliente> {
                 ))
             .toList(),
         onChanged: (value) {
+          _customer.typeId = value!;
           setState(
             () {
               _selectedValue = value as String;
@@ -164,6 +172,9 @@ class _ViewClienteState extends State<ViewCliente> {
               borderRadius: BorderRadius.circular(15.0),
               borderSide: const BorderSide(color: Color(0xffBA5C0B))),
         ),
+        onSaved: (newValue) {
+          _customer.id = newValue!;
+        },
       ),
     );
   }
@@ -196,6 +207,9 @@ class _ViewClienteState extends State<ViewCliente> {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
+        onSaved: (newValue) {
+          _customer.name = newValue!;
+        },
       ),
     );
   }
@@ -228,6 +242,9 @@ class _ViewClienteState extends State<ViewCliente> {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
+        onSaved: (newValue) {
+          _customer.lastName = newValue!;
+        },
       ),
     );
   }
@@ -240,7 +257,7 @@ class _ViewClienteState extends State<ViewCliente> {
           if (value == null || value.isEmpty) {
             return "El correo electronico es obligatorio";
           }
-          if (value.contains("@") && value.contains(".")) {
+          if (!value.contains("@") && !value.contains(".")) {
             return "El correo tiene un formato invalido";
           }
           //no recuerdo pa que es el null, jaja.
@@ -264,6 +281,9 @@ class _ViewClienteState extends State<ViewCliente> {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
+        onSaved: (newValue) {
+          _customer.email = newValue!;
+        },
       ),
     );
   }
@@ -300,6 +320,9 @@ class _ViewClienteState extends State<ViewCliente> {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
+        onSaved: (newValue) {
+          _customer.phoneNumber = newValue!;
+        },
       ),
     );
   }
@@ -314,10 +337,33 @@ class _ViewClienteState extends State<ViewCliente> {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 12.0),
       ),
-      onPressed: () {
+      onPressed: () async {
         if (formKeyCustomer.currentState!.validate()) {
-          //TODO: validar en BD
-          Navigator.of(context).pop();
+          formKeyCustomer.currentState!.save();
+          try {
+            await _controller.saveCustomer(_customer);
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("El registro del cliente fue exitoso"),
+              ),
+            );
+            //TODO: pasarla a la siguiente pestaña, tal vez setstate de la pestaña.
+            // Navigator.of(context).pop();
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => const ViewMoto(),
+            //   ),
+            // );
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(e.toString()),
+              ),
+            );
+          }
+          print(_customer);
         }
       },
       child: const Text("Regisrar"),
