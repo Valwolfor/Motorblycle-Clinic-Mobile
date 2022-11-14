@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserEntity {
   //LATE para manejar el null, el ?option para que pueda tener null
   late String? name;
@@ -14,6 +16,20 @@ class UserEntity {
       // this.password, no se necesita porque es validada por FB
       this.phoneNumber,
       this.isAdmin});
+
+//para obtener
+  factory UserEntity.fromFirestore(
+      DocumentSnapshot<Map<String, dynamic>> snapshot,
+      SnapshotOptions? options) {
+    //devielve todos los datos en map consultados.
+    var data = snapshot.data();
+    return UserEntity(
+        email: data?["email"],
+        name: data?["name"],
+        lastName: data?["lastName"],
+        phoneNumber: data?["phoneNumber"],
+        isAdmin: data?["isAdmin"]);
+  }
 
   Map<String, dynamic> toFirestore() {
     return {

@@ -4,16 +4,18 @@ import '/model/repository/user.dart';
 import 'request/login_request.dart';
 
 class LoginController {
-  late final FirebaseAuthenticationRepository userRepository;
-
+  late final FirebaseAuthenticationRepository userAuthRepository;
+  late final UserRepository userRepository;
   LoginController() {
-    userRepository = FirebaseAuthenticationRepository();
+    userAuthRepository = FirebaseAuthenticationRepository();
+    userRepository = UserRepository();
   }
   Future<String> validateLogin(LoginRequest request) async {
-    await userRepository.singInWithEmailAndPassword(
+    await userAuthRepository.singInWithEmailAndPassword(
         request.email, request.password);
-    var user = "userRepository";
-    // var nameUser = "${user.name} ${user.lastName}";
-    return user;
+    var user = await userRepository.findByEmail(request.email);
+
+    var nameUser = "${user.name} ${user.lastName}";
+    return nameUser;
   }
 }
