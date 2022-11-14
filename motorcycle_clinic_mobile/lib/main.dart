@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'view/pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_database/firebase_database.dart';
+
+//FirebaseDatabase database = FirebaseDatabase.instance;
 
 // ...
 
@@ -21,10 +25,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: "Motorcycle Clinic App",
-      debugShowCheckedModeBanner: false,
-      home: Home(),
+    return GestureDetector(
+      onTap: () {
+        //quitar teclado
+        final FocusScopeNode focus = FocusScope.of(context);
+
+        if (!focus.hasPrimaryFocus && focus.hasFocus) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        }
+      },
+      child: const MaterialApp(
+        title: "Motorcycle Clinic App",
+        debugShowCheckedModeBanner: false,
+        home: Home(),
+      ),
     );
   }
 }

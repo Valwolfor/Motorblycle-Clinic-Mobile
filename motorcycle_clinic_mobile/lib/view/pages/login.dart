@@ -108,7 +108,7 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
             return "El correo electronico es obligatorio";
           }
 
-          if (!value.contains("@") && !value.contains(".")) {
+          if (!value.contains("@") || !value.contains(".")) {
             return "El correo tiene un formato invalido";
           }
           //Siempre pide retornar algo y pues null

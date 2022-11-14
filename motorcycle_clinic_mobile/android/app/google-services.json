@@ -29,6 +29,13 @@
             {
               "client_id": "234873274464-qrdlua3t6k4tiu9po40brib2nhv19em1.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "234873274464-7p9mccv0ogovtvb6tguuth2csspjqcim.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.motorcycleClinicMobile"
+              }
             }
           ]
         }
