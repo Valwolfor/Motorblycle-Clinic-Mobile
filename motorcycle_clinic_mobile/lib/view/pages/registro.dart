@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '/controller/register_controller.dart';
+import '/controller/request/register_request.dart';
 import '../widgets/logo.dart';
 import '../widgets/app_bar_menu.dart';
 import 'login.dart';
@@ -14,6 +16,10 @@ class Registro extends StatefulWidget {
 class _RegistroState extends State<Registro> {
   bool _isObscure = true;
   final formKey = GlobalKey<FormState>();
+
+  late RegisterController _controller = RegisterController();
+  late RegisterRequest _registerRequest = RegisterRequest();
+
   //verificar contraseñas
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfirmationController =
@@ -126,6 +132,9 @@ class _RegistroState extends State<Registro> {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
+        onSaved: (newValue) {
+          _registerRequest.name = newValue!;
+        },
       ),
     );
   }
@@ -154,6 +163,9 @@ class _RegistroState extends State<Registro> {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
+        onSaved: (newValue) {
+          _registerRequest.lastName = newValue!;
+        },
       ),
     );
   }
@@ -186,6 +198,9 @@ class _RegistroState extends State<Registro> {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
+        onSaved: (newValue) {
+          _registerRequest.phoneNumber = newValue!;
+        },
       ),
     );
   }
@@ -222,6 +237,9 @@ class _RegistroState extends State<Registro> {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
+        onSaved: (newValue) {
+          _registerRequest.email = newValue!;
+        },
       ),
     );
   }
@@ -235,7 +253,7 @@ class _RegistroState extends State<Registro> {
           if (value == null || value.isEmpty) {
             return "La contraseña es obligatoria";
           }
-          if (value.length > 6) {
+          if (value.length < 6) {
             return "La constraseña debe tener mínimo seis caracteres";
           }
           return null; //por si no entra nada.
@@ -266,6 +284,9 @@ class _RegistroState extends State<Registro> {
             ),
           ),
         ),
+        onSaved: (newValue) {
+          _registerRequest.password = newValue!;
+        },
       ),
     );
   }
@@ -279,7 +300,7 @@ class _RegistroState extends State<Registro> {
           if (value == null || value.isEmpty) {
             return "La contraseña es obligatoria";
           }
-          if (value.length > 6) {
+          if (value.length < 6) {
             return "La constraseña debe tener mínimo seis caracteres";
           }
           if (passwordController.text != passwordConfirmationController.text) {
@@ -328,16 +349,35 @@ class _RegistroState extends State<Registro> {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 12.0),
       ),
-      onPressed: () {
+      onPressed: () async {
         if (formKey.currentState!.validate()) {
-          //TODO: validar en BD
-          Navigator.of(context).pop();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const CuerpoLogin(),
-            ),
-          );
+          //validación en BD
+          formKey.currentState!.save();
+          //cómo promese, usando el then, sí es existoso envía lo siguiente
+          try {
+            await _controller.registerNewUser(_registerRequest);
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("El registro fue exitoso"),
+              ),
+            );
+            //envía al login para iniciar de una vez.
+            Navigator.of(context).pop();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CuerpoLogin(),
+              ),
+            );
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(e.toString()),
+              ),
+            );
+          }
+          print(_registerRequest);
         }
       },
       child: const Text("Registrarse"),

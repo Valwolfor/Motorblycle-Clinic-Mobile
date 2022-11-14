@@ -26,14 +26,14 @@ class DrawerAdmin extends StatelessWidget {
                   color: Colors.white70,
                 ),
                 title: Text(
-                  "$name",
+                  name,
                   style: const TextStyle(
                     fontSize: 18.0,
                     color: Colors.white70,
                   ),
                 ),
                 subtitle: Text(
-                  "$email",
+                  email,
                   style: const TextStyle(
                     fontSize: 14.0,
                     color: Colors.white70,
