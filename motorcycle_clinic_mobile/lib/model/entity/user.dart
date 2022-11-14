@@ -15,6 +15,18 @@ class UserEntity {
       this.phoneNumber,
       this.isAdmin});
 
+  Map<String, dynamic> toFirestore() {
+    return {
+      if (email != null && email!.isNotEmpty) "email": email,
+      if (name != null && name!.isNotEmpty) "name": name,
+      if (lastName != null && lastName!.isNotEmpty) "lastName": lastName,
+      if (phoneNumber != null && phoneNumber!.isNotEmpty)
+        "phoneNumber": phoneNumber,
+      "isAdmin": isAdmin ?? false
+      //el primer ? es indicativo de null, el según el ?option.
+    };
+  }
+
   @override
   String toString() {
     return "UserEntity {$name, $lastName, $email, $phoneNumber, $isAdmin}";

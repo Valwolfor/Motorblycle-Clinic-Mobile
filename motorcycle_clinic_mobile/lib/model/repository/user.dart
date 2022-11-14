@@ -1,32 +1,31 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../entity/user.dart';
 
 class UserRepository {
-  //Map con su tipos
-  final _users = <String, UserEntity>{};
+  late final FirebaseFirestore db;
 
   UserRepository() {
-    _users["diego@gmail.com"] = UserEntity(
-        email: "diego@gmail.com",
-        name: "Diego Felipe",
-        lastName: "Gallo Garcia",
-        phoneNumber: "3108796935",
-        // password: "123456",
-        isAdmin: true);
-    _users["melissa@gmail.com"] = UserEntity(
-        email: "melissa@gmail.com",
-        name: "Marlys Melissa",
-        lastName: "Cely Castillo",
-        phoneNumber: "3228348408",
-        // password: "654321",
-        isAdmin: false);
+    //Para acceder a la BD
+    db = FirebaseFirestore.instance;
   }
 
   UserEntity findByEmail(String email) {
-    var user = _users[email];
+    // var user = _users[email];
 
-    if (user == null) {
-      throw Exception("El usuario no existe.");
-    }
-    return user;
+    // if (user == null) {
+    //   throw Exception("El usuario no existe.");
+    // }
+    return UserEntity();
+  }
+
+  Future<void> save(UserEntity user) async {
+    //Le da nombre a la colección, la crea.
+    await db
+        .collection("users")
+        .doc(user.email)
+        .set(user.toFirestore())
+        .onError((error, stackTrace) =>
+            print("$error, con la siguente pila: $stackTrace"));
   }
 }

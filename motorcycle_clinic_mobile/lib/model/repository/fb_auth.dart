@@ -29,9 +29,7 @@ class FirebaseAuthenticationRepository {
     }
   }
 
-  void saveData(UserEntity user) {
-    print(user);
-  }
+  // void saveData(UserEntity user) {}
 
   Future<void> singInWithEmailAndPassword(String email, String password) async {
     try {
