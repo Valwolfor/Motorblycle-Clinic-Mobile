@@ -35,7 +35,7 @@ class Principal extends StatelessWidget {
           AppBMenu(),
         ],
       ),
-      drawer: DrawerAdmin(email: email, name: name),
+      drawer: const DrawerAdmin(),
       //TODO: el recibidor del adminsitrador.
     );
   }

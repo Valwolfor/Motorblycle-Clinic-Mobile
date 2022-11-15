@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/controller/request/login_request.dart';
 import '/controller/login_controller.dart';
@@ -18,7 +19,11 @@ class CuerpoLogin extends StatefulWidget {
 
 class _CuerpoLoginState extends State<CuerpoLogin> {
   bool _isObscure = true;
+  //
   final formKey = GlobalKey<FormState>();
+  final _prefs = SharedPreferences.getInstance();
+
+  //
   late LoginController _controller = LoginController();
   late LoginRequest _loginRequest = LoginRequest();
 
@@ -202,7 +207,14 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
           //save guarda todo los campos con onSaved
           formKey.currentState!.save();
           try {
-            var name = await _controller.validateLogin(_loginRequest);
+            var userInfo = await _controller.validateLogin(_loginRequest);
+
+            var pref = await _prefs;
+            pref.setString("uid", userInfo.id!);
+            pref.setString("name", userInfo.name!);
+            pref.setString("lastName", userInfo.lastName!);
+            pref.setString("email", userInfo.email!);
+            pref.setBool("admin", userInfo.isAdmin!);
 
             Navigator.of(context).pop();
             Navigator.push(

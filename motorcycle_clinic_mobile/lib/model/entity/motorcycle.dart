@@ -15,6 +15,7 @@ class MotorcycleEntity {
       this.brand,
       this.model,
       this.registerYear});
+  //TODO: lista de ordenes de servicio con lista de servicios por OS.
 
   //para obtener
   factory MotorcycleEntity.fromFirestore(

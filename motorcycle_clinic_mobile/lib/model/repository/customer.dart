@@ -14,5 +14,9 @@ class CustomerRepository {
             fromFirestore: CustomerEntity.fromFirestore,
             toFirestore: (value, options) => value.toFirestore())
         .add(customer);
+    // .doc(customer.id)
+    // .set(customer.toFirestore())
+    // .onError((error, stackTrace) =>
+    //     print("$error, con la siguente pila: $stackTrace"));
   }
 }

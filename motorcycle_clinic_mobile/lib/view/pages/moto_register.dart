@@ -1,29 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/my_drawer.dart';
 import '../widgets/app_bar_menu.dart';
+import '../widgets/drawer_admin.dart';
 import 'tabs/customer_tab_register.dart';
 import 'tabs/dx_tab_register.dart';
 import 'tabs/motivo_tab_register.dart';
 import 'tabs/motorcycle_tab_register.dart';
 import 'tabs/servicios_tab_register.dart';
-
-// void main(List<String> args) {
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const MaterialApp(
-//       title: "Motorcycle Clinic App",
-//       debugShowCheckedModeBanner: false,
-//       home: RegisterBikecycle(),
-//     );
-//   }
-// }
 
 class RegisterMotorcycle extends StatefulWidget {
   const RegisterMotorcycle({super.key});
@@ -62,6 +45,18 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
       key: scaffoldKey,
       backgroundColor: const Color(0xffFEFAE0),
       appBar: AppBar(
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(
+                Icons.menu,
+                size: 32.0,
+              ),
+              onPressed: () => Scaffold.of(context)
+                  .openDrawer(), //función que llama al drawer.
+            );
+          },
+        ),
         title: const Center(
             child: Text(
           "Registro de motos",
@@ -73,7 +68,7 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
         ],
       ),
       body: bodyTabs(),
-      drawer: myDrawer(context), //TODO: hacerle el drawer propio
+      drawer: const DrawerAdmin(), //TODO: hacerle el drawer propio
     );
   }
 

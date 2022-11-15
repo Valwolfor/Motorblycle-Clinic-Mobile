@@ -21,12 +21,18 @@ class UserRepository {
         .where("email", isEqualTo: email)
         .get();
 //el cast convierte los dato al formato toFirestore
-    var users = query.docs.cast().map((item) => item.data());
+    var users = query.docs.cast();
 
     if (users.isEmpty) {
       return Future.error("El usuario no existe.");
     }
-    return users.first;
+    //Para recibir id de la BD
+    var user = users.first;
+
+    var response = user.data();
+    response.id = user.id;
+
+    return response;
   }
 
   Future<void> save(UserEntity user) async {

@@ -7,7 +7,7 @@ class MotorcycleRepository {
   late final CollectionReference _collection;
 
   MotorcycleRepository() {
-    _collection = FirebaseFirestore.instance.collection("customer");
+    _collection = FirebaseFirestore.instance.collection("motorcycle");
   }
   Future<void> newMotorcycle(MotorcycleEntity motorcycle) async {
     await _collection
@@ -15,5 +15,9 @@ class MotorcycleRepository {
             fromFirestore: MotorcycleEntity.fromFirestore,
             toFirestore: (value, options) => value.toFirestore())
         .add(motorcycle);
+    // .doc(motorcycle.plate)
+    // .set(motorcycle.toFirestore())
+    // .onError((error, stackTrace) =>
+    //     print("$error, con la siguente pila: $stackTrace"));
   }
 }
