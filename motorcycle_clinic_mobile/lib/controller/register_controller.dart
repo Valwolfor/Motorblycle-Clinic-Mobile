@@ -1,6 +1,5 @@
-import 'package:motorcycle_clinic_mobile/model/entity/user.dart';
-import 'package:motorcycle_clinic_mobile/model/repository/user.dart';
-
+import '/model/entity/user.dart';
+import '/model/repository/user.dart';
 import '/model/repository/fb_auth.dart';
 import 'request/register_request.dart';
 

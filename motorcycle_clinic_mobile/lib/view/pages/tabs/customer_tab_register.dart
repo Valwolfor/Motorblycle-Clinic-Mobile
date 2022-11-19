@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '/controller/customer_controller.dart';
+import '/controller/request/customer_request.dart';
 import '/controller/request/id_request.dart';
-import '/model/entity/customer.dart';
-import '/controller/service_order_controller.dart';
 
 class ViewCustomer extends StatefulWidget {
   final TabController? tabController;
@@ -28,8 +28,8 @@ class _ViewCustomerState extends State<ViewCustomer> {
 
   final formKeyCustomer = GlobalKey<FormState>();
 
-  late final ServiceOrderController _controller = ServiceOrderController();
-  late final CustomerEntity _customer = CustomerEntity();
+  late final CustomerController _controller = CustomerController();
+  late final CustomerRequest _customer = CustomerRequest();
   //TODO: request en vez de entity
   @override
   Widget build(BuildContext context) {
@@ -119,8 +119,6 @@ class _ViewCustomerState extends State<ViewCustomer> {
                 ))
             .toList(),
         onChanged: (value) {
-          _customer.typeId = value!;
-
           setState(
             () {
               _selectedValue = value as String;
@@ -349,14 +347,17 @@ class _ViewCustomerState extends State<ViewCustomer> {
       ),
       onPressed: () async {
         if (formKeyCustomer.currentState!.validate()) {
+          //Antes de save, validar el tipo
+          _customer.typeId = _selectedValue;
           formKeyCustomer.currentState!.save();
           try {
-            // await _controller.saveCustomer(_customer);
+            await _controller.registerNewCustomer(_customer);
 
-            //Para asegurar que llegue cc si no se toma
-            widget.idCustomer!.id = int.tryParse(_customer.id.toString());
-            print(widget.idCustomer!.id);
-            _customer.typeId ??= "CC";
+            //Para enviar id al moto
+            widget.idCustomer!.id = _customer.id.toString();
+            //validar que no venga vacía esa vaina
+            _customer.typeId == null ? "CC" : null;
+            //mensaje de salida.
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text("El registro del cliente fue exitoso"),

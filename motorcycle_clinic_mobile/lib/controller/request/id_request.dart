@@ -1,3 +1,3 @@
 class IdRequest {
-  int? id;
+  String? id;
 }

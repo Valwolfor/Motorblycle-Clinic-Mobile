@@ -12,7 +12,7 @@ class ServiceOrderController {
 
   ServiceOrderController() {
     //TODO: repository no Entity
-    _repositoryCustomer = CustomerRepository();
+    // _repositoryCustomer = CustomerRepository();
     _repositoryMotorcycle = MotorcycleRepository();
   }
 

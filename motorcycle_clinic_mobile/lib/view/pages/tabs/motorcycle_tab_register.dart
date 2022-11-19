@@ -346,11 +346,11 @@ class _ViewMotoState extends State<ViewMoto> {
         padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 12.0),
       ),
       onPressed: () async {
-        print("${widget.idCustomerM!.id}, en moto");
+        // print("${widget.idCustomerM!.id}, en moto");
         if (formKeyMotocycle.currentState!.validate()) {
           formKeyMotocycle.currentState!.save();
           try {
-            // await _controller.saveMotorcycle(_motorcycle);
+            await _controller.saveMotorcycle(_motorcycle);
 
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(

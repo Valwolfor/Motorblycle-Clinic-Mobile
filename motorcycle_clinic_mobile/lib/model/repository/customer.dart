@@ -6,7 +6,7 @@ class CustomerRepository {
   late final CollectionReference _collection;
 
   CustomerRepository() {
-    _collection = FirebaseFirestore.instance.collection("customer");
+    _collection = FirebaseFirestore.instance.collection("customers");
   }
   Future<void> newCustomer(CustomerEntity customer) async {
     await _collection

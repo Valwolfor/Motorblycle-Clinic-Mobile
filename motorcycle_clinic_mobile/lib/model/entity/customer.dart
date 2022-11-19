@@ -47,6 +47,6 @@ class CustomerEntity {
 
   @override
   String toString() {
-    return "UserEntity {$typeId, $id, $name, $lastName, $email, $phoneNumber}";
+    return "CustomerEntity {$typeId, $id, $name, $lastName, $email, $phoneNumber}";
   }
 }
