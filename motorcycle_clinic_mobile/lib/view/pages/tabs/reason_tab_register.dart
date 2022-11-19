@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-class ViewMotivo extends StatefulWidget {
-  const ViewMotivo({super.key});
+class ViewReason extends StatefulWidget {
+  final TabController? tabController;
+
+  const ViewReason({Key? key, this.tabController}) : super(key: key);
 
   @override
-  State<ViewMotivo> createState() => _ViewMotivoState();
+  State<ViewReason> createState() => _ViewReasonState();
 }
+//TODO: poner el entity en el onsaved
 
 // enum GasLevel { empty, unCuato, medio, tresCuatos, full }
 
-class _ViewMotivoState extends State<ViewMotivo> {
+class _ViewReasonState extends State<ViewReason> {
   //Dropmenu motivo
   var _selectedValue;
   final _reasons = <String>[
@@ -48,14 +51,14 @@ class _ViewMotivoState extends State<ViewMotivo> {
               textAlign: TextAlign.center,
             ),
           ),
-          formMotivo(),
+          formReason(),
         ],
       ),
     );
   }
 
   //Formulario
-  Widget formMotivo() {
+  Widget formReason() {
     return Form(
       key: formKeyReason,
       // autovalidateMode: AutovalidateMode.disabled,
@@ -88,7 +91,7 @@ class _ViewMotivoState extends State<ViewMotivo> {
                 ],
               ),
             ),
-            botonMotivo(),
+            botonReason(),
             //TODO: Text de id usuario y moto
           ],
         ),
@@ -122,6 +125,8 @@ class _ViewMotivoState extends State<ViewMotivo> {
                 ))
             .toList(),
         onChanged: (value) {
+          // _motorcycle.reason = value;
+
           setState(
             () {
               _selectedValue = value as String;
@@ -423,7 +428,7 @@ class _ViewMotivoState extends State<ViewMotivo> {
     );
   }
 
-  Widget botonMotivo() {
+  Widget botonReason() {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xff5DA767),

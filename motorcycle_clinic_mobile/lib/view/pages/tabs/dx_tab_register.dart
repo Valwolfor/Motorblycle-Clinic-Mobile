@@ -93,7 +93,7 @@ class _ViewDxState extends State<ViewDx> {
                 children: [
                   idicadoresRadioButton(),
                   estadoAceiteRadioButton(),
-                  nivelAceiteRadioButton(),
+                  oilLevelRadioButton(),
                 ],
               ),
             ),
@@ -112,9 +112,9 @@ class _ViewDxState extends State<ViewDx> {
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.ideographic,
                 children: [
-                  Expanded(child: liqFrenosRadioButton()),
-                  Expanded(child: liqEmbragueRadioButton()),
-                  Expanded(child: liqRefrigeranteRadioButton()),
+                  Expanded(child: breakFluidRadioButton()),
+                  Expanded(child: clutchFluidRadioButton()),
+                  Expanded(child: coolFluidRadioButton()),
                 ],
               ),
             ),
@@ -133,9 +133,9 @@ class _ViewDxState extends State<ViewDx> {
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.ideographic,
                 children: [
-                  espejosRadioButton(),
-                  claxonRadioButton(),
-                  tanqueRadioButton(),
+                  mirrowsRadioButton(),
+                  hornRadioButton(),
+                  tankRadioButton(),
                 ],
               ),
             ),
@@ -148,13 +148,13 @@ class _ViewDxState extends State<ViewDx> {
                 textBaseline: TextBaseline.ideographic,
                 children: [
                   Expanded(
-                    child: lucesCheckButton(),
+                    child: ligthsCheckButton(),
                   ),
                   const SizedBox(
                     width: 5.0,
                   ),
                   Expanded(
-                    child: llantasCheckButton(),
+                    child: tiresCheckButton(),
                   )
                 ],
               ),
@@ -175,9 +175,9 @@ class _ViewDxState extends State<ViewDx> {
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.ideographic,
                 children: [
-                  frenoDelanteroRadioButton(),
-                  frenoTraseroRadioButton(),
-                  embragueRadioButton(),
+                  frontBreakRadioButton(),
+                  backBreakRadioButton(),
+                  clutchRadioButton(),
                 ],
               ),
             ),
@@ -196,33 +196,33 @@ class _ViewDxState extends State<ViewDx> {
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.ideographic,
                 children: [
-                  cadenaRadioButton(),
-                  bujiaRadioButton(),
-                  bateriaRadioButton(),
+                  chainRadioButton(),
+                  sparkPlugRadioButton(),
+                  bateryRadioButton(),
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsetsDirectional.only(bottom: 15.0),
-              padding: const EdgeInsets.only(top: 10.0),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color(0xffBA5C0B),
-                ),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.ideographic,
-                children: [
-                  espejosRadioButton(),
-                  claxonRadioButton(),
-                  tanqueRadioButton(),
-                ],
-              ),
-            ),
+            // Container(
+            //   margin: const EdgeInsetsDirectional.only(bottom: 15.0),
+            //   padding: const EdgeInsets.only(top: 10.0),
+            //   decoration: BoxDecoration(
+            //     border: Border.all(
+            //       color: const Color(0xffBA5C0B),
+            //     ),
+            //     borderRadius: BorderRadius.circular(10.0),
+            //   ),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //     mainAxisSize: MainAxisSize.max,
+            //     crossAxisAlignment: CrossAxisAlignment.baseline,
+            //     textBaseline: TextBaseline.ideographic,
+            //     children: [
+            //       mirrowsRadioButton(),
+            //       hornRadioButton(),
+            //       tankRadioButton(),
+            //     ],
+            //   ),
+            // ),
             Container(
               margin: const EdgeInsetsDirectional.only(bottom: 15.0),
               padding: const EdgeInsets.only(top: 10.0),
@@ -239,8 +239,8 @@ class _ViewDxState extends State<ViewDx> {
                 textBaseline: TextBaseline.ideographic,
                 children: [
                   motorRadioButton(),
-                  tapasRadioButton(),
-                  kitArrastreRadioButton(),
+                  tapesRadioButton(),
+                  dragKitRadioButton(),
                 ],
               ),
             ),
@@ -416,7 +416,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget nivelAceiteRadioButton() {
+  Widget oilLevelRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Column(
@@ -494,7 +494,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget liqFrenosRadioButton() {
+  Widget breakFluidRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -552,7 +552,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget liqEmbragueRadioButton() {
+  Widget clutchFluidRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -610,7 +610,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget liqRefrigeranteRadioButton() {
+  Widget coolFluidRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -668,7 +668,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget espejosRadioButton() {
+  Widget mirrowsRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -726,7 +726,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget claxonRadioButton() {
+  Widget hornRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -784,7 +784,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget tanqueRadioButton() {
+  Widget tankRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -842,7 +842,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget lucesCheckButton() {
+  Widget ligthsCheckButton() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       decoration: BoxDecoration(
@@ -903,7 +903,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget llantasCheckButton() {
+  Widget tiresCheckButton() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       decoration: BoxDecoration(
@@ -964,7 +964,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget frenoDelanteroRadioButton() {
+  Widget frontBreakRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -1022,7 +1022,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget frenoTraseroRadioButton() {
+  Widget backBreakRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -1080,7 +1080,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget embragueRadioButton() {
+  Widget clutchRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -1138,7 +1138,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget cadenaRadioButton() {
+  Widget chainRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -1196,7 +1196,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget bujiaRadioButton() {
+  Widget sparkPlugRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -1254,7 +1254,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget bateriaRadioButton() {
+  Widget bateryRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -1390,7 +1390,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget tapasRadioButton() {
+  Widget tapesRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
@@ -1448,7 +1448,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget kitArrastreRadioButton() {
+  Widget dragKitRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(

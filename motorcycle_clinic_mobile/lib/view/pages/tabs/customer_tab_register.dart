@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:motorcycle_clinic_mobile/view/pages/tabs/motorcycle_tab_register.dart';
+import '/view/pages/tabs/motorcycle_tab_register.dart';
 
 import '/model/entity/customer.dart';
 import '/controller/service_order_controller.dart';
 
-class ViewCliente extends StatefulWidget {
-  const ViewCliente({super.key});
+class ViewCustomer extends StatefulWidget {
+  final TabController? tabController;
+
+  const ViewCustomer({Key? key, this.tabController}) : super(key: key);
+
+  // const ViewCustomer({super.key});
 
   @override
-  State<ViewCliente> createState() => _ViewClienteState();
+  State<ViewCustomer> createState() => _ViewCustomerState();
 }
 
-class _ViewClienteState extends State<ViewCliente> {
+class _ViewCustomerState extends State<ViewCustomer> {
   var _selectedValue = "CC";
   final _documents = <String>[
     "CC",
@@ -24,7 +28,7 @@ class _ViewClienteState extends State<ViewCliente> {
 
   late final ServiceOrderController _controller = ServiceOrderController();
   late final CustomerEntity _customer = CustomerEntity();
-
+  //TODO: request en vez de entity
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -91,10 +95,13 @@ class _ViewClienteState extends State<ViewCliente> {
     return Expanded(
       child: DropdownButtonFormField(
         //Quitar tipo widget
+        // hint: const Text("Id"),
         borderRadius: BorderRadius.circular(20.0),
         dropdownColor: const Color(0xffFEFAE0),
+        // validator: (value) =>
+        //     value == null ? 'Selecciones el tipo de id' : null,
         decoration: InputDecoration(
-          //TODO:  aquí falla cada vez que se seleciona
+          //TODO:  aquí falla cada vez que se seleciona la decoración
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
             borderSide: const BorderSide(
@@ -111,6 +118,7 @@ class _ViewClienteState extends State<ViewCliente> {
             .toList(),
         onChanged: (value) {
           _customer.typeId = value!;
+
           setState(
             () {
               _selectedValue = value as String;
@@ -341,21 +349,20 @@ class _ViewClienteState extends State<ViewCliente> {
         if (formKeyCustomer.currentState!.validate()) {
           formKeyCustomer.currentState!.save();
           try {
-            await _controller.saveCustomer(_customer);
+            // await _controller.saveCustomer(_customer);
 
+            //Para asegurar que llegue cc si no se toma
+
+            _customer.typeId ??= "CC";
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text("El registro del cliente fue exitoso"),
               ),
             );
-            //TODO: pasarla a la siguiente pestaña, tal vez setstate de la pestaña.
-            // Navigator.of(context).pop();
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => const ViewMoto(),
-            //   ),
-            // );
+            // pasarla a la siguiente pestaña.
+            widget.tabController!.animateTo(1);
+
+            print(_customer);
           } catch (e) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -363,7 +370,6 @@ class _ViewClienteState extends State<ViewCliente> {
               ),
             );
           }
-          print(_customer);
         }
       },
       child: const Text("Regisrar"),

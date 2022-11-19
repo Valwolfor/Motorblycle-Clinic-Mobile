@@ -4,9 +4,9 @@ import '../widgets/app_bar_menu.dart';
 import '../widgets/drawer_admin.dart';
 import 'tabs/customer_tab_register.dart';
 import 'tabs/dx_tab_register.dart';
-import 'tabs/motivo_tab_register.dart';
+import 'tabs/reason_tab_register.dart';
 import 'tabs/motorcycle_tab_register.dart';
-import 'tabs/servicios_tab_register.dart';
+import 'tabs/services_tab_register.dart';
 
 class RegisterMotorcycle extends StatefulWidget {
   const RegisterMotorcycle({super.key});
@@ -22,7 +22,7 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
   //No sé para que esel ScaffoldState
   final scaffoldKey = GlobalKey<ScaffoldState>();
   //controllers
-  late TabController _tabController;
+  TabController? _tabController;
 
   //para que se cree la pantalla
   @override
@@ -35,7 +35,7 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
   //Para cerrar la pantalla.
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController!.dispose();
     super.dispose();
   }
 
@@ -84,35 +84,39 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
               ),
             ),
           ),
-          padding: const EdgeInsets.only(top: 10.0), //aquí estab el scroll
-          child: TabBar(
-            indicator: const BoxDecoration(
-              color: Color(0xff5DA767),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10.0),
-                topRight: Radius.circular(10.0),
+          padding: const EdgeInsets.only(top: 10.0),
+          //Para evitar la funcionalidad de los botones de las tabs
+          child: IgnorePointer(
+            ignoring: false,
+            child: TabBar(
+              indicator: const BoxDecoration(
+                color: Color(0xff5DA767),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10.0),
+                  topRight: Radius.circular(10.0),
+                ),
               ),
+              indicatorColor: const Color(0xffBA5C0B), // elevation: 5,
+              labelColor: Colors.black,
+              controller: _tabController,
+              tabs: <Tab>[
+                Tab(
+                  child: iconCustomer(),
+                ),
+                Tab(
+                  child: iconMoto(),
+                ),
+                Tab(
+                  child: iconReason(),
+                ),
+                Tab(
+                  child: iconDx(),
+                ),
+                Tab(
+                  child: iconServices(),
+                ),
+              ],
             ),
-            indicatorColor: const Color(0xffBA5C0B), // elevation: 5,
-            labelColor: Colors.black,
-            controller: _tabController,
-            tabs: <Tab>[
-              Tab(
-                child: iconCustomer(),
-              ),
-              Tab(
-                child: iconMoto(),
-              ),
-              Tab(
-                child: iconReason(),
-              ),
-              Tab(
-                child: iconDx(),
-              ),
-              Tab(
-                child: iconServices(),
-              ),
-            ],
           ),
         ),
         tabViewRegister(),
@@ -181,21 +185,45 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
   Widget tabViewRegister() {
     return Expanded(
       child: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
         controller: _tabController,
-        children: const [
+        children: [
           SingleChildScrollView(
-            child: ViewCliente(),
+            child: ViewCustomer(tabController: _tabController),
           ),
           SingleChildScrollView(
-            child: ViewMoto(),
+            child: ViewMoto(tabController: _tabController),
           ),
           SingleChildScrollView(
-            child: ViewMotivo(),
+            child: ViewReason(tabController: _tabController),
           ),
           SingleChildScrollView(
-            child: ViewDx(),
+            child: ViewDx(/*tabController: _tabController*/),
           ),
-          SingleChildScrollView(child: ViewServicios()),
+          SingleChildScrollView(
+            child: ViewServicios(
+                /*
+              onSubmit: () => showCupertinoDialog(
+                context: context,
+                builder: (_) {
+                  return CupertinoAlertDialog(
+                    title: const Text('Thank you'),
+                    content: const Text('Your application was submitted.'),
+                    actions: [
+                      CupertinoDialogAction(
+                        child: const Text('OK'),
+                        onPressed: () {
+                          // dismiss dialog
+                          Navigator.of(context).pop();
+                          _tabController.index = 0;
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ),*/
+                ),
+          ),
         ],
       ),
     );

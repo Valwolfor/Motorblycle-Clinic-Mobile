@@ -4,8 +4,9 @@ import '/model/entity/motorcycle.dart';
 import '/controller/service_order_controller.dart';
 
 class ViewMoto extends StatefulWidget {
-  const ViewMoto({super.key});
+  final TabController? tabController;
 
+  const ViewMoto({Key? key, this.tabController}) : super(key: key);
   @override
   State<ViewMoto> createState() => _ViewMotoState();
 }
@@ -53,7 +54,7 @@ class _ViewMotoState extends State<ViewMoto> {
                 const SizedBox(
                   width: 5.0,
                 ),
-                iconButtonPlaca(),
+                iconButtonPlate(),
               ],
             ),
             idMotorField(),
@@ -124,7 +125,7 @@ class _ViewMotoState extends State<ViewMoto> {
     );
   }
 
-  Widget iconButtonPlaca() {
+  Widget iconButtonPlate() {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.only(bottom: 35.0),
@@ -346,7 +347,7 @@ class _ViewMotoState extends State<ViewMoto> {
         if (formKeyMotocycle.currentState!.validate()) {
           formKeyMotocycle.currentState!.save();
           try {
-            await _controller.saveMotorcycle(_motorcycle);
+            // await _controller.saveMotorcycle(_motorcycle);
 
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -354,13 +355,7 @@ class _ViewMotoState extends State<ViewMoto> {
               ),
             );
             //TODO: pasarla a la siguiente pestaña, tal vez setstate de la pestaña.
-            // Navigator.of(context).pop();
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => const ViewMoto(),
-            //   ),
-            // );
+            widget.tabController!.animateTo(2);
           } catch (e) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(

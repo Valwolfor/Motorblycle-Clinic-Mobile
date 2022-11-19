@@ -6,8 +6,6 @@ class RegisterRequest {
   late String email;
   late String password;
 
-  //cosntructor que puede recibibir null.
-  // LoginRequest({this.email, this.password});
   @override
   String toString() {
     return "$name, $lastName, $phoneNumber, $email, $password";

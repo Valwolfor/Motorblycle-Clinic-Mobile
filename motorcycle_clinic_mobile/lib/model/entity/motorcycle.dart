@@ -7,6 +7,7 @@ class MotorcycleEntity {
   late String? brand;
   late String? model;
   late int? registerYear;
+  late Map<String, dynamic>? serviceOrders;
 
   MotorcycleEntity(
       {this.plate,
@@ -14,8 +15,9 @@ class MotorcycleEntity {
       this.idchassis,
       this.brand,
       this.model,
-      this.registerYear});
-  //TODO: lista de ordenes de servicio con lista de servicios por OS.
+      this.registerYear,
+      this.serviceOrders});
+  //TODO: Organizar la orden de servicio
 
   //para obtener
   factory MotorcycleEntity.fromFirestore(
@@ -48,6 +50,6 @@ class MotorcycleEntity {
 
   @override
   String toString() {
-    return "UserEntity {$plate, $idMotor, $idchassis, $brand, $model, $registerYear}";
+    return "MotorcycleEntity {$plate, $idMotor, $idchassis, $brand, $model, $registerYear}";
   }
 }
