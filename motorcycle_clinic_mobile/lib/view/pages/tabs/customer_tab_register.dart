@@ -30,6 +30,8 @@ class _ViewCustomerState extends State<ViewCustomer> {
 
   late final CustomerController _controller = CustomerController();
   late final CustomerRequest _customer = CustomerRequest();
+  late final IdRequest _idRequest = IdRequest();
+  TextEditingController idController = TextEditingController();
   //TODO: request en vez de entity
   @override
   Widget build(BuildContext context) {
@@ -132,10 +134,29 @@ class _ViewCustomerState extends State<ViewCustomer> {
   Widget iconButtonID() {
     return Expanded(
       child: IconButton(
-        onPressed: () {
-          if (formKeyCustomer.currentState!.validate()) {
-            //TODO: validar id en BD
-            Navigator.of(context).pop();
+        onPressed: () async {
+          try {
+            //Alista la variable pa la moto.
+            widget.idCustomer!.id = idController.text;
+            await _controller.getCustomer(widget.idCustomer!);
+
+            // //Para enviar id al moto
+            // widget.idCustomer!.id = _customer.id.toString();
+            //mensaje de salida.
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("El cliente ya se encuentra registrado"),
+              ),
+            );
+            // pasarla a la siguiente pestaña.
+            widget.tabController!.animateTo(1);
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(e.toString()),
+              ),
+            );
+            print(e);
           }
         },
         icon: const Icon(
@@ -151,6 +172,7 @@ class _ViewCustomerState extends State<ViewCustomer> {
     return Expanded(
       flex: 2,
       child: TextFormField(
+        controller: idController,
         //se pone azul al selecionarlo
         validator: (value) {
           if (value == null || value.isEmpty) {

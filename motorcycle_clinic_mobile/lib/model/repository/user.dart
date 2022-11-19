@@ -30,7 +30,7 @@ class UserRepository {
     var user = users.first;
 
     var response = user.data();
-    response.idCustomer = user.idCustomer;
+    // response.idCustomer = user.idCustomer;
 
     return response;
   }

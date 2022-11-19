@@ -1,3 +1,5 @@
 class IdRequest {
-  String? id;
+  late String? id;
+
+  IdRequest({this.id});
 }
