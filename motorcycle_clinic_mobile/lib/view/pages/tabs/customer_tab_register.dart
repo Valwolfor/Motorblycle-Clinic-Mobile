@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import '/view/pages/tabs/motorcycle_tab_register.dart';
 
+import '/controller/request/id_request.dart';
 import '/model/entity/customer.dart';
 import '/controller/service_order_controller.dart';
 
 class ViewCustomer extends StatefulWidget {
   final TabController? tabController;
+  IdRequest? idCustomer;
 
-  const ViewCustomer({Key? key, this.tabController}) : super(key: key);
+  ViewCustomer({Key? key, this.tabController, this.idCustomer})
+      : super(key: key);
 
   // const ViewCustomer({super.key});
 
@@ -352,7 +354,8 @@ class _ViewCustomerState extends State<ViewCustomer> {
             // await _controller.saveCustomer(_customer);
 
             //Para asegurar que llegue cc si no se toma
-
+            widget.idCustomer!.id = int.tryParse(_customer.id.toString());
+            print(widget.idCustomer!.id);
             _customer.typeId ??= "CC";
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
@@ -361,8 +364,6 @@ class _ViewCustomerState extends State<ViewCustomer> {
             );
             // pasarla a la siguiente pestaña.
             widget.tabController!.animateTo(1);
-
-            print(_customer);
           } catch (e) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(

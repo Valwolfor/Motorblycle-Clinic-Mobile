@@ -1,0 +1,3 @@
+class IdRequest {
+  int? id;
+}

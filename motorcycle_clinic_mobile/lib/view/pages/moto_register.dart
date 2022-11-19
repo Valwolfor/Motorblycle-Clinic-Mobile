@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '/controller/request/id_request.dart';
 import '../widgets/app_bar_menu.dart';
 import '../widgets/drawer_admin.dart';
 import 'tabs/customer_tab_register.dart';
@@ -19,17 +20,19 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
     with SingleTickerProviderStateMixin {
   //el with es para darle contexto al this.
   int selectedPage = 0;
-  //No sé para que esel ScaffoldState
+  //TODO:No sé para que es el ScaffoldState
   final scaffoldKey = GlobalKey<ScaffoldState>();
   //controllers
   TabController? _tabController;
 
+  IdRequest? _idCustomer;
   //para que se cree la pantalla
   @override
   void initState() {
     super.initState();
     _tabController =
         TabController(vsync: this, initialIndex: selectedPage, length: 5);
+    _idCustomer = IdRequest();
   }
 
   //Para cerrar la pantalla.
@@ -189,10 +192,12 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
         controller: _tabController,
         children: [
           SingleChildScrollView(
-            child: ViewCustomer(tabController: _tabController),
+            child: ViewCustomer(
+                tabController: _tabController, idCustomer: _idCustomer),
           ),
           SingleChildScrollView(
-            child: ViewMoto(tabController: _tabController),
+            child: ViewMoto(
+                tabController: _tabController, idCustomerM: _idCustomer),
           ),
           SingleChildScrollView(
             child: ViewReason(tabController: _tabController),

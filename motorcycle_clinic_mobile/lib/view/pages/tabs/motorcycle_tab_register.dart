@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '/controller/request/id_request.dart';
 import '/model/entity/motorcycle.dart';
 import '/controller/service_order_controller.dart';
 
 class ViewMoto extends StatefulWidget {
   final TabController? tabController;
+  IdRequest? idCustomerM;
 
-  const ViewMoto({Key? key, this.tabController}) : super(key: key);
+  ViewMoto({Key? key, this.tabController, this.idCustomerM}) : super(key: key);
   @override
   State<ViewMoto> createState() => _ViewMotoState();
 }
@@ -125,13 +127,13 @@ class _ViewMotoState extends State<ViewMoto> {
     );
   }
 
+//TODO: solo validar placa
   Widget iconButtonPlate() {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.only(bottom: 35.0),
         child: IconButton(
           onPressed: () {
-            //TODO: solo validar placa
             if (formKeyMotocycle.currentState!.validate()) {
               //TODO: validar id en BD
               Navigator.of(context).pop();
@@ -344,6 +346,7 @@ class _ViewMotoState extends State<ViewMoto> {
         padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 12.0),
       ),
       onPressed: () async {
+        print("${widget.idCustomerM!.id}, en moto");
         if (formKeyMotocycle.currentState!.validate()) {
           formKeyMotocycle.currentState!.save();
           try {
@@ -354,7 +357,7 @@ class _ViewMotoState extends State<ViewMoto> {
                 content: Text("El registro de la moto fue exitoso"),
               ),
             );
-            //TODO: pasarla a la siguiente pestaña, tal vez setstate de la pestaña.
+            //Pasarla a la siguiente pestaña, tal vez setstate de la pestaña.
             widget.tabController!.animateTo(2);
           } catch (e) {
             ScaffoldMessenger.of(context).showSnackBar(
