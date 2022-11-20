@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ServiceOrdenEntity {
-//TODO: lo de la foto
+//TODO: hacer todo lo de la ordeN
   late String? indicators;
   late String? oilState;
   late String? oilLvl;

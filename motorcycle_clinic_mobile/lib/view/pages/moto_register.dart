@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '/controller/request/plate_request.dart';
 import '/controller/request/id_request.dart';
 import '../widgets/app_bar_menu.dart';
 import '../widgets/drawer_admin.dart';
@@ -26,6 +27,7 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
   TabController? _tabController;
 
   IdRequest? _idCustomer;
+  PlateRequest? _plateRequest;
   //para que se cree la pantalla
   @override
   void initState() {
@@ -33,6 +35,7 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
     _tabController =
         TabController(vsync: this, initialIndex: selectedPage, length: 5);
     _idCustomer = IdRequest();
+    _plateRequest = PlateRequest();
   }
 
   //Para cerrar la pantalla.
@@ -197,7 +200,10 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
           ),
           SingleChildScrollView(
             child: ViewMoto(
-                tabController: _tabController, idCustomerM: _idCustomer),
+              tabController: _tabController,
+              idCustomerM: _idCustomer,
+              plate: _plateRequest,
+            ),
           ),
           SingleChildScrollView(
             child: ViewReason(tabController: _tabController),

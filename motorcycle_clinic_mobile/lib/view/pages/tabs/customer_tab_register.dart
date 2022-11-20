@@ -156,7 +156,6 @@ class _ViewCustomerState extends State<ViewCustomer> {
                 content: Text(e.toString()),
               ),
             );
-            print(e);
           }
         },
         icon: const Icon(

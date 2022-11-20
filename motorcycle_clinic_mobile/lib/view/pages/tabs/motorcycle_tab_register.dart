@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '/controller/request/motorcycle_request.dart';
+import '/controller/request/plate_request.dart';
+import '/controller/motorcycle_controller.dart';
 import '/controller/request/id_request.dart';
-import '/model/entity/motorcycle.dart';
-import '/controller/service_order_controller.dart';
 
 class ViewMoto extends StatefulWidget {
   final TabController? tabController;
-  IdRequest? idCustomerM;
+  final IdRequest? idCustomerM;
+  final PlateRequest? plate;
 
-  ViewMoto({Key? key, this.tabController, this.idCustomerM}) : super(key: key);
+  const ViewMoto({Key? key, this.tabController, this.idCustomerM, this.plate})
+      : super(key: key);
   @override
   State<ViewMoto> createState() => _ViewMotoState();
 }
@@ -16,8 +19,9 @@ class ViewMoto extends StatefulWidget {
 class _ViewMotoState extends State<ViewMoto> {
   final formKeyMotocycle = GlobalKey<FormState>();
 
-  late final ServiceOrderController _controller = ServiceOrderController();
-  late final MotorcycleEntity _motorcycle = MotorcycleEntity();
+  late final MotorcycleController _controller = MotorcycleController();
+  late final MotorcycleRequest _motorcycle = MotorcycleRequest();
+  TextEditingController plateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +56,7 @@ class _ViewMotoState extends State<ViewMoto> {
           children: <Widget>[
             Row(
               children: [
-                idMotoField(),
+                plateMotoField(),
                 const SizedBox(
                   width: 5.0,
                 ),
@@ -60,7 +64,7 @@ class _ViewMotoState extends State<ViewMoto> {
               ],
             ),
             idMotorField(),
-            idChasisField(),
+            idChassisField(),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
               child: Row(
@@ -82,10 +86,11 @@ class _ViewMotoState extends State<ViewMoto> {
     );
   }
 
-  Widget idMotoField() {
+  Widget plateMotoField() {
     return Expanded(
       flex: 2,
       child: TextFormField(
+        controller: plateController,
         //TODO: convertir mayúsculas, también motor y chasis
         //se pone azul al selecionarlo
         validator: (value) {
@@ -133,10 +138,28 @@ class _ViewMotoState extends State<ViewMoto> {
       child: Container(
         padding: const EdgeInsets.only(bottom: 35.0),
         child: IconButton(
-          onPressed: () {
-            if (formKeyMotocycle.currentState!.validate()) {
-              //TODO: validar id en BD
-              Navigator.of(context).pop();
+          onPressed: () async {
+            widget.plate?.plate = plateController.text;
+            try {
+              //Alista la variable pa la moto.
+
+              await _controller.getMotorcycle(widget.plate!);
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("La moto ya se encuentra registrada"),
+                ),
+              );
+              // pasarla a la siguiente pestaña.
+              widget.tabController!.animateTo(2);
+            } catch (e) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(e.toString()),
+                ),
+              );
+              //TODO borrar
+              print(e);
             }
           },
           icon: const Icon(
@@ -185,7 +208,7 @@ class _ViewMotoState extends State<ViewMoto> {
     );
   }
 
-  Widget idChasisField() {
+  Widget idChassisField() {
     return Container(
       padding: const EdgeInsets.only(top: 15.0),
       child: TextFormField(
@@ -346,11 +369,13 @@ class _ViewMotoState extends State<ViewMoto> {
         padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 12.0),
       ),
       onPressed: () async {
-        // print("${widget.idCustomerM!.id}, en moto");
+        _motorcycle.idOwner = widget.idCustomerM!.id;
         if (formKeyMotocycle.currentState!.validate()) {
           formKeyMotocycle.currentState!.save();
           try {
-            await _controller.saveMotorcycle(_motorcycle);
+            widget.plate!.plate = _motorcycle.plate.toString();
+            _motorcycle.idOwner = widget.idCustomerM!.id;
+            await _controller.registerNewMotorcycle(_motorcycle);
 
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(

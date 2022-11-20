@@ -17,18 +17,9 @@ class _ViewServiciosState extends State<ViewServicios> {
   // final ServicesRequest _services = ServicesRequest();
   Map<String, dynamic>? _services = {};
   List<bool> _isChecked = [];
-  //pruebita
-  // final ServicesRequest _servicesTest = ServicesRequest();
 
   @override
   Widget build(BuildContext context) {
-    // _servicesTest.nameService = "Cambio de Aceite";
-    // _servicesTest.nameProduct = "Aceite tal y eso";
-    // _servicesTest.priceService = 10000;
-    // _servicesTest.priceProduct = 18000;
-
-    // _listServices!.add(_servicesTest);
-
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 10.0,
@@ -419,7 +410,7 @@ class _ViewServiciosState extends State<ViewServicios> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
-      leading: (true
+      leading: (_isChecked[indexTile]
           ? const Icon(
               Icons.check,
               color: Color(0xff4D581C),

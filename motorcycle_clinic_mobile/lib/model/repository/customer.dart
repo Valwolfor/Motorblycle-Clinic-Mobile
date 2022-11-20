@@ -21,7 +21,7 @@ class CustomerRepository {
   }
 
   Future<CustomerEntity> findById(String idQuery) async {
-    //el value el la entidad que se manda "email"
+    //el idQuery el la entidad que se manda "email"
     //el converte lo vuelve objeto, porque usa el factory
     final query = await _collection
         .withConverter(
@@ -34,7 +34,7 @@ class CustomerRepository {
     var customer = query.docs.cast();
 
     if (customer.isEmpty) {
-      return Future.error("El cliente no existe.");
+      return Future.error("El cliente no se encuentra registrado.");
     }
     //Para recibir id de la BD
     var id = customer[0];
