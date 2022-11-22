@@ -43,4 +43,8 @@ class FirebaseAuthenticationRepository {
       }
     }
   }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '/controller/request/service_order_request.dart';
+import '/controller/request/motorcycle_request.dart';
 import '/controller/request/plate_request.dart';
 import '/controller/request/id_request.dart';
 import '../widgets/app_bar_menu.dart';
@@ -26,6 +28,9 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
   //controllers
   TabController? _tabController;
 
+//TODO: arreglar lode la orden de servicio
+  MotorcycleRequest? _motorcycleRequest;
+  ServiceOrderRequest? _serviceOrderRequest;
   IdRequest? _idCustomer;
   PlateRequest? _plateRequest;
   //para que se cree la pantalla
@@ -36,6 +41,8 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
         TabController(vsync: this, initialIndex: selectedPage, length: 5);
     _idCustomer = IdRequest();
     _plateRequest = PlateRequest();
+    _motorcycleRequest = MotorcycleRequest();
+    _serviceOrderRequest = ServiceOrderRequest();
   }
 
   //Para cerrar la pantalla.
@@ -47,34 +54,39 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: const Color(0xffFEFAE0),
-      appBar: AppBar(
-        leading: Builder(
-          builder: (context) {
-            return IconButton(
-              icon: const Icon(
-                Icons.menu,
-                size: 32.0,
-              ),
-              onPressed: () => Scaffold.of(context)
-                  .openDrawer(), //función que llama al drawer.
-            );
-          },
+    return WillPopScope(
+      onWillPop: (() async {
+        return false;
+      }),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: const Color(0xffFEFAE0),
+        appBar: AppBar(
+          leading: Builder(
+            builder: (context) {
+              return IconButton(
+                icon: const Icon(
+                  Icons.menu,
+                  size: 32.0,
+                ),
+                onPressed: () => Scaffold.of(context)
+                    .openDrawer(), //función que llama al drawer.
+              );
+            },
+          ),
+          title: const Center(
+              child: Text(
+            "Registro de motos",
+            style: TextStyle(fontSize: 23.0),
+          )),
+          backgroundColor: const Color(0xff4D581C),
+          actions: const <Widget>[
+            AppBMenu(),
+          ],
         ),
-        title: const Center(
-            child: Text(
-          "Registro de motos",
-          style: TextStyle(fontSize: 23.0),
-        )),
-        backgroundColor: const Color(0xff4D581C),
-        actions: const <Widget>[
-          AppBMenu(),
-        ],
+        body: bodyTabs(),
+        drawer: const DrawerAdmin(), //TODO: hacerle el drawer propio
       ),
-      body: bodyTabs(),
-      drawer: const DrawerAdmin(), //TODO: hacerle el drawer propio
     );
   }
 
@@ -201,39 +213,30 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
           SingleChildScrollView(
             child: ViewMoto(
               tabController: _tabController,
+              motorcycle: _motorcycleRequest,
+              serviceOrder: _serviceOrderRequest,
               idCustomerM: _idCustomer,
               plate: _plateRequest,
             ),
           ),
           SingleChildScrollView(
-            child: ViewReason(tabController: _tabController),
+            child: ViewReason(
+                tabController: _tabController,
+                motorcycle: _motorcycleRequest,
+                serviceOrder: _serviceOrderRequest),
           ),
           SingleChildScrollView(
-            child: ViewDx(/*tabController: _tabController*/),
+            child: ViewDx(
+                tabController: _tabController,
+                motorcycle: _motorcycleRequest,
+                serviceOrder: _serviceOrderRequest),
           ),
           SingleChildScrollView(
+            //TODO: motivo y dx
             child: ViewServicios(
-                /*
-              onSubmit: () => showCupertinoDialog(
-                context: context,
-                builder: (_) {
-                  return CupertinoAlertDialog(
-                    title: const Text('Thank you'),
-                    content: const Text('Your application was submitted.'),
-                    actions: [
-                      CupertinoDialogAction(
-                        child: const Text('OK'),
-                        onPressed: () {
-                          // dismiss dialog
-                          Navigator.of(context).pop();
-                          _tabController.index = 0;
-                        },
-                      ),
-                    ],
-                  );
-                },
-              ),*/
-                ),
+                tabController: _tabController,
+                motorcycle: _motorcycleRequest,
+                serviceOrder: _serviceOrderRequest),
           ),
         ],
       ),

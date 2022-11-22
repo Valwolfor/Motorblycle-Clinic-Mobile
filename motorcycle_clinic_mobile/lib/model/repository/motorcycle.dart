@@ -6,8 +6,9 @@ class MotorcycleRepository {
   late final CollectionReference _collection;
 
   MotorcycleRepository() {
-    _collection = FirebaseFirestore.instance.collection("motorcycle");
+    _collection = FirebaseFirestore.instance.collection("motorcycles");
   }
+
   Future<void> newMotorcycle(MotorcycleEntity motorcycle) async {
     await _collection
         .withConverter(

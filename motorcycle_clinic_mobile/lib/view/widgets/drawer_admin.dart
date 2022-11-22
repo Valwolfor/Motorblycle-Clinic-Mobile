@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../pages/home.dart';
+import '/controller/login_controller.dart';
+
 class DrawerAdmin extends StatefulWidget {
   const DrawerAdmin({super.key});
 
@@ -10,9 +13,11 @@ class DrawerAdmin extends StatefulWidget {
 
 class _DrawerAdminState extends State<DrawerAdmin> {
   final _prefs = SharedPreferences.getInstance();
+  final _loginController = LoginController();
   late String _name = "";
   late String _lastName = "";
   late String _email = "";
+  late bool _isAdmin = false;
 
   @override
   void initState() {
@@ -24,6 +29,7 @@ class _DrawerAdminState extends State<DrawerAdmin> {
         _name = prefs.getString("name") ?? "N/A";
         _lastName = prefs.getString("lastName") ?? "N/A";
         _email = prefs.getString("email") ?? "N/A";
+        _isAdmin = prefs.getBool("isAdmin") ?? false;
       });
     });
   }
@@ -38,20 +44,21 @@ class _DrawerAdminState extends State<DrawerAdmin> {
           children: <Widget>[
             drawerHeader(fullName, _email),
 
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text(
-                "Mecánicos",
-                style: TextStyle(fontSize: 18.0),
+            if (_isAdmin)
+              ListTile(
+                leading: const Icon(Icons.person),
+                title: const Text(
+                  "Mecánicos",
+                  style: TextStyle(fontSize: 18.0),
+                ),
+                onTap: () {
+                  // Navigator.of(context).pop();
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => null));
+                },
               ),
-              onTap: () {
-                // Navigator.of(context).pop();
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => null));
-              },
-            ),
             ListTile(
                 leading: const Icon(Icons.app_registration_rounded),
                 title: const Text(
@@ -79,6 +86,39 @@ class _DrawerAdminState extends State<DrawerAdmin> {
                   //     MaterialPageRoute(
                   //         builder: (context) => const Registro()),
                   // );
+                }),
+            ListTile(
+                leading: const Icon(Icons.logout),
+                title: const Text(
+                  "Cerrar sesión",
+                  style: TextStyle(fontSize: 18.0),
+                ),
+                onTap: () async {
+                  try {
+                    var msj = ScaffoldMessenger.of(context);
+                    var nav = Navigator.of(context);
+
+                    _loginController.logout();
+
+                    //Eliminar prefs.
+                    var prefs = await _prefs;
+                    prefs.clear();
+                    //o con remove() por cada variable
+
+                    msj.showSnackBar(
+                      const SnackBar(
+                        content: Text("La sesión se cerró correctamente"),
+                      ),
+                    );
+                    nav.pop();
+                    nav.push(
+                      MaterialPageRoute(
+                        builder: (context) => const Home(),
+                      ),
+                    );
+                  } catch (e) {
+                    Future.error("No se pudo cerrar sesión");
+                  }
                 }),
             ListTile(
                 title: const Text(

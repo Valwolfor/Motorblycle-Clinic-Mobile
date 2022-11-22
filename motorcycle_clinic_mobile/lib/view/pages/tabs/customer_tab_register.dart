@@ -137,13 +137,14 @@ class _ViewCustomerState extends State<ViewCustomer> {
         onPressed: () async {
           try {
             //Alista la variable pa la moto.
+            var msj = ScaffoldMessenger.of(context);
             widget.idCustomer!.id = idController.text;
             await _controller.getCustomer(widget.idCustomer!);
 
             // //Para enviar id al moto
             // widget.idCustomer!.id = _customer.id.toString();
             //mensaje de salida.
-            ScaffoldMessenger.of(context).showSnackBar(
+            msj.showSnackBar(
               const SnackBar(
                 content: Text("El cliente ya se encuentra registrado"),
               ),
@@ -372,6 +373,7 @@ class _ViewCustomerState extends State<ViewCustomer> {
           _customer.typeId = _selectedValue;
           formKeyCustomer.currentState!.save();
           try {
+            var msj = ScaffoldMessenger.of(context);
             await _controller.registerNewCustomer(_customer);
 
             //Para enviar id al moto
@@ -379,7 +381,7 @@ class _ViewCustomerState extends State<ViewCustomer> {
             //validar que no venga vacía esa vaina
             _customer.typeId == null ? "CC" : null;
             //mensaje de salida.
-            ScaffoldMessenger.of(context).showSnackBar(
+            msj.showSnackBar(
               const SnackBar(
                 content: Text("El registro del cliente fue exitoso"),
               ),

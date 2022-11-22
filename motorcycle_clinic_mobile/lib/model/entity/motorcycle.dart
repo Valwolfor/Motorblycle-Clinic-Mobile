@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '/controller/request/service_order_request.dart';
+
 class MotorcycleEntity {
   late String? plate; //creo que es diferente por combo
   late String? idMotor;
@@ -8,7 +10,7 @@ class MotorcycleEntity {
   late String? model;
   late int? registerYear;
   late String? idOwner;
-  late Map<int, dynamic>? serviceOrders;
+  late List<Map<String, dynamic>>? serviceOrdersList;
 
   MotorcycleEntity(
       {this.plate,
@@ -18,7 +20,7 @@ class MotorcycleEntity {
       this.model,
       this.registerYear,
       this.idOwner,
-      this.serviceOrders});
+      this.serviceOrdersList});
   //TODO: Organizar la orden de servicio
 
   //para obtener
@@ -26,6 +28,7 @@ class MotorcycleEntity {
       DocumentSnapshot<Map<String, dynamic>> snapshot,
       SnapshotOptions? options) {
     //devielve todos los datos en map consultados.
+
     var data = snapshot.data();
     return MotorcycleEntity(
         plate: data?["plate"],
@@ -35,7 +38,7 @@ class MotorcycleEntity {
         model: data?["model"],
         registerYear: data?["registerYear"],
         idOwner: data?["idOwner"],
-        serviceOrders: data?["serviceOrders"]);
+        serviceOrdersList: [data?["serviceOrdersList"]]);
   }
 
   Map<String, dynamic> toFirestore() {
@@ -48,13 +51,13 @@ class MotorcycleEntity {
       if (registerYear != null && registerYear!.isNaN)
         "registerYear": registerYear,
       if (model != null && model!.isNotEmpty) "idOwner": idOwner,
-      "serviceOrders": serviceOrders
+      "serviceOrdersList": serviceOrdersList
       //el primer ? es indicativo de null, el según el ?option.
     };
   }
 
   @override
   String toString() {
-    return "MotorcycleEntity {$plate, $idMotor, $idchassis, $brand, $model, $registerYear, $idOwner, $serviceOrders}";
+    return "MotorcycleEntity {$plate, $idMotor, $idchassis, $brand, $model, $registerYear, $idOwner, $serviceOrdersList}";
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
+import '/controller/request/service_order_request.dart';
 import '/controller/request/motorcycle_request.dart';
 import '/controller/request/plate_request.dart';
 import '/controller/motorcycle_controller.dart';
@@ -9,9 +11,17 @@ class ViewMoto extends StatefulWidget {
   final TabController? tabController;
   final IdRequest? idCustomerM;
   final PlateRequest? plate;
+  final MotorcycleRequest? motorcycle;
+  final ServiceOrderRequest? serviceOrder;
 
-  const ViewMoto({Key? key, this.tabController, this.idCustomerM, this.plate})
-      : super(key: key);
+  const ViewMoto({
+    Key? key,
+    this.tabController,
+    this.idCustomerM,
+    this.plate,
+    this.motorcycle,
+    this.serviceOrder,
+  }) : super(key: key);
   @override
   State<ViewMoto> createState() => _ViewMotoState();
 }
@@ -20,7 +30,6 @@ class _ViewMotoState extends State<ViewMoto> {
   final formKeyMotocycle = GlobalKey<FormState>();
 
   late final MotorcycleController _controller = MotorcycleController();
-  late final MotorcycleRequest _motorcycle = MotorcycleRequest();
   TextEditingController plateController = TextEditingController();
 
   @override
@@ -126,30 +135,37 @@ class _ViewMotoState extends State<ViewMoto> {
               borderSide: const BorderSide(color: Color(0xffBA5C0B))),
         ),
         onSaved: (newValue) {
-          _motorcycle.plate = newValue!;
+          widget.motorcycle!.plate = newValue!;
         },
       ),
     );
   }
 
-//TODO: solo validar placa
   Widget iconButtonPlate() {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.only(bottom: 35.0),
         child: IconButton(
           onPressed: () async {
+            //Alista la variable pa la moto.
             widget.plate?.plate = plateController.text;
             try {
-              //Alista la variable pa la moto.
-
+              var msj = ScaffoldMessenger.of(context);
               await _controller.getMotorcycle(widget.plate!);
-
-              ScaffoldMessenger.of(context).showSnackBar(
+              //TODO: hacer alert que pregunte si quiere hacer una nueva OS.
+              msj.showSnackBar(
                 const SnackBar(
                   content: Text("La moto ya se encuentra registrada"),
                 ),
               );
+              //Crea nueva OS
+              DateTime now = DateTime.now();
+              //TODO: borrar porque es pa ver en realidad
+              DateFormat formatter = DateFormat.yMd().add_Hm();
+              String formated = formatter.format(now);
+              widget.serviceOrder!.date = formated;
+              widget.motorcycle!.serviceOrder = widget.serviceOrder!;
+
               // pasarla a la siguiente pestaña.
               widget.tabController!.animateTo(2);
             } catch (e) {
@@ -158,8 +174,6 @@ class _ViewMotoState extends State<ViewMoto> {
                   content: Text(e.toString()),
                 ),
               );
-              //TODO borrar
-              print(e);
             }
           },
           icon: const Icon(
@@ -202,7 +216,7 @@ class _ViewMotoState extends State<ViewMoto> {
           ),
         ),
         onSaved: (newValue) {
-          _motorcycle.idMotor = newValue!;
+          widget.motorcycle!.idMotor = newValue!;
         },
       ),
     );
@@ -238,7 +252,7 @@ class _ViewMotoState extends State<ViewMoto> {
           ),
         ),
         onSaved: (newValue) {
-          _motorcycle.idchassis = newValue!;
+          widget.motorcycle!.idchassis = newValue!;
         },
       ),
     );
@@ -274,7 +288,7 @@ class _ViewMotoState extends State<ViewMoto> {
           ),
         ),
         onSaved: (newValue) {
-          _motorcycle.brand = newValue!;
+          widget.motorcycle!.brand = newValue!;
         },
       ),
     );
@@ -310,7 +324,7 @@ class _ViewMotoState extends State<ViewMoto> {
           ),
         ),
         onSaved: (newValue) {
-          _motorcycle.model = newValue!;
+          widget.motorcycle!.model = newValue!;
         },
       ),
     );
@@ -353,7 +367,7 @@ class _ViewMotoState extends State<ViewMoto> {
             borderSide: const BorderSide(color: Color(0xffBA5C0B))),
       ),
       onSaved: (newValue) {
-        _motorcycle.registerYear = int.tryParse(newValue!);
+        widget.motorcycle!.registerYear = int.tryParse(newValue!);
       },
     );
   }
@@ -369,15 +383,23 @@ class _ViewMotoState extends State<ViewMoto> {
         padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 12.0),
       ),
       onPressed: () async {
-        _motorcycle.idOwner = widget.idCustomerM!.id;
+        widget.motorcycle!.idOwner = widget.idCustomerM!.id.toString();
         if (formKeyMotocycle.currentState!.validate()) {
           formKeyMotocycle.currentState!.save();
           try {
-            widget.plate!.plate = _motorcycle.plate.toString();
-            _motorcycle.idOwner = widget.idCustomerM!.id;
-            await _controller.registerNewMotorcycle(_motorcycle);
+            widget.plate!.plate = widget.motorcycle!.plate.toString();
+            var msj = ScaffoldMessenger.of(context);
+            //Iniciar orden de servicio.
+            DateTime now = DateTime.now();
+            DateFormat formatter = DateFormat.yMd().add_Hm();
+            String formated = formatter.format(now);
+            widget.serviceOrder!.date = formated;
+            widget.motorcycle!.serviceOrder = widget.serviceOrder!;
 
-            ScaffoldMessenger.of(context).showSnackBar(
+            //registra moto.
+            await _controller.registerNewMotorcycle(widget.motorcycle!);
+
+            msj.showSnackBar(
               const SnackBar(
                 content: Text("El registro de la moto fue exitoso"),
               ),
@@ -391,7 +413,7 @@ class _ViewMotoState extends State<ViewMoto> {
               ),
             );
           }
-          print(_motorcycle);
+          print(widget.motorcycle);
         }
       },
       child: const Text("Regisrar"),

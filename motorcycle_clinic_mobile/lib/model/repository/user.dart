@@ -14,7 +14,7 @@ class UserRepository {
     //el value el la entidad que se manda "email"
     //el converte lo vuelve objeto, porque usa el factory
     final query = await _collectionReference
-        .withConverter(
+        .withConverter<UserEntity>(
           fromFirestore: UserEntity.fromFirestore,
           toFirestore: (value, options) => value.toFirestore(),
         )
@@ -30,7 +30,7 @@ class UserRepository {
     var user = users.first;
 
     var response = user.data();
-    // response.idCustomer = user.idCustomer;
+    response.id = user.id;
 
     return response;
   }

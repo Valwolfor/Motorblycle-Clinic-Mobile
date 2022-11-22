@@ -355,17 +355,18 @@ class _RegistroState extends State<Registro> {
           formKey.currentState!.save();
           //cómo promese, usando el then, sí es existoso envía lo siguiente
           try {
+            var msj = ScaffoldMessenger.of(context);
+            var nav = Navigator.of(context);
             await _controller.registerNewUser(_registerRequest);
 
-            ScaffoldMessenger.of(context).showSnackBar(
+            msj.showSnackBar(
               const SnackBar(
                 content: Text("El registro fue exitoso"),
               ),
             );
             //envía al login para iniciar de una vez.
-            Navigator.of(context).pop();
-            Navigator.push(
-              context,
+            nav.pop();
+            nav.push(
               MaterialPageRoute(
                 builder: (context) => const CuerpoLogin(),
               ),
@@ -377,7 +378,6 @@ class _RegistroState extends State<Registro> {
               ),
             );
           }
-          print(_registerRequest);
         }
       },
       child: const Text("Registrarse"),

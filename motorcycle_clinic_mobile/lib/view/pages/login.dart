@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motorcycle_clinic_mobile/controller/response/user_info_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '/controller/request/login_request.dart';
@@ -207,21 +208,20 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
           //save guarda todo los campos con onSaved
           formKey.currentState!.save();
           try {
-            var userInfo = await _controller.validateLogin(_loginRequest);
+            var nav = Navigator.of(context);
+            var _userInfo = await _controller.validateLogin(_loginRequest);
 
             var pref = await _prefs;
-            pref.setString("uid", userInfo.id!);
-            pref.setString("name", userInfo.name!);
-            pref.setString("lastName", userInfo.lastName!);
-            pref.setString("email", userInfo.email!);
-            pref.setBool("admin", userInfo.isAdmin!);
+            pref.setString("uid", _userInfo.id!);
+            pref.setString("name", _userInfo.name!);
+            pref.setString("lastName", _userInfo.lastName!);
+            pref.setString("email", _userInfo.email!);
+            pref.setBool("admin", _userInfo.isAdmin!);
 
-            Navigator.of(context).pop();
-            Navigator.push(
-              context,
+            nav.pop();
+            nav.push(
               MaterialPageRoute(
-                builder: (context) => RegisterMotorcycle(),
-                // Principal(email: _loginRequest.email, name: name),
+                builder: (context) => const RegisterMotorcycle(),
               ),
             );
 

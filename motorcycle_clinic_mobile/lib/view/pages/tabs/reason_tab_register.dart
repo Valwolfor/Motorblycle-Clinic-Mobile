@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:motorcycle_clinic_mobile/controller/request/motorcycle_request.dart';
+import 'package:motorcycle_clinic_mobile/controller/request/service_order_request.dart';
 
 class ViewReason extends StatefulWidget {
   final TabController? tabController;
 
-  const ViewReason({Key? key, this.tabController}) : super(key: key);
+  const ViewReason(
+      {Key? key,
+      this.tabController,
+      MotorcycleRequest? motorcycle,
+      ServiceOrderRequest? serviceOrder})
+      : super(key: key);
 
   @override
   State<ViewReason> createState() => _ViewReasonState();

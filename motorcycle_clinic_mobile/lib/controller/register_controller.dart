@@ -14,21 +14,22 @@ class RegisterController {
   Future<void> registerNewUser(RegisterRequest request,
       {bool adminUser = false}) async {
     //Crear usuario en firebase.
+    try {
+      await _userRepository.findByEmail(request.email);
+      return Future.error("Ya existe un usuario con el correo ingresado");
+    } catch (e) {
+      //Como usuario no existe, se crea uno.
+      await _fbAuthRepository.createUserWithEmailAndPassword(
+          request.email, request.password);
 
-    await _fbAuthRepository.createUserWithEmailAndPassword(
-        request.email, request.password);
+      //Agregar información adicional en BD
 
-    //Agregar información adicional en BD
-
-    _userRepository.save(UserEntity(
-        email: request.email,
-        name: request.name,
-        lastName: request.lastName,
-        phoneNumber: request.phoneNumber,
-        isAdmin: adminUser));
+      _userRepository.save(UserEntity(
+          email: request.email,
+          name: request.name,
+          lastName: request.lastName,
+          phoneNumber: request.phoneNumber,
+          isAdmin: adminUser));
+    }
   }
-
-  // Future<void> logout() async {
-  //   await _authRepository.signOut();
-  // }
 }

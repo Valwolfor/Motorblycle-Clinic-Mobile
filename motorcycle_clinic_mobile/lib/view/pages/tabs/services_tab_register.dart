@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:motorcycle_clinic_mobile/controller/request/motorcycle_request.dart';
+import 'package:motorcycle_clinic_mobile/controller/request/service_order_request.dart';
 
 import '/controller/request/services_request.dart';
 
 class ViewServicios extends StatefulWidget {
-  const ViewServicios({super.key});
+  const ViewServicios(
+      {super.key,
+      TabController? tabController,
+      MotorcycleRequest? motorcycle,
+      ServiceOrderRequest? serviceOrder});
 
   @override
   State<ViewServicios> createState() => _ViewServiciosState();

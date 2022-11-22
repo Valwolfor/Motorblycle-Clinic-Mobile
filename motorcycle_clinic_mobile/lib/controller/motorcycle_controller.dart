@@ -11,7 +11,39 @@ class MotorcycleController {
 
   Future<void> registerNewMotorcycle(MotorcycleRequest request) async {
     //Agregar información a BD
-
+    List<Map<String, dynamic>> serviceOrdersList = [];
+    serviceOrdersList.add({
+      "date": request.serviceOrder!.date,
+      "reason": request.serviceOrder!.reason,
+      "mileage": request.serviceOrder!.mileage,
+      "reasonDetail": request.serviceOrder!.reasonDetail,
+      "lvlGas": request.serviceOrder!.lvlGas,
+      "documents": request.serviceOrder!.documents,
+      "advancePayment": request.serviceOrder!.advancePayment,
+      "authRute": request.serviceOrder!.authRute,
+      "advanceValue": request.serviceOrder!.advanceValue,
+      "indicators": request.serviceOrder!.indicators,
+      "oilState": request.serviceOrder!.oilState,
+      "oilLvl": request.serviceOrder!.oilLvl,
+      "brakeFluid": request.serviceOrder!.brakeFluid,
+      "cluchtFluid": request.serviceOrder!.cluchtFluid,
+      "coolantFluid": request.serviceOrder!.coolantFluid,
+      "mirrows": request.serviceOrder!.mirrows,
+      "horm": request.serviceOrder!.horm,
+      "tank": request.serviceOrder!.tank,
+      "ligths": request.serviceOrder!.ligths,
+      "tires": request.serviceOrder!.tires,
+      "forwardBrake": request.serviceOrder!.forwardBrake,
+      "backBrake": request.serviceOrder!.backBrake,
+      "clucht": request.serviceOrder!.clucht,
+      "chain": request.serviceOrder!.chain,
+      "sparkPlug": request.serviceOrder!.sparkPlug,
+      "batery": request.serviceOrder!.batery,
+      "motor": request.serviceOrder!.motor,
+      "tapes": request.serviceOrder!.tapes,
+      "dragKit": request.serviceOrder!.dragKit,
+      "listServices": request.serviceOrder!.listServices,
+    });
     _customerRepository.newMotorcycle(
       MotorcycleEntity(
           plate: request.plate,
@@ -21,7 +53,7 @@ class MotorcycleController {
           model: request.model,
           registerYear: request.registerYear,
           idOwner: request.idOwner,
-          serviceOrders: request.serviceOrders),
+          serviceOrdersList: serviceOrdersList),
     );
   }
 

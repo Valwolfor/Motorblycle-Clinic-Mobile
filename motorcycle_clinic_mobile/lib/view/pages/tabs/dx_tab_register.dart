@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:motorcycle_clinic_mobile/controller/request/motorcycle_request.dart';
+import 'package:motorcycle_clinic_mobile/controller/request/service_order_request.dart';
 
 class ViewDx extends StatefulWidget {
-  const ViewDx({super.key});
+  const ViewDx(
+      {super.key,
+      TabController? tabController,
+      MotorcycleRequest? motorcycle,
+      ServiceOrderRequest? serviceOrder});
 
   @override
   State<ViewDx> createState() => _ViewDxState();

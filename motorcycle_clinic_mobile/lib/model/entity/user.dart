@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserEntity {
-  //LATE para manejar el null, el ?option para que pueda tener null
-  late String? id; //para recibir y no se usa más
+  late String? id; //para recibir UID y no se usa más
   late String? name;
   late String? lastName;
   late String? email;
