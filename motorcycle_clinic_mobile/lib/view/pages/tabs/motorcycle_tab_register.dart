@@ -160,7 +160,6 @@ class _ViewMotoState extends State<ViewMoto> {
               );
               //Crea nueva OS
               DateTime now = DateTime.now();
-              //TODO: borrar porque es pa ver en realidad
               DateFormat formatter = DateFormat.yMd().add_Hm();
               String formated = formatter.format(now);
               widget.serviceOrder!.date = formated;
@@ -413,7 +412,6 @@ class _ViewMotoState extends State<ViewMoto> {
               ),
             );
           }
-          print(widget.motorcycle);
         }
       },
       child: const Text("Regisrar"),

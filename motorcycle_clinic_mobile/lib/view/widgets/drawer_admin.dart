@@ -102,6 +102,7 @@ class _DrawerAdminState extends State<DrawerAdmin> {
 
                     //Eliminar prefs.
                     var prefs = await _prefs;
+
                     prefs.clear();
                     //o con remove() por cada variable
 

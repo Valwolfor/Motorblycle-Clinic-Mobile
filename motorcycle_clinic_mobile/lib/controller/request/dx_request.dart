@@ -1,5 +1,4 @@
 class DxRequest {
-  //TODO ELIMINIAR.
   late String? indicators;
   late String? oilState;
   late String? oilLvl;
@@ -9,8 +8,8 @@ class DxRequest {
   late String? mirrows;
   late String? horm;
   late String? tank;
-  late List<String> ligths;
-  late List<String> tires;
+  late List<String>? ligths;
+  late List<String>? tires;
   late String? forwardBrake;
   late String? backBrake;
   late String? clucht;

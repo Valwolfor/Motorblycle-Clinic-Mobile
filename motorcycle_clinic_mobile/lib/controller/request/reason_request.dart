@@ -1,5 +1,4 @@
 class ReasonRequest {
-  //todo: ELEMINAR
   late String? reason;
   late int? mileage;
   late String? reasonDetail;
