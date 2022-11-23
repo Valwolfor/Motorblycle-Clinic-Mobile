@@ -16,7 +16,6 @@ class LoginController {
         request.email, request.password);
     var user = await _userRepository.findByEmail(request.email);
 
-    // var nameUser = "${user.name} ${user.lastName}";
     return UserInfoResponse(
         id: user.id,
         name: user.name,

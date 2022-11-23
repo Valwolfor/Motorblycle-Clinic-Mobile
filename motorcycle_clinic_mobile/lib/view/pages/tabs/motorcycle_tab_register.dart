@@ -147,9 +147,9 @@ class _ViewMotoState extends State<ViewMoto> {
         padding: const EdgeInsets.only(bottom: 35.0),
         child: IconButton(
           onPressed: () async {
-            //Alista la variable pa la moto.
-            widget.plate?.plate = plateController.text;
+            //Alista la variable pa la moto.a
             try {
+              widget.plate?.plate = plateController.text;
               var msj = ScaffoldMessenger.of(context);
               await _controller.getMotorcycle(widget.plate!);
               //TODO: hacer alert que pregunte si quiere hacer una nueva OS.

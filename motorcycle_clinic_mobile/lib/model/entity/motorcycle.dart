@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '/controller/request/service_order_request.dart';
-
 class MotorcycleEntity {
   late String? plate; //creo que es diferente por combo
   late String? idMotor;
@@ -10,7 +8,7 @@ class MotorcycleEntity {
   late String? model;
   late int? registerYear;
   late String? idOwner;
-  late List<Map<String, dynamic>>? serviceOrdersList;
+  late Map<String, dynamic>? serviceOrdersMaps;
 
   MotorcycleEntity(
       {this.plate,
@@ -20,7 +18,7 @@ class MotorcycleEntity {
       this.model,
       this.registerYear,
       this.idOwner,
-      this.serviceOrdersList});
+      this.serviceOrdersMaps});
   //TODO: Organizar la orden de servicio
 
   //para obtener
@@ -38,7 +36,7 @@ class MotorcycleEntity {
         model: data?["model"],
         registerYear: data?["registerYear"],
         idOwner: data?["idOwner"],
-        serviceOrdersList: [data?["serviceOrdersList"]]);
+        serviceOrdersMaps: data?["serviceOrdersMaps"]);
   }
 
   Map<String, dynamic> toFirestore() {
@@ -51,13 +49,13 @@ class MotorcycleEntity {
       if (registerYear != null && registerYear!.isNaN)
         "registerYear": registerYear,
       if (model != null && model!.isNotEmpty) "idOwner": idOwner,
-      "serviceOrdersList": serviceOrdersList
+      "serviceOrdersMaps": serviceOrdersMaps
       //el primer ? es indicativo de null, el según el ?option.
     };
   }
 
   @override
   String toString() {
-    return "MotorcycleEntity {$plate, $idMotor, $idchassis, $brand, $model, $registerYear, $idOwner, $serviceOrdersList}";
+    return "MotorcycleEntity {$plate, $idMotor, $idchassis, $brand, $model, $registerYear, $idOwner, $serviceOrdersMaps}";
   }
 }

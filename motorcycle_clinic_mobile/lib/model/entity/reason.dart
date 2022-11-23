@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ReasonEntity {
-  late String? reason; //creo que es diferente por combo
-  late String? reasonDetail; //creo que es diferente por combo
+  late String? reason;
+  late String? reasonDetail;
   late int? mileage;
-  late String? gas;
-  late Map<String, String>? documents;
+  late String? lvlGas;
+  late List<String>? documents;
   late bool? advancePayment;
   late int? advanceValue;
   late bool? authRute;
@@ -14,7 +14,7 @@ class ReasonEntity {
       {this.reason,
       this.reasonDetail,
       this.mileage,
-      this.gas,
+      this.lvlGas,
       this.documents,
       this.advancePayment,
       this.advanceValue,
@@ -30,7 +30,7 @@ class ReasonEntity {
       reason: data?["reason"],
       reasonDetail: data?["reasonDetail"],
       mileage: data?["mileage"],
-      gas: data?["gas"],
+      lvlGas: data?["lvlGas"],
       documents: data?["documents"],
       advancePayment: data?["advancePayment"],
       advanceValue: data?["advanceValue"],
@@ -44,18 +44,16 @@ class ReasonEntity {
       if (reasonDetail != null && reasonDetail!.isNotEmpty)
         "reasonDetail": reasonDetail,
       if (mileage != null && mileage!.isNaN) "mileage": mileage,
-      if (gas != null && gas!.isNotEmpty) "gas": gas,
-      // if (documents != null && model!.isNotEmpty) "model": documents, //sí puede ser null
+      if (lvlGas != null && lvlGas!.isNotEmpty) "lvlGas": lvlGas,
       if (advancePayment != null) "advancePayment": advancePayment,
       if (advanceValue != null && advanceValue!.isNaN)
         "advanceValue": advanceValue,
       if (authRute != null) "authRute": authRute,
-      //el primer ? es indicativo de null, el según el ?option.
     };
   }
 
   @override
   String toString() {
-    return "ReasonEntity {$reason, $reasonDetail, $mileage, $gas, $advancePayment, $advanceValue, $authRute}";
+    return "ReasonEntity {$reason, $reasonDetail, $mileage, $lvlGas, $advancePayment, $advanceValue, $authRute}";
   }
 }

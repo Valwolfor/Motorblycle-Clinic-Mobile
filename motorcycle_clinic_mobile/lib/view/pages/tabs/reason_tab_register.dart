@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:motorcycle_clinic_mobile/controller/request/motorcycle_request.dart';
-import 'package:motorcycle_clinic_mobile/controller/request/service_order_request.dart';
+
+import '/controller/request/reason_request.dart';
+import '/controller/request/motorcycle_request.dart';
+import '/controller/request/service_order_request.dart';
+import '/controller/motorcycle_controller.dart';
 
 class ViewReason extends StatefulWidget {
   final TabController? tabController;
+  final ServiceOrderRequest? serviceOrder;
+  final MotorcycleRequest? motorcycle;
 
-  const ViewReason(
-      {Key? key,
-      this.tabController,
-      MotorcycleRequest? motorcycle,
-      ServiceOrderRequest? serviceOrder})
-      : super(key: key);
+  const ViewReason({
+    Key? key,
+    this.tabController,
+    this.motorcycle,
+    this.serviceOrder,
+  }) : super(key: key);
 
   @override
   State<ViewReason> createState() => _ViewReasonState();
 }
-//TODO: poner el entity en el onsaved
-
-// enum GasLevel { empty, unCuato, medio, tresCuatos, full }
 
 class _ViewReasonState extends State<ViewReason> {
+  late final ReasonRequest _reason = ReasonRequest();
+  late final MotorcycleController _controller = MotorcycleController();
   //Dropmenu motivo
   var _selectedValue;
   final _reasons = <String>[
@@ -39,6 +43,8 @@ class _ViewReasonState extends State<ViewReason> {
   bool _checkedAutorizacion = false;
 
   final formKeyReason = GlobalKey<FormState>();
+
+  final List<String> documentslist = [];
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +81,7 @@ class _ViewReasonState extends State<ViewReason> {
           children: <Widget>[
             Row(
               children: [
-                dropdownID(),
+                dropdownReason(),
                 const SizedBox(
                   width: 5.0,
                 ),
@@ -107,7 +113,7 @@ class _ViewReasonState extends State<ViewReason> {
   }
 
   //Wigets
-  Widget dropdownID() {
+  Widget dropdownReason() {
     return Expanded(
       child: DropdownButtonFormField(
         //Quitar tipo widget
@@ -132,8 +138,8 @@ class _ViewReasonState extends State<ViewReason> {
                 ))
             .toList(),
         onChanged: (value) {
-          // _motorcycle.reason = value;
-
+          _reason.reason = value;
+          // widget.serviceOrder!.reason!.reason = value;
           setState(
             () {
               _selectedValue = value as String;
@@ -159,10 +165,6 @@ class _ViewReasonState extends State<ViewReason> {
         },
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
-          // prefixIcon: const Icon(
-          //   Icons.person,
-          //   color: Color(0xffBA5C0B),
-          // ),
           label: const Text(
             'Kilometraje',
           ),
@@ -176,6 +178,10 @@ class _ViewReasonState extends State<ViewReason> {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
+        onSaved: (newValue) {
+          _reason.mileage = int.tryParse(newValue!)!;
+          // widget.serviceOrder!.reason!.mileage = newValue as int;
+        },
       ),
     );
   }
@@ -213,11 +219,14 @@ class _ViewReasonState extends State<ViewReason> {
             borderRadius: BorderRadius.circular(15.0),
           ),
         ),
+        onSaved: (newValue) {
+          _reason.reasonDetail = newValue!;
+          // widget.serviceOrder!.reason!.reasonDetail = newValue;
+        },
       ),
     );
   }
 
-//No recibe los datos, tal vez necesita controllers.
   Widget gasRadioButton() {
     return Container(
         padding: const EdgeInsets.only(bottom: 15.0),
@@ -319,7 +328,6 @@ class _ViewReasonState extends State<ViewReason> {
         ));
   }
 
-//Ni idea como meterle controllers a esto :D
   Widget documentsCheckButton() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -342,6 +350,14 @@ class _ViewReasonState extends State<ViewReason> {
             onChanged: (bool? value) {
               setState(() {
                 _checkedLicencia = value!;
+
+                //asignación
+                if (_checkedLicencia == true) {
+                  documentslist.add("Licencia de tránsito");
+                } else {
+                  var checkeo = documentslist.contains("Licencia de tránsito");
+                  checkeo ? documentslist.remove("Licencia de tránsito") : null;
+                }
               });
             },
             activeColor: const Color(0xffBA5C0B),
@@ -352,6 +368,14 @@ class _ViewReasonState extends State<ViewReason> {
             onChanged: (bool? value) {
               setState(() {
                 _checkedSoat = value!;
+
+                //asignación
+                if (_checkedLicencia) {
+                  documentslist.add("Soat");
+                } else {
+                  var checkeo = documentslist.contains("Soat");
+                  checkeo ? documentslist.remove("Soat") : null;
+                }
               });
             },
             activeColor: const Color(0xffBA5C0B),
@@ -362,6 +386,14 @@ class _ViewReasonState extends State<ViewReason> {
             onChanged: (bool? value) {
               setState(() {
                 _checkedTecno = value!;
+
+                //asignación
+                if (_checkedLicencia) {
+                  documentslist.add("Tecnomecánica");
+                } else {
+                  var checkeo = documentslist.contains("Tecnomecánica");
+                  checkeo ? documentslist.remove("Tecnomecánica") : null;
+                }
               });
             },
             activeColor: const Color(0xffBA5C0B),
@@ -379,6 +411,7 @@ class _ViewReasonState extends State<ViewReason> {
           subtitle: const Text("Indique el valor"),
           value: _checkedAnticipo,
           onChanged: (bool? value) {
+            _reason.advancePayment = _checkedAnticipo;
             setState(() {
               _checkedAnticipo = value!;
             });
@@ -416,6 +449,11 @@ class _ViewReasonState extends State<ViewReason> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
             ),
+            onSaved: (newValue) {
+              _checkedAnticipo
+                  ? _reason.advanceValue = int.tryParse(newValue!)!
+                  : _reason.advanceValue = 0;
+            },
           ),
       ],
     );
@@ -427,8 +465,9 @@ class _ViewReasonState extends State<ViewReason> {
       title: const Text("Autoriza ruta por cliente "),
       value: _checkedAutorizacion,
       onChanged: (bool? value) {
+        _reason.authRute = value!;
         setState(() {
-          _checkedAutorizacion = value!;
+          _checkedAutorizacion = value;
         });
       },
       activeColor: const Color(0xffBA5C0B),
@@ -445,10 +484,30 @@ class _ViewReasonState extends State<ViewReason> {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 12.0),
       ),
-      onPressed: () {
+      onPressed: () async {
         if (formKeyReason.currentState!.validate()) {
-          //TODO: validar en BD
-          Navigator.of(context).pop();
+          formKeyReason.currentState!.save();
+          try {
+            //Botones sin controlador.
+            _reason.lvlGas = _gasSelected;
+            _reason.documents = documentslist;
+            var msj = ScaffoldMessenger.of(context);
+
+            await _controller.registerReason(widget.motorcycle!, _reason);
+
+            msj.showSnackBar(
+              const SnackBar(
+                content: Text("El registro del motivo fue exitoso"),
+              ),
+            );
+            widget.tabController!.animateTo(3);
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(e.toString()),
+              ),
+            );
+          }
         }
       },
       child: const Text("Regisrar"),
