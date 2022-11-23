@@ -20,7 +20,7 @@ class MotorcycleRepository {
         .add(motorcycle);
   }
 
-  Future<MotorcycleRequest> findByPlate(String plateQuery) async {
+  Future<MotorcycleEntity> findByPlate(String plateQuery) async {
     final query = await _collection
         .withConverter(
           fromFirestore: MotorcycleEntity.fromFirestore,

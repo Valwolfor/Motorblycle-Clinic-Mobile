@@ -2,7 +2,6 @@ import '/model/entity/reason.dart';
 import '/model/entity/motorcycle.dart';
 import '/model/repository/motorcycle.dart';
 import 'request/motorcycle_request.dart';
-import 'request/plate_request.dart';
 import 'request/reason_request.dart';
 import 'request/service_order_request.dart';
 
@@ -56,16 +55,15 @@ class MotorcycleController {
     }
   }
 
-//TODO: agregar nueva orden de servicio.
-  //veriticar existencia del vehículo
-  Future<MotorcycleRequest> getMotorcycle(PlateRequest request) async {
+  //veriticar existencia del vehículo y agrega nueva OS
+  Future<MotorcycleRequest> getMotorcycle(MotorcycleRequest request) async {
     var bike = await _motorcycleRepository.findByPlate(request.plate!);
 
     ServiceOrderRequest serviceOrder = ServiceOrderRequest();
-    serviceOrder.date = bike.serviceOrder!.date;
-    serviceOrder.reason = bike.serviceOrder!.reason;
-    serviceOrder.dx = bike.serviceOrder!.dx;
-    serviceOrder.listServices = bike.serviceOrder!.listServices;
+    serviceOrder.date = "";
+    serviceOrder.reason = <String, dynamic>{};
+    serviceOrder.dx = <String, dynamic>{};
+    serviceOrder.listServices = [<String, dynamic>{}];
 
     MotorcycleRequest motoRegistered = MotorcycleRequest();
     motoRegistered.plate = bike.plate;

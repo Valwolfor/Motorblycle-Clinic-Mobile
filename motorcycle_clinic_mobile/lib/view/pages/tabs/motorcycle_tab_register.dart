@@ -149,21 +149,33 @@ class _ViewMotoState extends State<ViewMoto> {
           onPressed: () async {
             //Alista la variable pa la moto.a
             try {
-              widget.plate?.plate = plateController.text;
+              // widget.plate?.plate = plateController.text;
+              widget.motorcycle!.plate = plateController.text;
               var msj = ScaffoldMessenger.of(context);
-              await _controller.getMotorcycle(widget.plate!);
-              //TODO: hacer alert que pregunte si quiere hacer una nueva OS.
+              var motoInBD =
+                  await _controller.getMotorcycle(widget.motorcycle!);
+
               msj.showSnackBar(
                 const SnackBar(
                   content: Text("La moto ya se encuentra registrada"),
                 ),
               );
+              //TODO: hacer alert que pregunte si quiere hacer una nueva OS.
               //Crea nueva OS
+
               DateTime now = DateTime.now();
               DateFormat formatter = DateFormat.yMd().add_Hm();
               String formated = formatter.format(now);
+
               widget.serviceOrder!.date = formated;
               widget.motorcycle!.serviceOrder = widget.serviceOrder!;
+              widget.motorcycle!.plate = motoInBD.plate;
+              widget.motorcycle!.idMotor = motoInBD.idMotor;
+              widget.motorcycle!.idchassis = motoInBD.idchassis;
+              widget.motorcycle!.brand = motoInBD.brand;
+              widget.motorcycle!.model = motoInBD.model;
+              widget.motorcycle!.registerYear = motoInBD.registerYear;
+              widget.motorcycle!.idOwner = motoInBD.idOwner;
 
               // pasarla a la siguiente pestaña.
               widget.tabController!.animateTo(2);
