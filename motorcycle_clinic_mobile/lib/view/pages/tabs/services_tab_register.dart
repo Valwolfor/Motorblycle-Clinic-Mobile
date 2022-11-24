@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:motorcycle_clinic_mobile/controller/request/motorcycle_request.dart';
-import 'package:motorcycle_clinic_mobile/controller/request/service_order_request.dart';
-
-import '/controller/request/services_request.dart';
+import '/controller/motorcycle_controller.dart';
+import '/controller/request/motorcycle_request.dart';
 
 class ViewServicios extends StatefulWidget {
-  const ViewServicios(
-      {super.key,
-      TabController? tabController,
-      MotorcycleRequest? motorcycle,
-      ServiceOrderRequest? serviceOrder});
+  final TabController? tabController;
+  final MotorcycleRequest? motorcycle;
+
+  const ViewServicios({
+    Key? key,
+    this.tabController,
+    this.motorcycle,
+  }) : super(key: key);
 
   @override
   State<ViewServicios> createState() => _ViewServiciosState();
 }
 
 class _ViewServiciosState extends State<ViewServicios> {
-  //TODO: pasarlo con entidad
+  late final MotorcycleController _controller = MotorcycleController();
+
   List<Map<String, dynamic>>? _listServices = [];
 
   final formKeyServices = GlobalKey<FormState>();
-  // final ServicesRequest _services = ServicesRequest();
   Map<String, dynamic>? _services = {};
   List<bool> _isChecked = [];
 
@@ -126,8 +127,27 @@ class _ViewServiciosState extends State<ViewServicios> {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 35.0, vertical: 12.0),
       ),
-      onPressed: () {
-        //TODO: Recoger todos los servicios registrados la lista
+      onPressed: () async {
+        widget.motorcycle!.serviceOrder!.listServices = _listServices;
+
+        var msj = ScaffoldMessenger.of(context);
+        try {
+          await _controller.registerServices(widget.motorcycle!);
+
+          msj.showSnackBar(
+            const SnackBar(
+              content: Text(
+                  "Se ha completado el registro, puede iniciar un nuevo registro."),
+            ),
+          );
+          widget.tabController!.animateTo(0);
+        } catch (e) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(e.toString()),
+            ),
+          );
+        }
       },
       child: const Text("Registrar Servicios"),
     );
@@ -272,10 +292,6 @@ class _ViewServiciosState extends State<ViewServicios> {
     );
   }
 
-  // Widget approvedCheckbox(int index) {
-  //   return;
-  // }
-
   Widget cancelDialogButton() {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
@@ -323,7 +339,6 @@ class _ViewServiciosState extends State<ViewServicios> {
           setState(() {});
           Navigator.of(context).pop();
         }
-        // _services!.clear();
       },
       child: const Text(
         "Agregar",
@@ -357,7 +372,6 @@ class _ViewServiciosState extends State<ViewServicios> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    //TODO: agrupador de servicios
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 25.0),
                       child: const Center(
@@ -379,7 +393,6 @@ class _ViewServiciosState extends State<ViewServicios> {
 
   Widget formDiaglog() {
     return Form(
-      //TODO: entity para recoger los servicios y guardarlos en la orden
       key: formKeyServices,
       child: Column(
         children: [
@@ -406,7 +419,6 @@ class _ViewServiciosState extends State<ViewServicios> {
     );
   }
 
-//TODO al builder.
   Widget tileServicios(int index) {
     int indexTile = index;
     return ListTile(
@@ -451,8 +463,6 @@ class _ViewServiciosState extends State<ViewServicios> {
                 setState(() {
                   _isChecked[indexTile];
                 });
-
-                print(_listServices);
               },
             )
           ],

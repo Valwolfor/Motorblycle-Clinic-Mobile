@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 
 import '/controller/request/reason_request.dart';
 import '/controller/request/motorcycle_request.dart';
-import '/controller/request/service_order_request.dart';
 import '/controller/motorcycle_controller.dart';
 
 class ViewReason extends StatefulWidget {
   final TabController? tabController;
-  final ServiceOrderRequest? serviceOrder;
   final MotorcycleRequest? motorcycle;
 
   const ViewReason({
     Key? key,
     this.tabController,
     this.motorcycle,
-    this.serviceOrder,
   }) : super(key: key);
 
   @override
@@ -180,7 +177,7 @@ class _ViewReasonState extends State<ViewReason> {
         ),
         onSaved: (newValue) {
           _reason.mileage = int.tryParse(newValue!)!;
-          // widget.serviceOrder!.reason!.mileage = newValue as int;
+          _reason.advanceValue = 0;
         },
       ),
     );
@@ -411,9 +408,9 @@ class _ViewReasonState extends State<ViewReason> {
           subtitle: const Text("Indique el valor"),
           value: _checkedAnticipo,
           onChanged: (bool? value) {
-            _reason.advancePayment = _checkedAnticipo;
             setState(() {
               _checkedAnticipo = value!;
+              _reason.advancePayment = _checkedAnticipo;
             });
           },
           activeColor: const Color(0xffBA5C0B),

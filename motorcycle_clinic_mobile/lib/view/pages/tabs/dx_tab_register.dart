@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:motorcycle_clinic_mobile/controller/request/motorcycle_request.dart';
-import 'package:motorcycle_clinic_mobile/controller/request/service_order_request.dart';
+
+import '/controller/motorcycle_controller.dart';
+import '/controller/request/dx_request.dart';
+import '/controller/request/motorcycle_request.dart';
 
 class ViewDx extends StatefulWidget {
-  const ViewDx(
-      {super.key,
-      TabController? tabController,
-      MotorcycleRequest? motorcycle,
-      ServiceOrderRequest? serviceOrder});
+  final TabController? tabController;
+  final MotorcycleRequest? motorcycle;
+
+  const ViewDx({
+    Key? key,
+    this.tabController,
+    this.motorcycle,
+  }) : super(key: key);
 
   @override
   State<ViewDx> createState() => _ViewDxState();
 }
 
 class _ViewDxState extends State<ViewDx> {
+  //Request
+  late final DxRequest _dx = DxRequest();
+  late final MotorcycleController _controller = MotorcycleController();
+
   //Variables
-  // final stateIndicadores = <String>["Apto", "No Apto"];
-  // final stateEstadoAceite = <String>["Apto", "Regular", "No Apto"];
   var _indicadoresSelected = "Apto";
   var _estadoAceiteSelected = "Apto";
   var _nivelAceiteSelected = "Lleno";
@@ -45,6 +52,9 @@ class _ViewDxState extends State<ViewDx> {
   bool _checkedLlantaTrasera = false;
   bool _checkedRinDelantero = false;
   bool _checkedRinTrasero = false;
+
+  final List<String> _listLigths = [];
+  final List<String> _listTiresState = [];
 
   //Formulario
   final formKeyDx = GlobalKey<FormState>();
@@ -274,7 +284,6 @@ class _ViewDxState extends State<ViewDx> {
           //TODO: Para tomar la foto
           if (formKeyDx.currentState!.validate()) {
             //TODO: validar id en BD
-            Navigator.of(context).pop();
           }
         },
         icon: const Icon(
@@ -308,7 +317,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _indicadoresSelected,
                   onChanged: (value) {
                     setState(() {
-                      _indicadoresSelected = value as String;
+                      _indicadoresSelected = value!;
                     });
                   },
                 ),
@@ -328,7 +337,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _indicadoresSelected,
                   onChanged: (value) {
                     setState(() {
-                      _indicadoresSelected = value as String;
+                      _indicadoresSelected = value!;
                     });
                   },
                 ),
@@ -366,7 +375,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _estadoAceiteSelected,
                   onChanged: (value) {
                     setState(() {
-                      _estadoAceiteSelected = value as String;
+                      _estadoAceiteSelected = value!;
                     });
                   },
                 ),
@@ -386,7 +395,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _estadoAceiteSelected,
                   onChanged: (value) {
                     setState(() {
-                      _estadoAceiteSelected = value as String;
+                      _estadoAceiteSelected = value!;
                     });
                   },
                 ),
@@ -406,7 +415,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _estadoAceiteSelected,
                   onChanged: (value) {
                     setState(() {
-                      _estadoAceiteSelected = value as String;
+                      _estadoAceiteSelected = value!;
                     });
                   },
                 ),
@@ -444,7 +453,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _nivelAceiteSelected,
                   onChanged: (value) {
                     setState(() {
-                      _nivelAceiteSelected = value as String;
+                      _nivelAceiteSelected = value!;
                     });
                   },
                 ),
@@ -464,7 +473,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _nivelAceiteSelected,
                   onChanged: (value) {
                     setState(() {
-                      _nivelAceiteSelected = value as String;
+                      _nivelAceiteSelected = value!;
                     });
                   },
                 ),
@@ -484,7 +493,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _nivelAceiteSelected,
                   onChanged: (value) {
                     setState(() {
-                      _nivelAceiteSelected = value as String;
+                      _nivelAceiteSelected = value!;
                     });
                   },
                 ),
@@ -522,7 +531,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _liqFrenosSelected,
                   onChanged: (value) {
                     setState(() {
-                      _liqFrenosSelected = value as String;
+                      _liqFrenosSelected = value!;
                     });
                   },
                 ),
@@ -542,7 +551,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _liqFrenosSelected,
                   onChanged: (value) {
                     setState(() {
-                      _liqFrenosSelected = value as String;
+                      _liqFrenosSelected = value!;
                     });
                   },
                 ),
@@ -580,7 +589,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _liqEmbragueSelected,
                   onChanged: (value) {
                     setState(() {
-                      _liqEmbragueSelected = value as String;
+                      _liqEmbragueSelected = value!;
                     });
                   },
                 ),
@@ -600,7 +609,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _liqEmbragueSelected,
                   onChanged: (value) {
                     setState(() {
-                      _liqEmbragueSelected = value as String;
+                      _liqEmbragueSelected = value!;
                     });
                   },
                 ),
@@ -638,7 +647,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _liqRefrigeranteSelected,
                   onChanged: (value) {
                     setState(() {
-                      _liqRefrigeranteSelected = value as String;
+                      _liqRefrigeranteSelected = value!;
                     });
                   },
                 ),
@@ -658,7 +667,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _liqRefrigeranteSelected,
                   onChanged: (value) {
                     setState(() {
-                      _liqRefrigeranteSelected = value as String;
+                      _liqRefrigeranteSelected = value!;
                     });
                   },
                 ),
@@ -696,7 +705,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _espejosSelected,
                   onChanged: (value) {
                     setState(() {
-                      _espejosSelected = value as String;
+                      _espejosSelected = value!;
                     });
                   },
                 ),
@@ -716,7 +725,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _espejosSelected,
                   onChanged: (value) {
                     setState(() {
-                      _espejosSelected = value as String;
+                      _espejosSelected = value!;
                     });
                   },
                 ),
@@ -754,7 +763,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _claxonSelected,
                   onChanged: (value) {
                     setState(() {
-                      _claxonSelected = value as String;
+                      _claxonSelected = value!;
                     });
                   },
                 ),
@@ -774,7 +783,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _claxonSelected,
                   onChanged: (value) {
                     setState(() {
-                      _claxonSelected = value as String;
+                      _claxonSelected = value!;
                     });
                   },
                 ),
@@ -812,7 +821,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _tanqueSelected,
                   onChanged: (value) {
                     setState(() {
-                      _tanqueSelected = value as String;
+                      _tanqueSelected = value!;
                     });
                   },
                 ),
@@ -832,7 +841,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _tanqueSelected,
                   onChanged: (value) {
                     setState(() {
-                      _tanqueSelected = value as String;
+                      _tanqueSelected = value!;
                     });
                   },
                 ),
@@ -870,6 +879,12 @@ class _ViewDxState extends State<ViewDx> {
             onChanged: (bool? value) {
               setState(() {
                 _checkedFarola = value!;
+                if (_checkedFarola == true) {
+                  _listLigths.add("Farola");
+                } else {
+                  var checkeo = _listLigths.contains("Farola");
+                  checkeo ? _listLigths.remove("Farola") : null;
+                }
               });
             },
             activeColor: const Color(0xffBA5C0B),
@@ -880,6 +895,12 @@ class _ViewDxState extends State<ViewDx> {
             onChanged: (bool? value) {
               setState(() {
                 _checkedTrasera = value!;
+                if (_checkedTrasera == true) {
+                  _listLigths.add("Trasera");
+                } else {
+                  var checkeo = _listLigths.contains("Trasera");
+                  checkeo ? _listLigths.remove("Trasera") : null;
+                }
               });
             },
             activeColor: const Color(0xffBA5C0B),
@@ -890,6 +911,12 @@ class _ViewDxState extends State<ViewDx> {
             onChanged: (bool? value) {
               setState(() {
                 _checkedDirec = value!;
+                if (_checkedDirec == true) {
+                  _listLigths.add("Direcionales");
+                } else {
+                  var checkeo = _listLigths.contains("Direcionales");
+                  checkeo ? _listLigths.remove("Direcionales") : null;
+                }
               });
             },
             activeColor: const Color(0xffBA5C0B),
@@ -900,6 +927,12 @@ class _ViewDxState extends State<ViewDx> {
             onChanged: (bool? value) {
               setState(() {
                 _checkedAuxiliares = value!;
+                if (_checkedAuxiliares == true) {
+                  _listLigths.add("Auxiliares");
+                } else {
+                  var checkeo = _listLigths.contains("Auxiliares");
+                  checkeo ? _listLigths.remove("Auxiliares") : null;
+                }
               });
             },
             activeColor: const Color(0xffBA5C0B),
@@ -931,6 +964,12 @@ class _ViewDxState extends State<ViewDx> {
             onChanged: (bool? value) {
               setState(() {
                 _checkedLlantaDelantera = value!;
+                if (_checkedLlantaDelantera == true) {
+                  _listTiresState.add("Llanta delantera");
+                } else {
+                  var checkeo = _listTiresState.contains("Llanta delantera");
+                  checkeo ? _listTiresState.remove("Llanta delantera") : null;
+                }
               });
             },
             activeColor: const Color(0xffBA5C0B),
@@ -941,6 +980,12 @@ class _ViewDxState extends State<ViewDx> {
             onChanged: (bool? value) {
               setState(() {
                 _checkedLlantaTrasera = value!;
+                if (_checkedLlantaTrasera == true) {
+                  _listTiresState.add("Llanta trasera");
+                } else {
+                  var checkeo = _listTiresState.contains("Llanta trasera");
+                  checkeo ? _listTiresState.remove("Llanta trasera") : null;
+                }
               });
             },
             activeColor: const Color(0xffBA5C0B),
@@ -951,6 +996,12 @@ class _ViewDxState extends State<ViewDx> {
             onChanged: (bool? value) {
               setState(() {
                 _checkedRinDelantero = value!;
+                if (_checkedRinDelantero == true) {
+                  _listTiresState.add("Rin delantero");
+                } else {
+                  var checkeo = _listTiresState.contains("Rin delantero");
+                  checkeo ? _listTiresState.remove("Rin delantero") : null;
+                }
               });
             },
             activeColor: const Color(0xffBA5C0B),
@@ -961,6 +1012,12 @@ class _ViewDxState extends State<ViewDx> {
             onChanged: (bool? value) {
               setState(() {
                 _checkedRinTrasero = value!;
+                if (_checkedRinTrasero == true) {
+                  _listTiresState.add("Rin trasero");
+                } else {
+                  var checkeo = _listTiresState.contains("Rin trasero");
+                  checkeo ? _listTiresState.remove("Rin trasero") : null;
+                }
               });
             },
             activeColor: const Color(0xffBA5C0B),
@@ -992,7 +1049,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _frenoDelanteroSelected,
                   onChanged: (value) {
                     setState(() {
-                      _frenoDelanteroSelected = value as String;
+                      _frenoDelanteroSelected = value!;
                     });
                   },
                 ),
@@ -1012,7 +1069,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _frenoDelanteroSelected,
                   onChanged: (value) {
                     setState(() {
-                      _frenoDelanteroSelected = value as String;
+                      _frenoDelanteroSelected = value!;
                     });
                   },
                 ),
@@ -1050,7 +1107,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _frenoTraseroSelected,
                   onChanged: (value) {
                     setState(() {
-                      _frenoTraseroSelected = value as String;
+                      _frenoTraseroSelected = value!;
                     });
                   },
                 ),
@@ -1070,7 +1127,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _frenoTraseroSelected,
                   onChanged: (value) {
                     setState(() {
-                      _frenoTraseroSelected = value as String;
+                      _frenoTraseroSelected = value!;
                     });
                   },
                 ),
@@ -1108,7 +1165,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _embragueSelected,
                   onChanged: (value) {
                     setState(() {
-                      _embragueSelected = value as String;
+                      _embragueSelected = value!;
                     });
                   },
                 ),
@@ -1128,7 +1185,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _embragueSelected,
                   onChanged: (value) {
                     setState(() {
-                      _embragueSelected = value as String;
+                      _embragueSelected = value!;
                     });
                   },
                 ),
@@ -1166,7 +1223,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _cadenaSelected,
                   onChanged: (value) {
                     setState(() {
-                      _cadenaSelected = value as String;
+                      _cadenaSelected = value!;
                     });
                   },
                 ),
@@ -1186,7 +1243,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _cadenaSelected,
                   onChanged: (value) {
                     setState(() {
-                      _cadenaSelected = value as String;
+                      _cadenaSelected = value!;
                     });
                   },
                 ),
@@ -1224,7 +1281,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _bujiaSelected,
                   onChanged: (value) {
                     setState(() {
-                      _bujiaSelected = value as String;
+                      _bujiaSelected = value!;
                     });
                   },
                 ),
@@ -1244,7 +1301,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _bujiaSelected,
                   onChanged: (value) {
                     setState(() {
-                      _bujiaSelected = value as String;
+                      _bujiaSelected = value!;
                     });
                   },
                 ),
@@ -1282,7 +1339,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _bateriaSelected,
                   onChanged: (value) {
                     setState(() {
-                      _bateriaSelected = value as String;
+                      _bateriaSelected = value!;
                     });
                   },
                 ),
@@ -1302,7 +1359,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _bateriaSelected,
                   onChanged: (value) {
                     setState(() {
-                      _bateriaSelected = value as String;
+                      _bateriaSelected = value!;
                     });
                   },
                 ),
@@ -1322,7 +1379,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _bateriaSelected,
                   onChanged: (value) {
                     setState(() {
-                      _bateriaSelected = value as String;
+                      _bateriaSelected = value!;
                     });
                   },
                 ),
@@ -1360,7 +1417,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _motorSelected,
                   onChanged: (value) {
                     setState(() {
-                      _motorSelected = value as String;
+                      _motorSelected = value!;
                     });
                   },
                 ),
@@ -1380,7 +1437,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _motorSelected,
                   onChanged: (value) {
                     setState(() {
-                      _motorSelected = value as String;
+                      _motorSelected = value!;
                     });
                   },
                 ),
@@ -1418,7 +1475,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _tapasSelected,
                   onChanged: (value) {
                     setState(() {
-                      _tapasSelected = value as String;
+                      _tapasSelected = value!;
                     });
                   },
                 ),
@@ -1438,7 +1495,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _tapasSelected,
                   onChanged: (value) {
                     setState(() {
-                      _tapasSelected = value as String;
+                      _tapasSelected = value!;
                     });
                   },
                 ),
@@ -1476,7 +1533,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _kitArrastreSelected,
                   onChanged: (value) {
                     setState(() {
-                      _kitArrastreSelected = value as String;
+                      _kitArrastreSelected = value!;
                     });
                   },
                 ),
@@ -1496,7 +1553,7 @@ class _ViewDxState extends State<ViewDx> {
                   groupValue: _kitArrastreSelected,
                   onChanged: (value) {
                     setState(() {
-                      _kitArrastreSelected = value as String;
+                      _kitArrastreSelected = value!;
                     });
                   },
                 ),
@@ -1543,6 +1600,9 @@ class _ViewDxState extends State<ViewDx> {
           borderRadius: BorderRadius.circular(15.0),
         ),
       ),
+      onSaved: (newValue) {
+        _dx.detailDx = newValue;
+      },
     );
   }
 
@@ -1556,10 +1616,52 @@ class _ViewDxState extends State<ViewDx> {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 12.0),
       ),
-      onPressed: () {
+      onPressed: () async {
         if (formKeyDx.currentState!.validate()) {
-          //TODO: validar en BD
-          Navigator.of(context).pop();
+          formKeyDx.currentState!.save();
+          //Variables asginadas.
+          _dx.indicators = _indicadoresSelected;
+          _dx.oilState = _estadoAceiteSelected;
+          _dx.oilLvl = _nivelAceiteSelected;
+          _dx.brakeFluid = _liqFrenosSelected;
+          _dx.cluchtFluid = _liqEmbragueSelected;
+          _dx.coolantFluid = _liqRefrigeranteSelected;
+          _dx.mirrows = _espejosSelected;
+          _dx.horm = _claxonSelected;
+          _dx.tank = _tanqueSelected;
+          _dx.forwardBrake = _frenoDelanteroSelected;
+          _dx.backBrake = _frenoTraseroSelected;
+          _dx.clucht = _embragueSelected;
+          _dx.chain = _cadenaSelected;
+          _dx.sparkPlug = _bujiaSelected;
+          _dx.batery = _bateriaSelected;
+          _dx.motor = _motorSelected;
+          _dx.tapes = _tapasSelected;
+          _dx.dragKit = _kitArrastreSelected;
+
+          //listas
+          _dx.ligths = _listLigths;
+          _dx.tires = _listTiresState;
+
+          //A la BD
+          try {
+            var msj = ScaffoldMessenger.of(context);
+
+            await _controller.registerDx(widget.motorcycle!, _dx);
+
+            msj.showSnackBar(
+              const SnackBar(
+                content: Text("El registro del diagnóstico fue exitoso"),
+              ),
+            );
+            widget.tabController!.animateTo(4);
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(e.toString()),
+              ),
+            );
+          }
         }
       },
       child: const Text("Regisrar"),

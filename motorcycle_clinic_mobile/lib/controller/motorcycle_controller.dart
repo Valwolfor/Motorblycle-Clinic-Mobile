@@ -1,6 +1,9 @@
+import '../model/entity/services.dart';
+import '/model/entity/dx.dart';
 import '/model/entity/reason.dart';
 import '/model/entity/motorcycle.dart';
 import '/model/repository/motorcycle.dart';
+import 'request/dx_request.dart';
 import 'request/motorcycle_request.dart';
 import 'request/reason_request.dart';
 import 'request/service_order_request.dart';
@@ -20,16 +23,6 @@ class MotorcycleController {
     } catch (e) {
       //Agregar información a BD
       //Secciones
-      // Map<String, dynamic> reasonMap = {
-      //   "reason": request.serviceOrder!.reason?.reason,
-      //   "mileage": request.serviceOrder!.reason?.mileage,
-      //   "reasonDetail": request.serviceOrder!.reason?.reasonDetail,
-      //   "lvlGas": request.serviceOrder!.reason?.lvlGas,
-      //   "documents": request.serviceOrder!.reason?.documents,
-      //   "advancePayment": request.serviceOrder!.reason?.advancePayment,
-      //   "authRute": request.serviceOrder!.reason?.authRute,
-      //   "advanceValue": request.serviceOrder!.reason?.advanceValue,
-      // };
 
       Map<String, dynamic> serviceOrders;
       serviceOrders = {
@@ -92,6 +85,43 @@ class MotorcycleController {
           advanceValue: request.advanceValue,
           authRute: request.authRute),
       requestMoto,
+    );
+  }
+
+  //agregando el Dx
+  Future<void> registerDx(
+      MotorcycleRequest motoRequest, DxRequest dxRequest) async {
+    _motorcycleRepository.addDx(
+      DxEntity(
+          indicators: dxRequest.indicators,
+          oilState: dxRequest.oilState,
+          oilLvl: dxRequest.oilLvl,
+          brakeFluid: dxRequest.brakeFluid,
+          clutchFluid: dxRequest.cluchtFluid,
+          coolantFluid: dxRequest.coolantFluid,
+          mirrows: dxRequest.mirrows,
+          horm: dxRequest.horm,
+          tank: dxRequest.tank,
+          ligths: dxRequest.ligths,
+          tires: dxRequest.tires,
+          frontBrake: dxRequest.forwardBrake,
+          backBrake: dxRequest.backBrake,
+          clutch: dxRequest.clucht,
+          chain: dxRequest.chain,
+          sparkPlug: dxRequest.sparkPlug,
+          batery: dxRequest.batery,
+          motor: dxRequest.motor,
+          tapes: dxRequest.tapes,
+          dragKit: dxRequest.dragKit,
+          detailDx: dxRequest.detailDx),
+      motoRequest,
+    );
+  }
+
+  Future<void> registerServices(MotorcycleRequest motorcycleRequest) async {
+    _motorcycleRepository.addServices(
+      ServicesEntity(services: motorcycleRequest.serviceOrder!.listServices),
+      motorcycleRequest,
     );
   }
 }

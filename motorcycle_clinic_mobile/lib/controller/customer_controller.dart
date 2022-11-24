@@ -2,7 +2,6 @@ import '/model/entity/customer.dart';
 import '/model/repository/customer.dart';
 import 'request/customer_request.dart';
 import 'request/id_request.dart';
-import 'response/customer_response.dart';
 
 class CustomerController {
   late final CustomerRepository _customerRepository;

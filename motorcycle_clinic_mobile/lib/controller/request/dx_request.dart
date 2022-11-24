@@ -19,4 +19,5 @@ class DxRequest {
   late String? motor;
   late String? tapes;
   late String? dragKit;
+  late String? detailDx;
 }

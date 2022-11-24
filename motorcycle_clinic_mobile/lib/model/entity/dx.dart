@@ -11,8 +11,8 @@ class DxEntity {
   late String? mirrows;
   late String? horm;
   late String? tank;
-  late Map<String, String>? ligths;
-  late Map<String, String>? tires;
+  late List<String>? ligths;
+  late List<String>? tires;
   late String? frontBrake;
   late String? backBrake;
   late String? clutch;
@@ -47,7 +47,6 @@ class DxEntity {
       this.dragKit,
       this.detailDx});
 
-  //TODO: agregar a la OS
   //para obtener
   factory DxEntity.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot,
@@ -86,14 +85,20 @@ class DxEntity {
       "oilLvl": oilLvl,
       "brakeFluid": brakeFluid,
       "clutchFluid": clutchFluid,
-      "coolantFluid": coolantFluid, "mirrows": mirrows, "horm": horm,
+      "coolantFluid": coolantFluid,
+      "mirrows": mirrows,
+      "horm": horm,
       "tank": tank,
-      "frontBrake": frontBrake, "backBrake": backBrake, "clutch": clutch,
+      "frontBrake": frontBrake,
+      "backBrake": backBrake,
+      "clutch": clutch,
       "chain": chain,
-      "sparkPlug": sparkPlug, "batery": batery,
-      "motor": motor, "tapes": tapes, "dragKit": dragKit,
+      "sparkPlug": sparkPlug,
+      "batery": batery,
+      "motor": motor,
+      "tapes": tapes,
+      "dragKit": dragKit,
       if (detailDx != null && detailDx!.isNotEmpty) "detailDx": detailDx,
-      //el primer ? es indicativo de null, el según el ?option.
     };
   }
 

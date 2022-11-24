@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:motorcycle_clinic_mobile/model/entity/user.dart';
 
 class FirebaseAuthenticationRepository {
   Future<void> createUserWithEmailAndPassword(

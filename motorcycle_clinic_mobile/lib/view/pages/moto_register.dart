@@ -221,22 +221,21 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
           ),
           SingleChildScrollView(
             child: ViewReason(
-                tabController: _tabController,
-                motorcycle: _motorcycleRequest,
-                serviceOrder: _serviceOrderRequest),
+              tabController: _tabController,
+              motorcycle: _motorcycleRequest,
+            ),
           ),
           SingleChildScrollView(
             child: ViewDx(
-                tabController: _tabController,
-                motorcycle: _motorcycleRequest,
-                serviceOrder: _serviceOrderRequest),
+              tabController: _tabController,
+              motorcycle: _motorcycleRequest,
+            ),
           ),
           SingleChildScrollView(
-            //TODO: motivo y dx
             child: ViewServicios(
-                tabController: _tabController,
-                motorcycle: _motorcycleRequest,
-                serviceOrder: _serviceOrderRequest),
+              tabController: _tabController,
+              motorcycle: _motorcycleRequest,
+            ),
           ),
         ],
       ),
