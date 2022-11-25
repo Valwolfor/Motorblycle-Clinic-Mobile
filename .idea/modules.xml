@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/motorcycle_clinic.iml" filepath="$PROJECT_DIR$/motorcycle_clinic.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/motorcycle_clinic_android.iml" filepath="$PROJECT_DIR$/android/motorcycle_clinic_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Motorblycle-Clinic-Mobile.iml" filepath="$PROJECT_DIR$/.idea/Motorblycle-Clinic-Mobile.iml" />
     </modules>
   </component>
 </project>
