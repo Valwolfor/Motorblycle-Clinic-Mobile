@@ -13,7 +13,7 @@ Funcionalidades:
 Cada moto mostrará el registro de todas sus ordenes de servicio de forma histórica y así mismo cada orden de servicio 
 mostrará los servicios y estado asociados. 
 
-Se usará Git Flow.
+Se usa Git Flow.
 
 Vamos a trabajar predominantemente en GitHub, pero vamos a probar GitLab 
 
