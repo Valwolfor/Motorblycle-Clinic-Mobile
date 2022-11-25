@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'view/pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'firebase_options.dart';
-import 'view/pages/moto_register.dart';
+import 'view/pages/home.dart';
+import 'view/pages/moto_records.dart';
 
 void main() async {
   //este es por un error porque inicia antes de que pase la ejecución del run App
@@ -37,7 +37,7 @@ class _MotorClinicState extends State<MotorClinic> {
     _prefs.then((pref) {
       if (pref.getString("uid") != null) {
         setState(() {
-          _init = const RegisterMotorcycle();
+          _init = const MotorcycleRecords();
         });
       } else {
         setState(() {

@@ -11,15 +11,12 @@ class ServiceOrderController {
   late MotorcycleRepository _repositoryMotorcycle;
 
   ServiceOrderController() {
-    //TODO: repository no Entity
-    // _repositoryCustomer = CustomerRepository();
     _repositoryMotorcycle = MotorcycleRepository();
   }
 
   Future<void> saveCustomer(CustomerEntity customer) async {
     await _repositoryCustomer.newCustomer(customer);
   }
-  //TODO: para moto y cliente, pero orden de servicio sí agrupada. Aunque se podría dividr.
 
   Future<void> saveMotorcycle(MotorcycleEntity motorcycle) async {
     await _repositoryMotorcycle.newMotorcycle(motorcycle);

@@ -17,8 +17,8 @@ class _RegistroState extends State<Registro> {
   bool _isObscure = true;
   final formKey = GlobalKey<FormState>();
 
-  late RegisterController _controller = RegisterController();
-  late RegisterRequest _registerRequest = RegisterRequest();
+  late final RegisterController _controller = RegisterController();
+  late final RegisterRequest _registerRequest = RegisterRequest();
 
   //verificar contraseñas
   TextEditingController passwordController = TextEditingController();
@@ -46,8 +46,6 @@ class _RegistroState extends State<Registro> {
             style: TextStyle(fontSize: 23.0),
           ),
         ),
-
-        //TODO: aquí vamos mañana sigo esto
         backgroundColor: const Color(0xff4D581C),
         actions: const <Widget>[
           AppBMenu(),

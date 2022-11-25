@@ -19,7 +19,7 @@ class ViewServicios extends StatefulWidget {
 class _ViewServiciosState extends State<ViewServicios> {
   late final MotorcycleController _controller = MotorcycleController();
 
-  List<Map<String, dynamic>>? _listServices = [];
+  final List<Map<String, dynamic>>? _listServices = [];
 
   final formKeyServices = GlobalKey<FormState>();
   Map<String, dynamic>? _services = {};
@@ -63,30 +63,7 @@ class _ViewServiciosState extends State<ViewServicios> {
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color(0xffBA5C0B),
-                ),
-                borderRadius: BorderRadius.circular(15.0)),
-            height: 450.0,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: _listServices!.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  child: Material(
-                    elevation: 10,
-                    borderRadius: BorderRadius.circular(20.0),
-                    shadowColor: Colors.black,
-                    child: tileServicios(index),
-                  ),
-                );
-              },
-            ),
-          ),
+          servicesBuilder(),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 15.0),
             child: Row(
@@ -100,6 +77,33 @@ class _ViewServiciosState extends State<ViewServicios> {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget servicesBuilder() {
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+          border: Border.all(
+            color: const Color(0xffBA5C0B),
+          ),
+          borderRadius: BorderRadius.circular(15.0)),
+      height: 450.0,
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: _listServices!.length,
+        itemBuilder: (context, index) {
+          return Container(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Material(
+              elevation: 10,
+              borderRadius: BorderRadius.circular(20.0),
+              shadowColor: Colors.black,
+              child: tileServicios(index),
+            ),
+          );
+        },
       ),
     );
   }

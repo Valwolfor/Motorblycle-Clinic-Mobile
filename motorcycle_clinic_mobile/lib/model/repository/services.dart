@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../entity/customer.dart';
 
-//TODO: todo
 class ServiceRepository {
   late final CollectionReference _collection;
 

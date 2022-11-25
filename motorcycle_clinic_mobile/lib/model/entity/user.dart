@@ -33,10 +33,10 @@ class UserEntity {
 
   Map<String, dynamic> toFirestore() {
     return {
-      if (email != null && email!.isNotEmpty) "email": email,
-      if (name != null && name!.isNotEmpty) "name": name,
-      if (lastName != null && lastName!.isNotEmpty) "lastName": lastName,
-      if (phoneNumber != null && phoneNumber!.isNotEmpty)
+      if (email != null || email!.isNotEmpty) "email": email,
+      if (name != null || name!.isNotEmpty) "name": name,
+      if (lastName != null || lastName!.isNotEmpty) "lastName": lastName,
+      if (phoneNumber != null || phoneNumber!.isNotEmpty)
         "phoneNumber": phoneNumber,
       "isAdmin": isAdmin ?? false
       //el primer ? es indicativo de null, el según el ?option.

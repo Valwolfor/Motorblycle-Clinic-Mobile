@@ -28,7 +28,6 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
   //controllers
   TabController? _tabController;
 
-//TODO: arreglar lode la orden de servicio
   MotorcycleRequest? _motorcycleRequest;
   ServiceOrderRequest? _serviceOrderRequest;
   IdRequest? _idCustomer;
@@ -85,7 +84,7 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
           ],
         ),
         body: bodyTabs(),
-        drawer: const DrawerAdmin(), //TODO: hacerle el drawer propio
+        drawer: const DrawerAdmin(),
       ),
     );
   }

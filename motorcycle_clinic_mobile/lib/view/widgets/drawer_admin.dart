@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../pages/home.dart';
+import '../pages/moto_records.dart';
+import '../pages/moto_register.dart';
 import '/controller/login_controller.dart';
 
 class DrawerAdmin extends StatefulWidget {
@@ -76,16 +78,31 @@ class _DrawerAdminState extends State<DrawerAdmin> {
             ListTile(
                 leading: const Icon(Icons.app_registration_rounded),
                 title: const Text(
+                  "Registrar moto",
+                  style: TextStyle(fontSize: 18.0),
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RegisterMotorcycle(),
+                    ),
+                  );
+                }),
+            ListTile(
+                leading: const Icon(Icons.app_registration_rounded),
+                title: const Text(
                   "Histórico",
                   style: TextStyle(fontSize: 18.0),
                 ),
                 onTap: () {
-                  // Navigator.of(context).pop();
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const Registro()),
-                  // );
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MotorcycleRecords()),
+                  );
                 }),
             ListTile(
                 leading: const Icon(Icons.logout),
@@ -104,7 +121,6 @@ class _DrawerAdminState extends State<DrawerAdmin> {
                     var prefs = await _prefs;
 
                     prefs.clear();
-                    //o con remove() por cada variable
 
                     msj.showSnackBar(
                       const SnackBar(

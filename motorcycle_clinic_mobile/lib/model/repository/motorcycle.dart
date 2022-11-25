@@ -8,7 +8,6 @@ import '/controller/request/motorcycle_request.dart';
 
 class MotorcycleRepository {
   late final CollectionReference _collection;
-  late final String iud;
 
   MotorcycleRepository() {
     _collection = FirebaseFirestore.instance.collection("motorcycles");
@@ -53,7 +52,7 @@ class MotorcycleRepository {
           .get();
 //el cast convierte los dato al formato toFirestore
       var motorclycle = query.docs.cast();
-
+      //se consigue el IUD
       var plate = motorclycle.first;
       var idDoc = plate.id;
       await _collection.doc(idDoc).set(
@@ -131,7 +130,8 @@ class MotorcycleRepository {
     }
   }
 
-  void addServices(ServicesEntity services, MotorcycleRequest request) async {
+  Future<void> addServices(
+      ServicesEntity services, MotorcycleRequest request) async {
     try {
       final query = await _collection
           .withConverter(
@@ -160,5 +160,27 @@ class MotorcycleRepository {
     } catch (e) {
       rethrow;
     }
+  }
+
+  // Consultar datos
+  Future<List<MotorcycleEntity>> getMotorcycleRecords() async {
+    var query = await _collection
+        .withConverter<MotorcycleEntity>(
+          fromFirestore: MotorcycleEntity.fromFirestore,
+          toFirestore: (value, options) => value.toFirestore(),
+        )
+        .get();
+
+    // List<MotorcycleEntity> MotlistMotorcycle = [];
+    // var motorcycle;
+
+    var motorclycles = query.docs.cast().map<MotorcycleEntity>((e) {
+      var motorcycle = e.data();
+      motorcycle.id = e.id;
+
+      return motorcycle;
+    });
+
+    return motorclycles.toList();
   }
 }

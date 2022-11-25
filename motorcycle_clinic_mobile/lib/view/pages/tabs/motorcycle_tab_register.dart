@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/controller/request/service_order_request.dart';
 import '/controller/request/motorcycle_request.dart';
@@ -27,10 +28,21 @@ class ViewMoto extends StatefulWidget {
 }
 
 class _ViewMotoState extends State<ViewMoto> {
+  final _prefs = SharedPreferences.getInstance();
   final formKeyMotocycle = GlobalKey<FormState>();
 
   late final MotorcycleController _controller = MotorcycleController();
   TextEditingController plateController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _prefs.then((pref) {
+      setState(() {
+        widget.motorcycle!.idUser = pref.getString("uid");
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +55,7 @@ class _ViewMotoState extends State<ViewMoto> {
         children: <Widget>[
           const Center(
             child: Text(
-              "Por favor ingrese los datos de la moto. Si ya está registrada, validela.",
+              "Por favor ingrese los datos de la moto. Si ya está registrada, valide.",
               style: TextStyle(fontSize: 22.0),
               textAlign: TextAlign.center,
             ),
@@ -149,7 +161,6 @@ class _ViewMotoState extends State<ViewMoto> {
           onPressed: () async {
             //Alista la variable pa la moto.a
             try {
-              // widget.plate?.plate = plateController.text;
               widget.motorcycle!.plate = plateController.text;
               var msj = ScaffoldMessenger.of(context);
               var motoInBD =
@@ -160,15 +171,15 @@ class _ViewMotoState extends State<ViewMoto> {
                   content: Text("La moto ya se encuentra registrada"),
                 ),
               );
-              //TODO: hacer alert que pregunte si quiere hacer una nueva OS.
+              //TODO: hacer alert que pregunte si quiere hacer una nueva OS. O informar
               //Crea nueva OS
 
               DateTime now = DateTime.now();
               DateFormat formatter = DateFormat.yMd().add_Hm();
               String formated = formatter.format(now);
 
-              widget.serviceOrder!.date = formated;
-              widget.motorcycle!.serviceOrder = widget.serviceOrder!;
+              // widget.serviceOrder!.date = formated;
+              widget.motorcycle!.serviceOrder!.date = formated;
               widget.motorcycle!.plate = motoInBD.plate;
               widget.motorcycle!.idMotor = motoInBD.idMotor;
               widget.motorcycle!.idchassis = motoInBD.idchassis;
@@ -360,10 +371,6 @@ class _ViewMotoState extends State<ViewMoto> {
       maxLength: 4,
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
-        // prefixIcon: const Icon(
-        //   Icons.year,
-        //   color: Color(0xffBA5C0B),
-        // ),
         label: const Text(
           'Año de registro',
         ),
@@ -378,7 +385,7 @@ class _ViewMotoState extends State<ViewMoto> {
             borderSide: const BorderSide(color: Color(0xffBA5C0B))),
       ),
       onSaved: (newValue) {
-        widget.motorcycle!.registerYear = int.tryParse(newValue!);
+        widget.motorcycle!.registerYear = int.parse(newValue!);
       },
     );
   }
@@ -406,6 +413,7 @@ class _ViewMotoState extends State<ViewMoto> {
             String formated = formatter.format(now);
             widget.serviceOrder!.date = formated;
             widget.motorcycle!.serviceOrder = widget.serviceOrder!;
+            widget.motorcycle!.serviceOrder!.date = formated;
 
             //registra moto.
             await _controller.registerNewMotorcycle(widget.motorcycle!);

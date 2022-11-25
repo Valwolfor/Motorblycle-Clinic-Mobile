@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:motorcycle_clinic_mobile/controller/response/user_info_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '/controller/request/login_request.dart';
 import '/controller/login_controller.dart';
+import 'moto_records.dart';
 import 'moto_register.dart';
 import 'principal.dart';
-import 'registro.dart';
 
 import '../widgets/logo.dart';
 import '../widgets/app_bar_menu.dart';
@@ -25,8 +24,8 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
   final _prefs = SharedPreferences.getInstance();
 
   //
-  late LoginController _controller = LoginController();
-  late LoginRequest _loginRequest = LoginRequest();
+  late final LoginController _controller = LoginController();
+  late final LoginRequest _loginRequest = LoginRequest();
 
   @override
   Widget build(BuildContext context) {
@@ -209,14 +208,14 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
           formKey.currentState!.save();
           try {
             var nav = Navigator.of(context);
-            var _userInfo = await _controller.validateLogin(_loginRequest);
+            var userInfo = await _controller.validateLogin(_loginRequest);
 
             var pref = await _prefs;
-            pref.setString("uid", _userInfo.id!);
-            pref.setString("name", _userInfo.name!);
-            pref.setString("lastName", _userInfo.lastName!);
-            pref.setString("email", _userInfo.email!);
-            pref.setBool("admin", _userInfo.isAdmin!);
+            pref.setString("uid", userInfo.id!);
+            pref.setString("name", userInfo.name!);
+            pref.setString("lastName", userInfo.lastName!);
+            pref.setString("email", userInfo.email!);
+            pref.setBool("admin", userInfo.isAdmin!);
 
             nav.pop();
             nav.push(
@@ -224,8 +223,6 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
                 builder: (context) => const RegisterMotorcycle(),
               ),
             );
-
-            //TODO: Aquí quedé, pero registra el doc con aleatorio, necesito con id, validar botom de validación
           } catch (e) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(
@@ -302,12 +299,11 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
       ),
       onPressed: () {
         if (true) {
-          //TODO: validar en BD
           Navigator.of(context).pop();
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const Registro(),
+              builder: (context) => const MotorcycleRecords(),
             ),
           );
         }

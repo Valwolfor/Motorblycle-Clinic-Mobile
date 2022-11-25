@@ -4,15 +4,12 @@ class FirebaseAuthenticationRepository {
   Future<void> createUserWithEmailAndPassword(
       String email, String password) async {
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        //future error termina el programa y bota
-
         return Future.error(
           'La contraseña es muy debil.',
         );
@@ -28,11 +25,9 @@ class FirebaseAuthenticationRepository {
     }
   }
 
-  // void saveData(UserEntity user) {}
-
   Future<void> singInWithEmailAndPassword(String email, String password) async {
     try {
-      final credential = await FirebaseAuth.instance
+      await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

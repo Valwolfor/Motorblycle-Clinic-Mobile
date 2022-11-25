@@ -9,10 +9,11 @@ class MotorcycleRequest {
   late String? model;
   late int? registerYear;
   late String? idOwner;
+  late String? idUser;
   late ServiceOrderRequest? serviceOrder;
 
   @override
   String toString() {
-    return "$plate, $idMotor, $idchassis, $brand, $model, $registerYear, $idOwner, $serviceOrder ";
+    return "$plate, $idMotor, $idchassis, $brand, $model, $registerYear, $idOwner, $idUser, $serviceOrder ";
   }
 }

@@ -98,7 +98,7 @@ class DxEntity {
       "motor": motor,
       "tapes": tapes,
       "dragKit": dragKit,
-      if (detailDx != null && detailDx!.isNotEmpty) "detailDx": detailDx,
+      if (detailDx != null || detailDx!.isNotEmpty) "detailDx": detailDx,
     };
   }
 

@@ -19,7 +19,7 @@ class ReasonEntity {
       this.advancePayment,
       this.advanceValue,
       this.authRute});
-  //TODO: agregar a la OS
+
   //para obtener
   factory ReasonEntity.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot,
@@ -40,13 +40,13 @@ class ReasonEntity {
 
   Map<String, dynamic> toFirestore() {
     return {
-      if (reason != null && reason!.isNotEmpty) "reason": reason,
-      if (reasonDetail != null && reasonDetail!.isNotEmpty)
+      if (reason != null || reason!.isNotEmpty) "reason": reason,
+      if (reasonDetail != null || reasonDetail!.isNotEmpty)
         "reasonDetail": reasonDetail,
-      if (mileage != null && mileage!.isNaN) "mileage": mileage,
-      if (lvlGas != null && lvlGas!.isNotEmpty) "lvlGas": lvlGas,
+      if (mileage != null || mileage!.isNaN) "mileage": mileage,
+      if (lvlGas != null || lvlGas!.isNotEmpty) "lvlGas": lvlGas,
       if (advancePayment != null) "advancePayment": advancePayment,
-      if (advanceValue != null && advanceValue!.isNaN)
+      if (advanceValue != null || advanceValue!.isNaN)
         "advanceValue": advanceValue,
       if (authRute != null) "authRute": authRute,
     };

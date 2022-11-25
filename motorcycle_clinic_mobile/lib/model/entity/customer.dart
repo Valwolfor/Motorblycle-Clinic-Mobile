@@ -34,12 +34,12 @@ class CustomerEntity {
 
   Map<String, dynamic> toFirestore() {
     return {
-      if (typeId != null && typeId!.isNotEmpty) "typeId": typeId,
-      if (id != null && id!.isNotEmpty) "id": id,
-      if (name != null && name!.isNotEmpty) "name": name,
-      if (lastName != null && lastName!.isNotEmpty) "lastName": lastName,
-      if (email != null && email!.isNotEmpty) "email": email,
-      if (phoneNumber != null && phoneNumber!.isNotEmpty)
+      if (typeId != null || typeId!.isNotEmpty) "typeId": typeId,
+      if (id != null || id!.isNotEmpty) "id": id,
+      if (name != null || name!.isNotEmpty) "name": name,
+      if (lastName != null || lastName!.isNotEmpty) "lastName": lastName,
+      if (email != null || email!.isNotEmpty) "email": email,
+      if (phoneNumber != null || phoneNumber!.isNotEmpty)
         "phoneNumber": phoneNumber
       //el primer ? es indicativo de null, el según el ?option.
     };

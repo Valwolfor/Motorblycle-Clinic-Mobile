@@ -36,7 +36,6 @@ class Principal extends StatelessWidget {
         ],
       ),
       drawer: const DrawerAdmin(),
-      //TODO: el recibidor del adminsitrador.
     );
   }
 }

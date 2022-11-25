@@ -43,6 +43,7 @@ class MotorcycleController {
             model: request.model,
             registerYear: request.registerYear,
             idOwner: request.idOwner,
+            idUser: request.idUser,
             serviceOrdersMaps: serviceOrders),
       );
     }
@@ -53,7 +54,8 @@ class MotorcycleController {
     var bike = await _motorcycleRepository.findByPlate(request.plate!);
 
     ServiceOrderRequest serviceOrder = ServiceOrderRequest();
-    serviceOrder.date = "";
+    //TODO: revisar esto del date
+    serviceOrder.date = request.serviceOrder!.date;
     serviceOrder.reason = <String, dynamic>{};
     serviceOrder.dx = <String, dynamic>{};
     serviceOrder.listServices = [<String, dynamic>{}];
@@ -66,6 +68,7 @@ class MotorcycleController {
     motoRegistered.model = bike.model;
     motoRegistered.registerYear = bike.registerYear;
     motoRegistered.idOwner = bike.idOwner;
+    motoRegistered.idUser = request.idUser;
     motoRegistered.serviceOrder = serviceOrder;
 
     return motoRegistered;
@@ -123,5 +126,10 @@ class MotorcycleController {
       ServicesEntity(services: motorcycleRequest.serviceOrder!.listServices),
       motorcycleRequest,
     );
+  }
+
+  //TODO: cambiar por un respose.
+  Future<List<MotorcycleEntity>> displayMotorcycle() async {
+    return await _motorcycleRepository.getMotorcycleRecords();
   }
 }

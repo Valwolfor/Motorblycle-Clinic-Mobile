@@ -6,12 +6,10 @@ import '/controller/request/id_request.dart';
 
 class ViewCustomer extends StatefulWidget {
   final TabController? tabController;
-  IdRequest? idCustomer;
+  final IdRequest? idCustomer;
 
-  ViewCustomer({Key? key, this.tabController, this.idCustomer})
+  const ViewCustomer({Key? key, this.tabController, this.idCustomer})
       : super(key: key);
-
-  // const ViewCustomer({super.key});
 
   @override
   State<ViewCustomer> createState() => _ViewCustomerState();
@@ -30,9 +28,8 @@ class _ViewCustomerState extends State<ViewCustomer> {
 
   late final CustomerController _controller = CustomerController();
   late final CustomerRequest _customer = CustomerRequest();
-  late final IdRequest _idRequest = IdRequest();
   TextEditingController idController = TextEditingController();
-  //TODO: request en vez de entity
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -105,7 +102,6 @@ class _ViewCustomerState extends State<ViewCustomer> {
         // validator: (value) =>
         //     value == null ? 'Selecciones el tipo de id' : null,
         decoration: InputDecoration(
-          //TODO:  aquí falla cada vez que se seleciona la decoración
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
             borderSide: const BorderSide(
