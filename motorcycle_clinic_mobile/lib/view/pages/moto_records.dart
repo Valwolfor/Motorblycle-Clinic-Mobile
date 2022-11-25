@@ -70,6 +70,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
                 const Center(
                   child: Logo(),
                 ),
+                //TODO: buscar entre registro: selecionar lista con if en donde se pone la lista
                 const Center(
                   child: Text(
                     "Registro de todas las motos ingresadas.",
