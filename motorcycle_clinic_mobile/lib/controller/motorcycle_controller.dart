@@ -15,6 +15,18 @@ class MotorcycleController {
   }
 
   Future<void> registerNewMotorcycle(MotorcycleRequest request) async {
+    int index;
+    var query;
+
+    query = await _motorcycleRepository.findLength(request.plate!);
+
+    if (query == 0) {
+      index = 1;
+    } else {
+      query += 1;
+      index = int.parse(query) + 1;
+    }
+
     try {
       await _motorcycleRepository.findByPlate(request.plate!);
 
@@ -23,16 +35,17 @@ class MotorcycleController {
     } catch (e) {
       //Agregar información a BD
       //Secciones
-
       Map<String, dynamic> serviceOrders;
       serviceOrders = {
-        request.serviceOrder!.date!: {
-          "date": request.serviceOrder!.date,
-          "reason": {},
-          "dx": {},
-          "listServices": []
-        },
+        "date": request.serviceOrder!.date,
+        "reason": {},
+        "dx": {},
+        "listServices": []
       };
+
+      String key = index.toString();
+      Map<String, Map<String, dynamic>>? serviceOrdersMaps = {};
+      serviceOrdersMaps[key] = serviceOrders;
 
       _motorcycleRepository.newMotorcycle(
         MotorcycleEntity(
@@ -44,7 +57,7 @@ class MotorcycleController {
             registerYear: request.registerYear,
             idOwner: request.idOwner,
             idUser: request.idUser,
-            serviceOrdersMaps: serviceOrders),
+            serviceOrdersMaps: serviceOrdersMaps),
       );
     }
   }
@@ -54,8 +67,7 @@ class MotorcycleController {
     var bike = await _motorcycleRepository.findByPlate(request.plate!);
 
     ServiceOrderRequest serviceOrder = ServiceOrderRequest();
-    //TODO: revisar esto del date
-    serviceOrder.date = request.serviceOrder!.date;
+    serviceOrder.date = "";
     serviceOrder.reason = <String, dynamic>{};
     serviceOrder.dx = <String, dynamic>{};
     serviceOrder.listServices = [<String, dynamic>{}];

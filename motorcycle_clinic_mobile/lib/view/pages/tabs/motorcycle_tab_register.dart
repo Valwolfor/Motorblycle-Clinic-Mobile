@@ -178,8 +178,8 @@ class _ViewMotoState extends State<ViewMoto> {
               DateFormat formatter = DateFormat.yMd().add_Hm();
               String formated = formatter.format(now);
 
-              // widget.serviceOrder!.date = formated;
-              widget.motorcycle!.serviceOrder!.date = formated;
+              widget.serviceOrder!.date = formated;
+              widget.motorcycle!.serviceOrder = widget.serviceOrder;
               widget.motorcycle!.plate = motoInBD.plate;
               widget.motorcycle!.idMotor = motoInBD.idMotor;
               widget.motorcycle!.idchassis = motoInBD.idchassis;
@@ -411,9 +411,8 @@ class _ViewMotoState extends State<ViewMoto> {
             DateTime now = DateTime.now();
             DateFormat formatter = DateFormat.yMd().add_Hm();
             String formated = formatter.format(now);
-            widget.serviceOrder!.date = formated;
-            widget.motorcycle!.serviceOrder = widget.serviceOrder!;
-            widget.motorcycle!.serviceOrder!.date = formated;
+            widget.serviceOrder?.date = formated;
+            widget.motorcycle!.serviceOrder = widget.serviceOrder;
 
             //registra moto.
             await _controller.registerNewMotorcycle(widget.motorcycle!);

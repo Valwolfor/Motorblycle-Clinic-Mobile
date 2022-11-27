@@ -333,11 +333,11 @@ class _ViewServiciosState extends State<ViewServicios> {
           Map<String, dynamic> servicesElement = {};
           formKeyServices.currentState!.save();
 
-          servicesElement["Nombre servicio"] = _services!["Nombre servicio"];
-          servicesElement["Nombre producto"] = _services!["Nombre producto"];
-          servicesElement["Precio servicio"] = _services!["Precio servicio"];
-          servicesElement["Precio producto"] = _services!["Precio producto"];
-          servicesElement["Aprobacion"] = false;
+          servicesElement["nameService"] = _services!["Nombre servicio"];
+          servicesElement["nameProduct"] = _services!["Nombre producto"];
+          servicesElement["priceService"] = _services!["Precio servicio"];
+          servicesElement["priceProduct"] = _services!["Precio producto"];
+          servicesElement["approvated"] = false;
           _listServices!.add(servicesElement);
           _isChecked.add(false);
           setState(() {});
@@ -427,8 +427,8 @@ class _ViewServiciosState extends State<ViewServicios> {
     int indexTile = index;
     return ListTile(
       tileColor: const Color(0xffFEFAE0),
-      title: Text(_listServices![indexTile]["Nombre servicio"]),
-      subtitle: Text(_listServices![indexTile]["Nombre producto"]),
+      title: Text(_listServices![indexTile]["nameService"]),
+      subtitle: Text(_listServices![indexTile]["nameProduct"]),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
@@ -452,8 +452,8 @@ class _ViewServiciosState extends State<ViewServicios> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                Text(_listServices![indexTile]["Precio servicio"].toString()),
-                Text(_listServices![indexTile]["Precio producto"].toString()),
+                Text(_listServices![indexTile]["priceService"].toString()),
+                Text(_listServices![indexTile]["priceProduct"].toString()),
               ],
             ),
             Switch(
@@ -462,8 +462,8 @@ class _ViewServiciosState extends State<ViewServicios> {
               activeColor: const Color(0xffBA5C0B),
               onChanged: (bool value) {
                 // This is called when the user toggles the switch.
-                _listServices![indexTile]["Aprobacion"] = value;
-                _isChecked[indexTile] = _listServices![indexTile]["Aprobacion"];
+                _listServices![indexTile]["approvated"] = value;
+                _isChecked[indexTile] = _listServices![indexTile]["approvated"];
                 setState(() {
                   _isChecked[indexTile];
                 });
