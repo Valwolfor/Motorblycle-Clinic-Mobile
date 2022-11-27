@@ -21,7 +21,7 @@ class MotorcycleRepository {
         .add(motorcycle);
   }
 
-  Future<dynamic> findLength(String plateQuery) async {
+  Future<int> findLength(String plateQuery) async {
     final query = await _collection
         .withConverter(
           fromFirestore: MotorcycleEntity.fromFirestore,
@@ -72,13 +72,16 @@ class MotorcycleRepository {
           .get();
 //el cast convierte los dato al formato toFirestore
       var motorclycle = query.docs.cast();
-      //se consigue el IUD
+
       var plate = motorclycle.first;
       var idDoc = plate.id;
       var data = plate.data();
 
-      int index = data.serviceOrdersMaps.length;
-      if (index != 1) {
+      int index;
+
+      index = data.serviceOrdersMaps.length;
+      if (data.serviceOrdersMaps["1"]["reason"].isEmpty) {
+      } else {
         index += 1;
       }
       String key = index.toString();

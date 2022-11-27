@@ -987,7 +987,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
     return ListTile(
       tileColor: const Color(0xffFEFAE0),
       title: Text("${servicesList[index]["nameService"]}"),
-      subtitle: Text("${servicesList[index]["nameSProduct"]}"),
+      subtitle: Text("${servicesList[index]["nameProduct"]}"),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),

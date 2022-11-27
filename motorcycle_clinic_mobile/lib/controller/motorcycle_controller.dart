@@ -67,7 +67,7 @@ class MotorcycleController {
     var bike = await _motorcycleRepository.findByPlate(request.plate!);
 
     ServiceOrderRequest serviceOrder = ServiceOrderRequest();
-    serviceOrder.date = request.serviceOrder!.date;
+    serviceOrder.date = "";
     serviceOrder.reason = <String, dynamic>{};
     serviceOrder.dx = <String, dynamic>{};
     serviceOrder.listServices = [<String, dynamic>{}];
