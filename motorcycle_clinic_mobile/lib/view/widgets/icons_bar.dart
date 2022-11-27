@@ -49,7 +49,10 @@ class _IconsBarState extends State<IconsBar> {
                     icon: const Icon(Icons.phone),
                     color: Colors.white,
                     onPressed: () {
-                      //TODO: agregar tema de url.
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text(
+                        "Próximante dispondrás de está funcionalidad",
+                      )));
                     },
                   ),
                   const Text(
@@ -94,7 +97,12 @@ class _IconsBarState extends State<IconsBar> {
                   IconButton(
                     icon: const Icon(Icons.share),
                     color: Colors.white,
-                    onPressed: () {},
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text(
+                        "Próximante dispondrás de está funcionalidad",
+                      )));
+                    },
                   ),
                   const Text(
                     "Compartir",

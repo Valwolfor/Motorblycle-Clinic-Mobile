@@ -104,7 +104,7 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
           padding: const EdgeInsets.only(top: 10.0),
           //Para evitar la funcionalidad de los botones de las tabs
           child: IgnorePointer(
-            ignoring: false,
+            ignoring: true,
             child: TabBar(
               indicator: const BoxDecoration(
                 color: Color(0xff5DA767),

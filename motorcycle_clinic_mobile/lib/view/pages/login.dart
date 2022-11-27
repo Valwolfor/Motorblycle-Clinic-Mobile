@@ -71,23 +71,23 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
                         const SizedBox(
                           height: 15.0,
                         ),
-                        const Text(
-                          "También puedes loguearte con: ",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            // fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 15.0,
-                        ),
+                        // const Text(
+                        //   "También puedes loguearte con: ",
+                        //   style: TextStyle(
+                        //     fontSize: 16.0,
+                        //     // fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
+                        // const SizedBox(
+                        //   height: 15.0,
+                        // ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            botonFace(),
-                            botonGoogle(),
+                            // botonFace(),
+                            // botonGoogle(),
                           ],
                         ),
                         botonRegistro(),
@@ -205,7 +205,12 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
           //si es diferente a null se ejecuta.
           //save guarda todo los campos con onSaved
           formKey.currentState!.save();
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text(
+            "Validando usuario en base de datos",
+          )));
           try {
+            var msj = ScaffoldMessenger.of(context);
             var nav = Navigator.of(context);
             var userInfo = await _controller.validateLogin(_loginRequest);
 
@@ -222,6 +227,10 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
                 builder: (context) => const MotorcycleRecords(),
               ),
             );
+            msj.showSnackBar(const SnackBar(
+                content: Text(
+              "Validación exitosa",
+            )));
           } catch (e) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(
@@ -235,61 +244,61 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
     );
   }
 
-  Widget botonFace() {
-    return IconButton(
-      alignment: Alignment.center,
-      padding: const EdgeInsets.only(bottom: 40.0),
-      icon: const Icon(
-        Icons.facebook,
-        color: Colors.blueAccent,
-        size: 65.0,
-      ),
-      onPressed: () {
-        if (true) {
-          //TODO: validar en BD
-          var name = "name";
-          Navigator.of(context).pop();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  Principal(email: _loginRequest.email, name: name),
-            ),
-          );
-        }
-      },
-      // child: const Text("Ingresar"),
-    );
-  }
+  // Widget botonFace() {
+  //   return IconButton(
+  //     alignment: Alignment.center,
+  //     padding: const EdgeInsets.only(bottom: 40.0),
+  //     icon: const Icon(
+  //       Icons.facebook,
+  //       color: Colors.blueAccent,
+  //       size: 65.0,
+  //     ),
+  //     onPressed: () {
+  //       if (true) {
+  //         //TODO: validar en BD
+  //         var name = "name";
+  //         Navigator.of(context).pop();
+  //         Navigator.push(
+  //           context,
+  //           MaterialPageRoute(
+  //             builder: (context) =>
+  //                 Principal(email: _loginRequest.email, name: name),
+  //           ),
+  //         );
+  //       }
+  //     },
+  //     // child: const Text("Ingresar"),
+  //   );
+  // }
 
-  Widget botonGoogle() {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromARGB(255, 220, 209, 209),
-        textStyle: const TextStyle(fontSize: 25.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(17.0),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 17.0),
-      ),
-      onPressed: () {
-        //Aquí simulando
-        var name = "name";
-        if (true) {
-          //TODO: validar en BD
-          Navigator.of(context).pop();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  Principal(email: _loginRequest.email, name: name),
-            ),
-          );
-        }
-      },
-      child: const Text("Google"),
-    );
-  }
+  // Widget botonGoogle() {
+  //   return ElevatedButton(
+  //     style: ElevatedButton.styleFrom(
+  //       backgroundColor: const Color.fromARGB(255, 220, 209, 209),
+  //       textStyle: const TextStyle(fontSize: 25.0),
+  //       shape: RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.circular(17.0),
+  //       ),
+  //       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 17.0),
+  //     ),
+  //     onPressed: () {
+  //       //Aquí simulando
+  //       var name = "name";
+  //       if (true) {
+  //         //TODO: validar en BD
+  //         Navigator.of(context).pop();
+  //         Navigator.push(
+  //           context,
+  //           MaterialPageRoute(
+  //             builder: (context) =>
+  //                 Principal(email: _loginRequest.email, name: name),
+  //           ),
+  //         );
+  //       }
+  //     },
+  //     child: const Text("Google"),
+  //   );
+  // }
 
   Widget botonRegistro() {
     return TextButton(

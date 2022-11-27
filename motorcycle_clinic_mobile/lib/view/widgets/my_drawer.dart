@@ -40,7 +40,7 @@ Widget myDrawer(context) {
                 }),
             ListTile(
                 title: const Text(
-                  "App Versión 0.5.0",
+                  "App Versión 1.0.0",
                   style: TextStyle(fontSize: 16.0),
                 ),
                 onTap: () {

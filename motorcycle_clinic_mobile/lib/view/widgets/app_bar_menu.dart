@@ -16,29 +16,51 @@ class _AppBMenuState extends State<AppBMenu> {
       color: const Color(0xffFEFAE0),
       itemBuilder: (context) {
         return [
-          const PopupMenuItem(
+          PopupMenuItem(
             child: ListTile(
-              leading: Icon(Icons.settings),
-              title: Text("Configuración"),
-              //Puede llevar onTap para darle las opciones.
+                leading: const Icon(Icons.settings),
+                title: const Text("Configuración"),
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text(
+                    "Próximante dispondrás de está funcionalidad",
+                  )));
+                }),
+          ),
+          PopupMenuItem(
+            child: ListTile(
+              leading: const Icon(Icons.message_rounded),
+              title: const Text("Danos tu opinión"),
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text(
+                  "Próximante podrás darnos tu valiosa opinión por este medio, por ahora puedes escribirnos directamente.",
+                )));
+              },
             ),
           ),
-          const PopupMenuItem(
+          PopupMenuItem(
             child: ListTile(
-              leading: Icon(Icons.message_rounded),
-              title: Text("Danos tu opinión"),
+              leading: const Icon(Icons.help),
+              title: const Text("Ayuda"),
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text(
+                  "Próximante dispondrás de está funcionalidad",
+                )));
+              },
             ),
           ),
-          const PopupMenuItem(
+          PopupMenuItem(
             child: ListTile(
-              leading: Icon(Icons.help),
-              title: Text("Ayuda"),
-            ),
-          ),
-          const PopupMenuItem(
-            child: ListTile(
-              leading: Icon(Icons.group),
-              title: Text("Acerca de nosotros"),
+              leading: const Icon(Icons.group),
+              title: const Text("Acerca de nosotros"),
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text(
+                  "Pronto dispondremos de nuestro sitio para que puedar obtener la información que necesitas",
+                )));
+              },
             ),
           )
         ];
