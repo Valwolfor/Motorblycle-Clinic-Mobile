@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '/controller/request/login_request.dart';
 import '/controller/login_controller.dart';
 import 'moto_records.dart';
-import 'moto_register.dart';
 import 'principal.dart';
 
 import '../widgets/logo.dart';
@@ -220,7 +219,7 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
             nav.pop();
             nav.push(
               MaterialPageRoute(
-                builder: (context) => const RegisterMotorcycle(),
+                builder: (context) => const MotorcycleRecords(),
               ),
             );
           } catch (e) {
