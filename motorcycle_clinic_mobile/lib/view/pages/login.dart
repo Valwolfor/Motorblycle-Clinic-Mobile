@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '/controller/request/login_request.dart';
 import '/controller/login_controller.dart';
 import 'moto_records.dart';
-import 'principal.dart';
 
 import '../widgets/logo.dart';
 import '../widgets/app_bar_menu.dart';
@@ -207,7 +206,7 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
           formKey.currentState!.save();
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text(
-            "Validando usuario en base de datos",
+            "Validando usuario en base de datos, por favor espere.",
           )));
           try {
             var msj = ScaffoldMessenger.of(context);
