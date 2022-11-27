@@ -145,7 +145,8 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
                 //todo: VALIDAR con nombre nuevo método.
               ],
             ),
-            //TODO: futuro, verificar si está en taller.
+            //TODO: futuro, verificar si está en taller. con alert de confirm
+            //TODO: y bloqueo si confirmación recibe el true desde BD al registrarlos, todos tienen por defecto esto
             // Switch(
             // This bool value toggles the switch.
             // value: _isChecked[indexTile],
@@ -164,8 +165,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
       ),
       onLongPress: () {
         var moto = _list[index];
-        // index
-        //TODO: mostrar detalle
+
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => DetailMotorcycle(moto: moto),
