@@ -5,6 +5,7 @@ import '/controller/motorcycle_controller.dart';
 import '../widgets/app_bar_menu.dart';
 import '../widgets/drawer_admin.dart';
 import '../widgets/logo.dart';
+import 'detail_motorview.dart';
 
 class MotorcycleRecords extends StatefulWidget {
   const MotorcycleRecords({super.key});
@@ -21,6 +22,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
   @override
   void initState() {
     super.initState();
+    //TODO pref para listar por user de app.
 // _prefs.then((pref){const id = pref.getString("uid");
 // También aquí se mete la variable de id al controller });
     _controller.displayMotorcycle().then((value) {
@@ -70,6 +72,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
                 const Center(
                   child: Logo(),
                 ),
+                //TODO: buscar entre registro: selecionar lista con if en donde se pone la lista
                 const Center(
                   child: Text(
                     "Registro de todas las motos ingresadas.",
@@ -89,21 +92,6 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
                       borderRadius: BorderRadius.circular(15.0)),
                   height: 380.0,
                   child: listBuilderMotos(),
-                  // ListView.builder(
-                  //   shrinkWrap: true,
-                  //   itemCount: _list.length,
-                  //   itemBuilder: (context, index) {
-                  //     return Container(
-                  //       padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  //       child: Material(
-                  //         elevation: 10,
-                  //         borderRadius: BorderRadius.circular(20.0),
-                  //         shadowColor: Colors.black,
-                  //         child: tileMotos(index),
-                  //       ),
-                  //     );
-                  //   },
-                  // ),
                 ),
               ],
             )),
@@ -138,19 +126,11 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
-      // leading: (
-      // _isChecked[indexTile]
-      // ? const Icon(
-      //     Icons.check,
-      //     color: Color(0xff4D581C),
-      //     size: 40.0,
-      //   )
-      // : const Icon(
-      //     Icons.warning,
-      //     color: Color(0xffEEA153),
-      //     size: 40.0,
-      // )
-      // ),
+      leading: const Icon(
+        Icons.sports_motorsports,
+        color: Color(0xff4D581C),
+        size: 40.0,
+      ),
       trailing: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -165,7 +145,8 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
                 //todo: VALIDAR con nombre nuevo método.
               ],
             ),
-            //TODO: futuro, verificar si está en taller.
+            //TODO: futuro, verificar si está en taller. con alert de confirm
+            //TODO: y bloqueo si confirmación recibe el true desde BD al registrarlos, todos tienen por defecto esto
             // Switch(
             // This bool value toggles the switch.
             // value: _isChecked[indexTile],
@@ -183,8 +164,13 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
         ),
       ),
       onLongPress: () {
-        // index
-        //TODO: mostrar detalle
+        var moto = _list[index];
+
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => DetailMotorcycle(moto: moto),
+          ),
+        );
       },
     );
   }
