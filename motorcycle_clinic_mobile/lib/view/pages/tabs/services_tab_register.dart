@@ -27,6 +27,7 @@ class _ViewServiciosState extends State<ViewServicios> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 10.0,
@@ -63,7 +64,7 @@ class _ViewServiciosState extends State<ViewServicios> {
               ],
             ),
           ),
-          servicesBuilder(),
+          servicesBuilder(size),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 15.0),
             child: Row(
@@ -81,7 +82,7 @@ class _ViewServiciosState extends State<ViewServicios> {
     );
   }
 
-  Widget servicesBuilder() {
+  Widget servicesBuilder(Size size) {
     return Container(
       padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
@@ -89,7 +90,7 @@ class _ViewServiciosState extends State<ViewServicios> {
             color: const Color(0xffBA5C0B),
           ),
           borderRadius: BorderRadius.circular(15.0)),
-      height: 450.0,
+      height: size.height * 0.45,
       child: ListView.builder(
         shrinkWrap: true,
         itemCount: _listServices!.length,

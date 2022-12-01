@@ -34,6 +34,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: (() async {
         return false;
@@ -90,7 +91,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
                         color: const Color(0xffBA5C0B),
                       ),
                       borderRadius: BorderRadius.circular(15.0)),
-                  height: 380.0,
+                  height: size.height * 0.35,
                   child: listBuilderMotos(),
                 ),
               ],
@@ -122,7 +123,10 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
     return ListTile(
       tileColor: const Color(0xffFEFAE0),
       title: Text(_list[index].plate!),
-      subtitle: Text(_list[index].idOwner!),
+      subtitle: Text(
+        _list[index].idOwner!,
+        style: const TextStyle(fontSize: 12.0),
+      ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),

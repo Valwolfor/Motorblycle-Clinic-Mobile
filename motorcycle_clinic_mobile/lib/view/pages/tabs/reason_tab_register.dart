@@ -237,90 +237,90 @@ class _ViewReasonState extends State<ViewReason> {
               textAlign: TextAlign.left,
               style: TextStyle(fontSize: 17.0),
             ),
-            Row(
-              children: [
-                Transform.scale(
-                  scale: 1.5,
-                  child: Radio(
-                    value: "Empty",
-                    groupValue: _gasSelected,
-                    onChanged: (value) {
-                      setState(() {
-                        _gasSelected = value as String;
-                      });
-                    },
+            FittedBox(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Transform.scale(
+                    scale: 1.5,
+                    child: Radio(
+                      value: "Empty",
+                      groupValue: _gasSelected,
+                      onChanged: (value) {
+                        setState(() {
+                          _gasSelected = value as String;
+                        });
+                      },
+                    ),
                   ),
-                ),
-                const Text(
-                  "Empty",
-                  style: TextStyle(fontSize: 15.0),
-                ),
-                Transform.scale(
-                  scale: 1.5,
-                  child: Radio(
-                    value: "1/4",
-                    groupValue: _gasSelected,
-                    onChanged: (value) {
-                      setState(() {
-                        _gasSelected = value as String;
-                      });
-                    },
+                  const Text(
+                    "Empty",
+                    style: TextStyle(fontSize: 15.0),
                   ),
-                ),
-                const Text(
-                  "1/4",
-                  style: TextStyle(fontSize: 15.0),
-                ),
-                Transform.scale(
-                  scale: 1.5,
-                  child: Radio(
-                    value: "1/2",
-                    groupValue: _gasSelected,
-                    onChanged: (value) {
-                      setState(() {
-                        _gasSelected = value as String;
-                      });
-                    },
+                  Transform.scale(
+                    scale: 1.5,
+                    child: Radio(
+                      value: "1/4",
+                      groupValue: _gasSelected,
+                      onChanged: (value) {
+                        setState(() {
+                          _gasSelected = value as String;
+                        });
+                      },
+                    ),
                   ),
-                ),
-                const Text(
-                  "1/2",
-                  style: TextStyle(fontSize: 15.0),
-                ),
-                Transform.scale(
-                  scale: 1.5,
-                  child: Radio(
-                    value: "3/4",
-                    groupValue: _gasSelected,
-                    onChanged: (value) {
-                      setState(() {
-                        _gasSelected = value as String;
-                      });
-                    },
+                  const Text(
+                    "1/4",
+                    style: TextStyle(fontSize: 15.0),
                   ),
-                ),
-                const Text(
-                  "3/4",
-                  style: TextStyle(fontSize: 15.0),
-                ),
-                Transform.scale(
-                  scale: 1.5,
-                  child: Radio(
-                    value: "Full",
-                    groupValue: _gasSelected,
-                    onChanged: (value) {
-                      setState(() {
-                        _gasSelected = value as String;
-                      });
-                    },
+                  Transform.scale(
+                    scale: 1.5,
+                    child: Radio(
+                      value: "1/2",
+                      groupValue: _gasSelected,
+                      onChanged: (value) {
+                        setState(() {
+                          _gasSelected = value as String;
+                        });
+                      },
+                    ),
                   ),
-                ),
-                const Text(
-                  "Full",
-                  style: TextStyle(fontSize: 15.0),
-                ),
-              ],
-            )
+                  const Text(
+                    "1/2",
+                    style: TextStyle(fontSize: 15.0),
+                  ),
+                  Transform.scale(
+                    scale: 1.5,
+                    child: Radio(
+                      value: "3/4",
+                      groupValue: _gasSelected,
+                      onChanged: (value) {
+                        setState(() {
+                          _gasSelected = value as String;
+                        });
+                      },
+                    ),
+                  ),
+                  const Text(
+                    "3/4",
+                    style: TextStyle(fontSize: 15.0),
+                  ),
+                  Transform.scale(
+                    scale: 1.5,
+                    child: Radio(
+                      value: "Full",
+                      groupValue: _gasSelected,
+                      onChanged: (value) {
+                        setState(() {
+                          _gasSelected = value as String;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ));
   }
