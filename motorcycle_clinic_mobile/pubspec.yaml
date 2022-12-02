@@ -45,6 +45,7 @@ dependencies:
   accordion: ^2.5.1
   camera: ^0.10.0+4
   path_provider: ^2.0.11
+  path: ^1.8.2
   # firebase_database: ^10.0.5
   # firebase_performance: ^0.9.0+5
   # firebase_messaging: ^14.1.0
