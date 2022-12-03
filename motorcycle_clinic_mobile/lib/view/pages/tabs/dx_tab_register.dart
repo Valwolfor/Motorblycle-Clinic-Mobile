@@ -71,7 +71,7 @@ class _ViewDxState extends State<ViewDx> {
             child: Text(
               "Indique el estado general del vehículo.",
               style: TextStyle(
-                fontSize: 22.0,
+                fontSize: 18.0,
               ),
               textAlign: TextAlign.center,
             ),
@@ -107,9 +107,9 @@ class _ViewDxState extends State<ViewDx> {
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.ideographic,
                 children: [
-                  idicadoresRadioButton(),
-                  estadoAceiteRadioButton(),
-                  oilLevelRadioButton(),
+                  Flexible(child: idicadoresRadioButton()),
+                  Flexible(child: estadoAceiteRadioButton()),
+                  Flexible(child: oilLevelRadioButton()),
                 ],
               ),
             ),
@@ -218,27 +218,7 @@ class _ViewDxState extends State<ViewDx> {
                 ],
               ),
             ),
-            // Container(
-            //   margin: const EdgeInsetsDirectional.only(bottom: 15.0),
-            //   padding: const EdgeInsets.only(top: 10.0),
-            //   decoration: BoxDecoration(
-            //     border: Border.all(
-            //       color: const Color(0xffBA5C0B),
-            //     ),
-            //     borderRadius: BorderRadius.circular(10.0),
-            //   ),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //     mainAxisSize: MainAxisSize.max,
-            //     crossAxisAlignment: CrossAxisAlignment.baseline,
-            //     textBaseline: TextBaseline.ideographic,
-            //     children: [
-            //       mirrowsRadioButton(),
-            //       hornRadioButton(),
-            //       tankRadioButton(),
-            //     ],
-            //   ),
-            // ),
+
             Container(
               margin: const EdgeInsetsDirectional.only(bottom: 15.0),
               padding: const EdgeInsets.only(top: 10.0),
@@ -300,18 +280,21 @@ class _ViewDxState extends State<ViewDx> {
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
           const Text(
             "Indicadores",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
+          ),
+          const SizedBox(
+            height: 20.0,
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _indicadoresSelected,
@@ -331,7 +314,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _indicadoresSelected,
@@ -358,18 +341,18 @@ class _ViewDxState extends State<ViewDx> {
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
           const Text(
             "Estado de Aceite",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _estadoAceiteSelected,
@@ -382,6 +365,7 @@ class _ViewDxState extends State<ViewDx> {
               ),
               const Text(
                 "Apto",
+                textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 15.0),
               ),
             ],
@@ -389,7 +373,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Regular",
                   groupValue: _estadoAceiteSelected,
@@ -409,7 +393,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _estadoAceiteSelected,
@@ -436,18 +420,21 @@ class _ViewDxState extends State<ViewDx> {
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
           const Text(
             "Nivel de Aceite",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
+          ),
+          const SizedBox(
+            height: 20.0,
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Lleno",
                   groupValue: _nivelAceiteSelected,
@@ -467,7 +454,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Medio",
                   groupValue: _nivelAceiteSelected,
@@ -487,7 +474,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Bajo",
                   groupValue: _nivelAceiteSelected,
@@ -514,18 +501,18 @@ class _ViewDxState extends State<ViewDx> {
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
           const Text(
             "Liquido de frenos",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _liqFrenosSelected,
@@ -545,7 +532,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _liqFrenosSelected,
@@ -572,18 +559,18 @@ class _ViewDxState extends State<ViewDx> {
       padding: const EdgeInsets.only(bottom: 10.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
           const Text(
             "Liquido de embrague",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Tiene",
                   groupValue: _liqEmbragueSelected,
@@ -603,7 +590,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Tiene",
                   groupValue: _liqEmbragueSelected,
@@ -635,13 +622,13 @@ class _ViewDxState extends State<ViewDx> {
         children: [
           const Text(
             "Liquido refrigerante",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Tiene",
                   groupValue: _liqRefrigeranteSelected,
@@ -661,7 +648,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Tiene",
                   groupValue: _liqRefrigeranteSelected,
@@ -693,13 +680,13 @@ class _ViewDxState extends State<ViewDx> {
         children: [
           const Text(
             "Espejos",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _espejosSelected,
@@ -719,7 +706,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _espejosSelected,
@@ -751,13 +738,13 @@ class _ViewDxState extends State<ViewDx> {
         children: [
           const Text(
             "Claxón",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _claxonSelected,
@@ -777,7 +764,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _claxonSelected,
@@ -809,13 +796,13 @@ class _ViewDxState extends State<ViewDx> {
         children: [
           const Text(
             "Tanque",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _tanqueSelected,
@@ -835,7 +822,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _tanqueSelected,
@@ -871,10 +858,13 @@ class _ViewDxState extends State<ViewDx> {
           const Text(
             "Luces aptas",
             textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            style: TextStyle(fontSize: 16.0),
           ),
           CheckboxListTile(
-            title: const Text("Farola"),
+            title: const Text(
+              "Farola",
+              style: TextStyle(fontSize: 15.0),
+            ),
             value: _checkedFarola,
             onChanged: (bool? value) {
               setState(() {
@@ -890,7 +880,10 @@ class _ViewDxState extends State<ViewDx> {
             activeColor: const Color(0xffBA5C0B),
           ),
           CheckboxListTile(
-            title: const Text("Trasera"),
+            title: const Text(
+              "Trasera",
+              style: TextStyle(fontSize: 15.0),
+            ),
             value: _checkedTrasera,
             onChanged: (bool? value) {
               setState(() {
@@ -906,7 +899,10 @@ class _ViewDxState extends State<ViewDx> {
             activeColor: const Color(0xffBA5C0B),
           ),
           CheckboxListTile(
-            title: const Text("Direcionales"),
+            title: const Text(
+              "Direcional",
+              style: TextStyle(fontSize: 15.0),
+            ),
             value: _checkedDirec,
             onChanged: (bool? value) {
               setState(() {
@@ -922,7 +918,10 @@ class _ViewDxState extends State<ViewDx> {
             activeColor: const Color(0xffBA5C0B),
           ),
           CheckboxListTile(
-            title: const Text("Auxiliares"),
+            title: const Text(
+              "Auxiliares",
+              style: TextStyle(fontSize: 15.0),
+            ),
             value: _checkedAuxiliares,
             onChanged: (bool? value) {
               setState(() {
@@ -956,10 +955,13 @@ class _ViewDxState extends State<ViewDx> {
           const Text(
             "Estado de llantas",
             textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            style: TextStyle(fontSize: 16.0),
           ),
           CheckboxListTile(
-            title: const Text("Llanta delantera"),
+            title: const Text(
+              "Llanta delantera",
+              style: TextStyle(fontSize: 15.0),
+            ),
             value: _checkedLlantaDelantera,
             onChanged: (bool? value) {
               setState(() {
@@ -975,7 +977,10 @@ class _ViewDxState extends State<ViewDx> {
             activeColor: const Color(0xffBA5C0B),
           ),
           CheckboxListTile(
-            title: const Text("Llanta trasera"),
+            title: const Text(
+              "Llanta trasera",
+              style: TextStyle(fontSize: 15.0),
+            ),
             value: _checkedLlantaTrasera,
             onChanged: (bool? value) {
               setState(() {
@@ -991,7 +996,10 @@ class _ViewDxState extends State<ViewDx> {
             activeColor: const Color(0xffBA5C0B),
           ),
           CheckboxListTile(
-            title: const Text("Rin delantero"),
+            title: const Text(
+              "Rin delantero",
+              style: TextStyle(fontSize: 15.0),
+            ),
             value: _checkedRinDelantero,
             onChanged: (bool? value) {
               setState(() {
@@ -1007,7 +1015,10 @@ class _ViewDxState extends State<ViewDx> {
             activeColor: const Color(0xffBA5C0B),
           ),
           CheckboxListTile(
-            title: const Text("Rin trasero"),
+            title: const Text(
+              "Rin trasero",
+              style: TextStyle(fontSize: 15.0),
+            ),
             value: _checkedRinTrasero,
             onChanged: (bool? value) {
               setState(() {
@@ -1037,13 +1048,13 @@ class _ViewDxState extends State<ViewDx> {
         children: [
           const Text(
             "Freno delantero",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _frenoDelanteroSelected,
@@ -1063,7 +1074,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _frenoDelanteroSelected,
@@ -1095,13 +1106,13 @@ class _ViewDxState extends State<ViewDx> {
         children: [
           const Text(
             "Freno trasero",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _frenoTraseroSelected,
@@ -1121,7 +1132,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _frenoTraseroSelected,
@@ -1153,13 +1164,13 @@ class _ViewDxState extends State<ViewDx> {
         children: [
           const Text(
             "Embrague",
-            textAlign: TextAlign.left,
+            textAlign: TextAlign.center,
             style: TextStyle(fontSize: 17.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _embragueSelected,
@@ -1179,7 +1190,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _embragueSelected,
@@ -1211,13 +1222,13 @@ class _ViewDxState extends State<ViewDx> {
         children: [
           const Text(
             "Cadena",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _cadenaSelected,
@@ -1237,7 +1248,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _cadenaSelected,
@@ -1269,13 +1280,13 @@ class _ViewDxState extends State<ViewDx> {
         children: [
           const Text(
             "Bujía",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _bujiaSelected,
@@ -1295,7 +1306,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _bujiaSelected,
@@ -1327,13 +1338,13 @@ class _ViewDxState extends State<ViewDx> {
         children: [
           const Text(
             "Batería",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _bateriaSelected,
@@ -1353,7 +1364,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _bateriaSelected,
@@ -1373,7 +1384,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Sin Carga",
                   groupValue: _bateriaSelected,
@@ -1405,13 +1416,13 @@ class _ViewDxState extends State<ViewDx> {
         children: [
           const Text(
             "Motor",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _motorSelected,
@@ -1431,7 +1442,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _motorSelected,
@@ -1463,13 +1474,13 @@ class _ViewDxState extends State<ViewDx> {
         children: [
           const Text(
             "Tapas",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _tapasSelected,
@@ -1489,7 +1500,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _tapasSelected,
@@ -1521,13 +1532,13 @@ class _ViewDxState extends State<ViewDx> {
         children: [
           const Text(
             "Kit de arrastre",
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 17.0),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16.0),
           ),
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "Apto",
                   groupValue: _kitArrastreSelected,
@@ -1547,7 +1558,7 @@ class _ViewDxState extends State<ViewDx> {
           Row(
             children: [
               Transform.scale(
-                scale: 1.5,
+                scale: 1.2,
                 child: Radio(
                   value: "No Apto",
                   groupValue: _kitArrastreSelected,

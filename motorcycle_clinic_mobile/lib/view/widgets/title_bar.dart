@@ -35,7 +35,7 @@ class TitleBar extends StatelessWidget {
             "Motorcycle Clinic App",
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 25.0,
+              fontSize: 22.0,
             ),
           ),
         ),

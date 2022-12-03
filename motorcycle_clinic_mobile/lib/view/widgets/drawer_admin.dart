@@ -52,7 +52,7 @@ class _DrawerAdminState extends State<DrawerAdmin> {
                 leading: const Icon(Icons.person),
                 title: const Text(
                   "Mecánicos",
-                  style: TextStyle(fontSize: 18.0),
+                  style: TextStyle(fontSize: 15.0),
                 ),
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

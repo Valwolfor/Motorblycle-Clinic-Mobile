@@ -48,7 +48,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
               return IconButton(
                 icon: const Icon(
                   Icons.menu,
-                  size: 32.0,
+                  size: 30.0,
                 ),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               );
@@ -57,7 +57,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
           title: const Center(
               child: Text(
             "Histórico de motos",
-            style: TextStyle(fontSize: 23.0),
+            style: TextStyle(fontSize: 20.0),
           )),
           backgroundColor: const Color(0xff4D581C),
           actions: const <Widget>[
@@ -77,7 +77,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
                 const Center(
                   child: Text(
                     "Registro de todas las motos ingresadas.",
-                    style: TextStyle(fontSize: 22.0),
+                    style: TextStyle(fontSize: 18.0),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -133,7 +133,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
       leading: const Icon(
         Icons.sports_motorsports,
         color: Color(0xff4D581C),
-        size: 40.0,
+        size: 35.0,
       ),
       trailing: Container(
         child: Row(

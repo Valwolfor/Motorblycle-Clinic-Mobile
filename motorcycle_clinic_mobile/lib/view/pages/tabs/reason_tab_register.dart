@@ -56,7 +56,7 @@ class _ViewReasonState extends State<ViewReason> {
             child: Text(
               "Por favor indique el motivo de ingreso",
               style: TextStyle(
-                fontSize: 22.0,
+                fontSize: 18.0,
               ),
               textAlign: TextAlign.center,
             ),

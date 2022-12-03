@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '/controller/request/login_request.dart';
 import '/controller/login_controller.dart';
 import 'moto_records.dart';
-import 'principal.dart';
 
 import '../widgets/logo.dart';
 import '../widgets/app_bar_menu.dart';
@@ -34,7 +33,7 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
         title: const Center(
             child: Text(
           "Ingresar",
-          style: TextStyle(fontSize: 23.0),
+          style: TextStyle(fontSize: 22.0),
         )),
         backgroundColor: const Color(0xff4D581C),
         actions: const <Widget>[

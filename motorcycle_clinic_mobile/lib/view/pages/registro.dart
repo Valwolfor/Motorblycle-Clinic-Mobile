@@ -43,7 +43,7 @@ class _RegistroState extends State<Registro> {
         title: const Center(
           child: Text(
             "Registro",
-            style: TextStyle(fontSize: 23.0),
+            style: TextStyle(fontSize: 22.0),
           ),
         ),
         backgroundColor: const Color(0xff4D581C),
@@ -78,7 +78,7 @@ class _RegistroState extends State<Registro> {
                         const Text(
                           "Diligencie los siguientes campos para crear su usuario",
                           style: TextStyle(
-                            fontSize: 18.0,
+                            fontSize: 16.0,
                           ),
                           textAlign: TextAlign.center,
                         ),

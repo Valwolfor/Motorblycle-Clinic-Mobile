@@ -23,7 +23,7 @@ class _StarButtonState extends State<StarButton> {
                 padding: EdgeInsets.symmetric(vertical: 5.0),
                 child: Text(
                   "Nuestros clientes siempre obtienen la mejor calidad",
-                  style: TextStyle(fontSize: 18.0),
+                  style: TextStyle(fontSize: 15.0),
                 ),
               ),
             ],
@@ -55,7 +55,7 @@ class _StarButtonState extends State<StarButton> {
               ),
               Text(
                 "$_favoriteCount",
-                style: const TextStyle(fontSize: 16.0),
+                style: const TextStyle(fontSize: 15.0),
               ),
             ],
           ),

@@ -66,7 +66,7 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
               return IconButton(
                 icon: const Icon(
                   Icons.menu,
-                  size: 32.0,
+                  size: 30.0,
                 ),
                 onPressed: () => Scaffold.of(context)
                     .openDrawer(), //función que llama al drawer.
@@ -76,7 +76,7 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
           title: const Center(
               child: Text(
             "Registro de motos",
-            style: TextStyle(fontSize: 23.0),
+            style: TextStyle(fontSize: 22.0),
           )),
           backgroundColor: const Color(0xff4D581C),
           actions: const <Widget>[
