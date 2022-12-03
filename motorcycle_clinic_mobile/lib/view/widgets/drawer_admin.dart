@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motorcycle_clinic_mobile/view/widgets/camera_avatar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../pages/home.dart';
@@ -137,7 +138,7 @@ class _DrawerAdminState extends State<DrawerAdmin> {
                 }),
             ListTile(
                 title: const Text(
-                  "App Versión 0.1.0",
+                  "App Versión 1.0.1",
                   style: TextStyle(fontSize: 16.0),
                 ),
                 onTap: () {
@@ -154,16 +155,9 @@ class _DrawerAdminState extends State<DrawerAdmin> {
     return DrawerHeader(
       decoration: const BoxDecoration(
         color: Color(0xff4D581C),
-        // borderRadius: BorderRadius.all(
-        //   Radius.circular(15.0),
-        // ),
       ),
       child: ListTile(
-        leading: const Icon(
-          Icons.person,
-          size: 40.0,
-          color: Colors.white70,
-        ),
+        leading: const CameraAvatar(),
         title: Text(
           name,
           style: const TextStyle(
