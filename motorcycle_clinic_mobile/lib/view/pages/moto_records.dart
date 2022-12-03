@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/model/entity/motorcycle.dart';
+import '/controller/response/list_motos_response.dart';
 import '/controller/motorcycle_controller.dart';
 import '../widgets/app_bar_menu.dart';
 import '../widgets/drawer_admin.dart';
@@ -15,7 +15,7 @@ class MotorcycleRecords extends StatefulWidget {
 }
 
 class _MotorcycleRecordsState extends State<MotorcycleRecords> {
-  List<MotorcycleEntity> _list = [];
+  List<MotorcycleResponse> _list = [];
   final _controller = MotorcycleController();
 
   // final _prefs = SharedPreferences.getInstance(); // para cuando se haga por usuario
@@ -145,7 +145,10 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Text("${_list[index].brand!}, ${_list[index].model!}"),
-                Text(_list[index].idUser!),
+                Text(
+                  _list[index].idUser!,
+                  style: const TextStyle(fontSize: 12.0),
+                ),
                 //todo: VALIDAR con nombre nuevo método.
               ],
             ),

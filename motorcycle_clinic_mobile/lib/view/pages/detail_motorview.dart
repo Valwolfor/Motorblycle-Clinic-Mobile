@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
-import 'package:motorcycle_clinic_mobile/model/entity/motorcycle.dart';
 
+import '/controller/response/list_motos_response.dart';
 import '../widgets/app_bar_menu.dart';
 
 class DetailMotorcycle extends StatefulWidget {
-  final MotorcycleEntity? moto;
+  final MotorcycleResponse? moto;
 
   const DetailMotorcycle({
     Key? key,
