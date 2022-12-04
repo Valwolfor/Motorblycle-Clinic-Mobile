@@ -73,8 +73,11 @@ class _TakePhotoState extends State<TakePhoto> {
 
             String path = image.path;
             photo.photo = path;
-            _registerController.registerPhoto(photo, widget.uid);
+
             if (!mounted) return;
+
+            _registerController.registerPhoto(photo, widget.uid);
+
             //Guarda foto
 
             nav.pop<String>(path);
