@@ -216,6 +216,10 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
             var pref = await _prefs;
             pref.setString("uid", userInfo.id!);
             pref.setString("name", userInfo.name!);
+            //Sí ya tiene la foto la guarda en pref.
+            if (userInfo.photo != null) {
+              pref.setString("photo", userInfo.photo!);
+            }
             pref.setString("lastName", userInfo.lastName!);
             pref.setString("email", userInfo.email!);
             pref.setBool("admin", userInfo.isAdmin!);

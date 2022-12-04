@@ -1,6 +1,7 @@
 import '/model/entity/user.dart';
 import '/model/repository/user.dart';
 import '/model/repository/fb_auth.dart';
+import 'request/photo_user_request.dart';
 import 'request/register_request.dart';
 
 class RegisterController {
@@ -30,6 +31,16 @@ class RegisterController {
           lastName: request.lastName,
           phoneNumber: request.phoneNumber,
           isAdmin: adminUser));
+    }
+  }
+
+  Future<void> registerPhoto(PhotoRequest request, String uid) async {
+    //Crear usuario en firebase.
+    try {
+      //Agregar información adicional en BD
+      _userRepository.savePhoto(uid, request.photo!);
+    } catch (e) {
+      return Future.error(e);
     }
   }
 }

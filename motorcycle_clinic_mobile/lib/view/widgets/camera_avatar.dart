@@ -5,20 +5,19 @@ import 'dart:io';
 import '../pages/take_photo.dart';
 
 class CameraAvatar extends StatefulWidget {
-  const CameraAvatar({super.key});
+  String? photo;
+  final String uid;
+  CameraAvatar(this.uid, {super.key, this.photo});
 
   @override
   State<CameraAvatar> createState() => _CameraAvatarState();
 }
 
 class _CameraAvatarState extends State<CameraAvatar> {
-  String? _photo;
-
   @override
   Widget build(BuildContext context) {
     Widget icon;
-
-    if (_photo == null) {
+    if (widget.photo == null || widget.photo!.length < 4) {
       icon = IconButton(
         icon: const CircleAvatar(
           backgroundColor: Color(0xff4D581C),
@@ -34,25 +33,51 @@ class _CameraAvatarState extends State<CameraAvatar> {
           final cameras = await availableCameras();
           final camera = cameras.first;
 
-          // nav.pop();
+          nav.pop();
           var imagePath = await nav.push<String>(
             MaterialPageRoute(
-              builder: (context) => TakePhoto(camara: camera),
+              builder: (context) => TakePhoto(widget.uid, camara: camera),
             ),
           );
 
           if (imagePath != null && imagePath.isNotEmpty) {
             setState(() {
-              _photo = imagePath;
+              widget.photo = imagePath;
             });
           }
         },
       );
     } else {
-      icon = CircleAvatar(
-        backgroundImage: FileImage(
-          File(_photo!),
+      icon = InkResponse(
+        // radius: 10.0,
+        // highlightShape: BoxShape.circle,
+        highlightColor: Colors.black38,
+        splashColor: Colors.black38,
+        child: CircleAvatar(
+          maxRadius: 30.0,
+          backgroundImage: FileImage(
+            File(widget.photo!),
+          ),
         ),
+        onTap: () async {
+          var nav = Navigator.of(context);
+
+          final cameras = await availableCameras();
+          final camera = cameras.first;
+
+          // nav.pop();
+          var imagePath = await nav.push<String>(
+            MaterialPageRoute(
+              builder: (context) => TakePhoto(widget.uid, camara: camera),
+            ),
+          );
+
+          if (imagePath != null && imagePath.isNotEmpty) {
+            setState(() {
+              widget.photo = imagePath;
+            });
+          }
+        },
       );
     }
     return icon;

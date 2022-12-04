@@ -49,6 +49,15 @@ class UserRepository {
     //         print("$error, con la siguente pila: $stackTrace"));
   }
 
+  Future<void> savePhoto(String uid, String photo) async {
+    await _collectionReference.doc(uid).set(
+      {
+        "photo": photo,
+      },
+      SetOptions(merge: true),
+    );
+  }
+
   Future<List<UserEntity>> getUserRecords() async {
     var query = await _collectionReference
         .withConverter<UserEntity>(

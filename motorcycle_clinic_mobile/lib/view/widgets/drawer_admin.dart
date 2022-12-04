@@ -17,9 +17,11 @@ class DrawerAdmin extends StatefulWidget {
 class _DrawerAdminState extends State<DrawerAdmin> {
   final _prefs = SharedPreferences.getInstance();
   final _loginController = LoginController();
+  late String _uid = "";
   late String _name = "";
   late String _lastName = "";
   late String _email = "";
+  late String? _photo = "";
   late bool _isAdmin = false;
 
   @override
@@ -29,8 +31,10 @@ class _DrawerAdminState extends State<DrawerAdmin> {
 //then para recibir el resultado.
     _prefs.then((prefs) {
       setState(() {
+        _uid = prefs.getString("uid") ?? "N/A";
         _name = prefs.getString("name") ?? "N/A";
         _lastName = prefs.getString("lastName") ?? "N/A";
+        _photo = prefs.getString("photo") ?? "N/A";
         _email = prefs.getString("email") ?? "N/A";
         _isAdmin = prefs.getBool("isAdmin") ?? false;
       });
@@ -45,7 +49,7 @@ class _DrawerAdminState extends State<DrawerAdmin> {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            drawerHeader(fullName, _email),
+            drawerHeader(fullName, _email, _uid, _photo),
 
             if (_isAdmin)
               ListTile(
@@ -151,13 +155,13 @@ class _DrawerAdminState extends State<DrawerAdmin> {
     );
   }
 
-  Widget drawerHeader(name, email) {
+  Widget drawerHeader(name, email, uid, photo) {
     return DrawerHeader(
       decoration: const BoxDecoration(
         color: Color(0xff4D581C),
       ),
       child: ListTile(
-        leading: const CameraAvatar(),
+        leading: CameraAvatar(uid, photo: photo),
         title: Text(
           name,
           style: const TextStyle(

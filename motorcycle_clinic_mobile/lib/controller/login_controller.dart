@@ -16,10 +16,12 @@ class LoginController {
         request.email, request.password);
     var user = await _userRepository.findByEmail(request.email);
 
+    //podría ir un if
     return UserInfoResponse(
         id: user.id,
         name: user.name,
         lastName: user.lastName,
+        photo: user.photo,
         email: user.email,
         isAdmin: user.isAdmin);
   }

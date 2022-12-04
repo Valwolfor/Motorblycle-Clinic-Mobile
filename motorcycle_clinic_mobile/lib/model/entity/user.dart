@@ -4,16 +4,16 @@ class UserEntity {
   late String? id; //para recibir UID y no se usa más
   late String? name;
   late String? lastName;
+  late String? photo;
   late String? email;
-  // late String? password;
   late String? phoneNumber;
   late bool? isAdmin;
 
   UserEntity(
       {this.name,
       this.lastName,
+      this.photo,
       this.email,
-      // this.password, no se necesita porque es validada por FB
       this.phoneNumber,
       this.isAdmin});
 
@@ -26,6 +26,7 @@ class UserEntity {
     return UserEntity(
         email: data?["email"],
         name: data?["name"],
+        photo: data?["photo"],
         lastName: data?["lastName"],
         phoneNumber: data?["phoneNumber"],
         isAdmin: data?["isAdmin"]);
@@ -36,6 +37,7 @@ class UserEntity {
       if (email != null || email!.isNotEmpty) "email": email,
       if (name != null || name!.isNotEmpty) "name": name,
       if (lastName != null || lastName!.isNotEmpty) "lastName": lastName,
+      "photo": photo ?? "N/A",
       if (phoneNumber != null || phoneNumber!.isNotEmpty)
         "phoneNumber": phoneNumber,
       "isAdmin": isAdmin ?? false

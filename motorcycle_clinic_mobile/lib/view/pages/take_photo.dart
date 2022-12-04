@@ -1,12 +1,14 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:motorcycle_clinic_mobile/controller/register_controller.dart';
+
+import '/controller/request/photo_user_request.dart';
 
 class TakePhoto extends StatefulWidget {
   final CameraDescription camara;
+  String uid;
 
-  const TakePhoto({super.key, required this.camara});
+  TakePhoto(this.uid, {super.key, required this.camara});
 
   @override
   State<TakePhoto> createState() => _TakePhotoState();
@@ -14,6 +16,7 @@ class TakePhoto extends StatefulWidget {
 
 class _TakePhotoState extends State<TakePhoto> {
   late CameraController _controller;
+  late final RegisterController _registerController = RegisterController();
   late Future<void> _initializarControllerFuture;
 
   @override
@@ -36,6 +39,7 @@ class _TakePhotoState extends State<TakePhoto> {
 
   @override
   Widget build(BuildContext context) {
+    PhotoRequest photo = PhotoRequest();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Tome la foto."),
@@ -68,9 +72,11 @@ class _TakePhotoState extends State<TakePhoto> {
             final image = await _controller.takePicture();
 
             String path = image.path;
-
+            photo.photo = path;
+            _registerController.registerPhoto(photo, widget.uid);
             if (!mounted) return;
-            //no retorna estoo
+            //Guarda foto
+
             nav.pop<String>(path);
             msj.showSnackBar(
                 const SnackBar(content: Text("Foto tomada con exito")));
