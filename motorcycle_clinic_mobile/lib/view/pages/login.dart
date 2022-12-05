@@ -206,7 +206,7 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
           formKey.currentState!.save();
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text(
-            "Validando usuario en base de datos",
+            "Validando usuario en base de datos, por favor espere.",
           )));
           try {
             var msj = ScaffoldMessenger.of(context);

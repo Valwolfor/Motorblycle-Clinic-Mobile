@@ -444,34 +444,32 @@ class _ViewServiciosState extends State<ViewServicios> {
               color: Color(0xffEEA153),
               size: 40.0,
             )),
-      trailing: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text(_listServices![indexTile]["priceService"].toString()),
-                Text(_listServices![indexTile]["priceProduct"].toString()),
-              ],
-            ),
-            Switch(
-              // This bool value toggles the switch.
-              value: _isChecked[indexTile],
-              activeColor: const Color(0xffBA5C0B),
-              onChanged: (bool value) {
-                // This is called when the user toggles the switch.
-                _listServices![indexTile]["approvated"] = value;
-                _isChecked[indexTile] = _listServices![indexTile]["approvated"];
-                setState(() {
-                  _isChecked[indexTile];
-                });
-              },
-            )
-          ],
-        ),
+      trailing: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text(_listServices![indexTile]["priceService"].toString()),
+              Text(_listServices![indexTile]["priceProduct"].toString()),
+            ],
+          ),
+          Switch(
+            // This bool value toggles the switch.
+            value: _isChecked[indexTile],
+            activeColor: const Color(0xffBA5C0B),
+            onChanged: (bool value) {
+              // This is called when the user toggles the switch.
+              _listServices![indexTile]["approvated"] = value;
+              _isChecked[indexTile] = _listServices![indexTile]["approvated"];
+              setState(() {
+                _isChecked[indexTile];
+              });
+            },
+          )
+        ],
       ),
       onLongPress: () {
         // index

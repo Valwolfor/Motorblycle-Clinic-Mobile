@@ -963,14 +963,19 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
   }
 
   Widget builderTileServices(int index) {
+<<<<<<< HEAD
     //TODO: lanzar exception
     List<dynamic> _servicesList = [];
     _servicesList =
+=======
+    List<dynamic> servicesList = [];
+    servicesList =
+>>>>>>> 1.0.1
         widget.moto!.serviceOrdersMaps!["$index"]["listServices"]["services"];
 //TODO: solucionar tema de scrolling
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: _servicesList.length,
+      itemCount: servicesList.length,
       itemBuilder: (context, index) {
         return Container(
           padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -978,7 +983,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
             elevation: 10,
             borderRadius: BorderRadius.circular(20.0),
             shadowColor: Colors.black,
-            child: tileServicios(index, _servicesList),
+            child: tileServicios(index, servicesList),
           ),
         );
       },

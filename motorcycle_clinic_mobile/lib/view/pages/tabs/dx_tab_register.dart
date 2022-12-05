@@ -107,9 +107,15 @@ class _ViewDxState extends State<ViewDx> {
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.ideographic,
                 children: [
+<<<<<<< HEAD
                   Flexible(child: idicadoresRadioButton()),
                   Flexible(child: estadoAceiteRadioButton()),
                   Flexible(child: oilLevelRadioButton()),
+=======
+                  idicadoresRadioButton(),
+                  oilStateRadioButton(),
+                  oilLevelRadioButton(),
+>>>>>>> 1.0.1
                 ],
               ),
             ),
@@ -262,9 +268,10 @@ class _ViewDxState extends State<ViewDx> {
       child: IconButton(
         onPressed: () {
           //TODO: Para tomar la foto
-          if (formKeyDx.currentState!.validate()) {
-            //TODO: validar id en BD
-          }
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text(
+            "Muy pronto podrás realizar fotografías en tus diagnóstico.",
+          )));
         },
         icon: const Icon(
           Icons.camera_alt,
@@ -336,7 +343,7 @@ class _ViewDxState extends State<ViewDx> {
     );
   }
 
-  Widget estadoAceiteRadioButton() {
+  Widget oilStateRadioButton() {
     return Container(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Column(
