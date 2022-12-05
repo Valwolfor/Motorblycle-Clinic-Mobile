@@ -961,13 +961,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
   }
 
   Widget builderTileServices(int index) {
-    List<dynamic> _servicesList = [];
-    _servicesList =
+    List<dynamic> servicesList = [];
+    servicesList =
         widget.moto!.serviceOrdersMaps!["$index"]["listServices"]["services"];
 
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: _servicesList.length,
+      itemCount: servicesList.length,
       itemBuilder: (context, index) {
         return Container(
           padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -975,12 +975,11 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
             elevation: 10,
             borderRadius: BorderRadius.circular(20.0),
             shadowColor: Colors.black,
-            child: tileServicios(index, _servicesList),
+            child: tileServicios(index, servicesList),
           ),
         );
       },
     );
-    ;
   }
 
   Widget tileServicios(int index, List<dynamic> servicesList) {

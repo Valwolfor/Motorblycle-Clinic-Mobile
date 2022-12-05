@@ -47,6 +47,14 @@ class _ViewCustomerState extends State<ViewCustomer> {
             ),
           ),
           formCliente(),
+          const Text(
+            "Para poder pasar a la siguiente pestaña debes de diligenciar correctamente el formulario",
+            style: TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Colors.grey,
+            ),
+            textAlign: TextAlign.center,
+          )
         ],
       ),
     );

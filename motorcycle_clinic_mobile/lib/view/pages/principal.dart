@@ -10,6 +10,7 @@ class Principal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //TODO hacerla
     return Scaffold(
       appBar: AppBar(
         leading: Builder(

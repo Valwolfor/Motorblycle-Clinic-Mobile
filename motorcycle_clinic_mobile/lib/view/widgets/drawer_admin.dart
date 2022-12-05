@@ -54,11 +54,10 @@ class _DrawerAdminState extends State<DrawerAdmin> {
                   style: TextStyle(fontSize: 18.0),
                 ),
                 onTap: () {
-                  // Navigator.of(context).pop();
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => null));
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text(
+                    "Pronto dispondrás de está funcionalidad",
+                  )));
                 },
               ),
             ListTile(
@@ -68,12 +67,11 @@ class _DrawerAdminState extends State<DrawerAdmin> {
                   style: TextStyle(fontSize: 18.0),
                 ),
                 onTap: () {
-                  // Navigator.of(context).pop();
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const Registro()),
-                  // );
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text(
+                    "Pronto dispondrás de está funcionalidad",
+                  )));
+                  Navigator.pop(context);
                 }),
             ListTile(
                 leading: const Icon(Icons.app_registration_rounded),

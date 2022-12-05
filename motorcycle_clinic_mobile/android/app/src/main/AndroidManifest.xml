@@ -1,7 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.motorcycle_clinic_mobile">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
    <application
-        android:label="motorcycle_clinic_mobile"
+        android:label="Motor Clinic"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
