@@ -1,6 +1,5 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
 
 import '../pages/take_photo.dart';
 
@@ -54,16 +53,14 @@ class _CameraAvatarState extends State<CameraAvatar> {
         highlightColor: Colors.black38,
         splashColor: Colors.black38,
         child: CircleAvatar(
-          maxRadius: 30.0,
-          backgroundImage: FileImage(
-            File(widget.photo!),
-          ),
+          maxRadius: 35.0,
+          backgroundImage: NetworkImage(widget.photo!),
         ),
         onTap: () async {
           var nav = Navigator.of(context);
 
           final cameras = await availableCameras();
-          final camera = cameras.first;
+          final camera = cameras[1];
 
           // nav.pop();
           var imagePath = await nav.push<String>(
