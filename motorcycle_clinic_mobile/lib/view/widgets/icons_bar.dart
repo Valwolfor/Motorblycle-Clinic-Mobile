@@ -51,6 +51,7 @@ class _IconsBarState extends State<IconsBar> {
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text(
+                        //flutter pub add url_launcher
                         "Próximante dispondrás de está funcionalidad",
                       )));
                     },
