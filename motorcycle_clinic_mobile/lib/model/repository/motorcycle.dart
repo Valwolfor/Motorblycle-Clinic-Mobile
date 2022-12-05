@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../entity/dx.dart';
 import '../entity/reason.dart';
 import '../entity/motorcycle.dart';
 import '../entity/services.dart';
+import '../entity/user.dart';
 import '/controller/request/motorcycle_request.dart';
+import 'user.dart';
 
 class MotorcycleRepository {
+  late final UserRepository _userRepository;
   late final CollectionReference _collection;
 
   MotorcycleRepository() {
@@ -210,16 +212,6 @@ class MotorcycleRepository {
     }
   }
 
-  // {
-  //         "serviceOrdersMaps": {
-  //           "${request.serviceOrder!.date}": {
-  //             "listServices": {
-  //               "services": services.services,
-  //             }
-  //           }
-  //         }
-  //       },
-
   // Consultar datos
   Future<List<MotorcycleEntity>> getMotorcycleRecords() async {
     var query = await _collection
@@ -229,12 +221,11 @@ class MotorcycleRepository {
         )
         .get();
 
-    // List<MotorcycleEntity> MotlistMotorcycle = [];
-    // var motorcycle;
-
     var motorclycles = query.docs.cast().map<MotorcycleEntity>((e) {
       var motorcycle = e.data();
+      //Id de la moto en FS, no recuerdo pa qué.
       motorcycle.id = e.id;
+      //buscar el mecánico
 
       return motorcycle;
     });

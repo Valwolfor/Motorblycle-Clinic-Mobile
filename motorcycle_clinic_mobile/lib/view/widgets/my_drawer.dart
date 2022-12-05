@@ -16,7 +16,7 @@ Widget myDrawer(context) {
                 leading: const Icon(Icons.person),
                 title: const Text(
                   "Ingresar",
-                  style: TextStyle(fontSize: 18.0),
+                  style: TextStyle(fontSize: 15.0),
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -29,7 +29,7 @@ Widget myDrawer(context) {
                 leading: const Icon(Icons.app_registration_rounded),
                 title: const Text(
                   "Registrame",
-                  style: TextStyle(fontSize: 18.0),
+                  style: TextStyle(fontSize: 15.0),
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -41,7 +41,7 @@ Widget myDrawer(context) {
             ListTile(
                 title: const Text(
                   "App Versión 1.0.0",
-                  style: TextStyle(fontSize: 16.0),
+                  style: TextStyle(fontSize: 13.0),
                 ),
                 onTap: () {
                   // Find peoples button action

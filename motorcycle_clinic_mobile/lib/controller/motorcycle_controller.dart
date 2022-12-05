@@ -1,3 +1,5 @@
+import 'package:motorcycle_clinic_mobile/model/repository/user.dart';
+
 import '../model/entity/services.dart';
 import '/model/entity/dx.dart';
 import '/model/entity/reason.dart';
@@ -7,11 +9,14 @@ import 'request/dx_request.dart';
 import 'request/motorcycle_request.dart';
 import 'request/reason_request.dart';
 import 'request/service_order_request.dart';
+import 'response/list_motos_response.dart';
 
 class MotorcycleController {
   late final MotorcycleRepository _motorcycleRepository;
+  late final UserRepository _userRepository;
   MotorcycleController() {
     _motorcycleRepository = MotorcycleRepository();
+    _userRepository = UserRepository();
   }
 
   Future<void> registerNewMotorcycle(MotorcycleRequest request) async {
@@ -140,8 +145,34 @@ class MotorcycleController {
     );
   }
 
-  //TODO: cambiar por un respose.
-  Future<List<MotorcycleEntity>> displayMotorcycle() async {
-    return await _motorcycleRepository.getMotorcycleRecords();
+  Future<List<MotorcycleResponse>> displayMotorcycle() async {
+    var listMotos = await _motorcycleRepository.getMotorcycleRecords();
+    var listUsers = await _userRepository.getUserRecords();
+    MotorcycleResponse moto;
+
+    var motorclycles = listMotos.map<MotorcycleResponse>((m) {
+      //mete el repository en los request
+      moto = MotorcycleResponse();
+      moto.id = m.id;
+      moto.plate = m.plate;
+      moto.idMotor = m.idMotor;
+      moto.idchassis = m.idchassis;
+      moto.brand = m.brand;
+      moto.model = m.model;
+      moto.registerYear = m.registerYear;
+      moto.idOwner = m.idOwner;
+      //pone el nombre de mecánico en vez de id
+      for (var u in listUsers) {
+        if (u.id == m.idUser) {
+          moto.idUser = "${u.lastName}";
+          break;
+        }
+      }
+      moto.serviceOrdersMaps = m.serviceOrdersMaps;
+
+      return moto;
+    }).toList();
+
+    return motorclycles;
   }
 }

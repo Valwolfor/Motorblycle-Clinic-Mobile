@@ -56,7 +56,7 @@ class _ViewMotoState extends State<ViewMoto> {
           const Center(
             child: Text(
               "Por favor ingrese los datos de la moto. Si ya está registrada, valide.",
-              style: TextStyle(fontSize: 22.0),
+              style: TextStyle(fontSize: 18.0),
               textAlign: TextAlign.center,
             ),
           ),

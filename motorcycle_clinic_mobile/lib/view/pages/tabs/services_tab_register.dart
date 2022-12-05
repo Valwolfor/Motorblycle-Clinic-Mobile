@@ -39,7 +39,7 @@ class _ViewServiciosState extends State<ViewServicios> {
             child: Text(
               "Indique el estado general del vehículo.",
               style: TextStyle(
-                fontSize: 22.0,
+                fontSize: 18.0,
               ),
               textAlign: TextAlign.center,
             ),
@@ -126,7 +126,7 @@ class _ViewServiciosState extends State<ViewServicios> {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xff5DA767),
-        textStyle: const TextStyle(fontSize: 25.0),
+        textStyle: const TextStyle(fontSize: 22.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(17.0),
         ),
@@ -382,7 +382,7 @@ class _ViewServiciosState extends State<ViewServicios> {
                       child: const Center(
                         child: Text(
                           "Ingrese el servicio necesario.",
-                          style: TextStyle(fontSize: 22.0),
+                          style: TextStyle(fontSize: 18.0),
                           textAlign: TextAlign.center,
                         ),
                       ),

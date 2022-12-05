@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/model/entity/motorcycle.dart';
+import '/controller/response/list_motos_response.dart';
 import '/controller/motorcycle_controller.dart';
 import '../widgets/app_bar_menu.dart';
 import '../widgets/drawer_admin.dart';
@@ -15,7 +15,7 @@ class MotorcycleRecords extends StatefulWidget {
 }
 
 class _MotorcycleRecordsState extends State<MotorcycleRecords> {
-  List<MotorcycleEntity> _list = [];
+  List<MotorcycleResponse> _list = [];
   final _controller = MotorcycleController();
 
   // final _prefs = SharedPreferences.getInstance(); // para cuando se haga por usuario
@@ -48,7 +48,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
               return IconButton(
                 icon: const Icon(
                   Icons.menu,
-                  size: 32.0,
+                  size: 30.0,
                 ),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               );
@@ -57,7 +57,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
           title: const Center(
               child: Text(
             "Histórico de motos",
-            style: TextStyle(fontSize: 23.0),
+            style: TextStyle(fontSize: 20.0),
           )),
           backgroundColor: const Color(0xff4D581C),
           actions: const <Widget>[
@@ -77,7 +77,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
                 const Center(
                   child: Text(
                     "Registro de todas las motos ingresadas.",
-                    style: TextStyle(fontSize: 22.0),
+                    style: TextStyle(fontSize: 18.0),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -133,7 +133,7 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
       leading: const Icon(
         Icons.sports_motorsports,
         color: Color(0xff4D581C),
-        size: 40.0,
+        size: 35.0,
       ),
       trailing: Container(
         child: Row(
@@ -145,7 +145,10 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Text("${_list[index].brand!}, ${_list[index].model!}"),
-                Text(_list[index].idUser!),
+                Text(
+                  _list[index].idUser!,
+                  style: const TextStyle(fontSize: 12.0),
+                ),
                 //todo: VALIDAR con nombre nuevo método.
               ],
             ),

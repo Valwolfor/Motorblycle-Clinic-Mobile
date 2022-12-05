@@ -48,4 +48,33 @@ class UserRepository {
     //     (error, stackTrace) =>
     //         print("$error, con la siguente pila: $stackTrace"));
   }
+
+  Future<void> savePhoto(String uid, String photo) async {
+    await _collectionReference.doc(uid).set(
+      {
+        "photo": photo,
+      },
+      SetOptions(merge: true),
+    );
+  }
+
+  Future<List<UserEntity>> getUserRecords() async {
+    var query = await _collectionReference
+        .withConverter<UserEntity>(
+          fromFirestore: UserEntity.fromFirestore,
+          toFirestore: (value, options) => value.toFirestore(),
+        )
+        .get();
+
+    var users = query.docs.cast().map<UserEntity>((e) {
+      var user = e.data();
+      //Id de la moto en FS, no recuerdo pa qué.
+      user.id = e.id;
+      //buscar el mecánico
+
+      return user;
+    });
+
+    return users.toList();
+  }
 }

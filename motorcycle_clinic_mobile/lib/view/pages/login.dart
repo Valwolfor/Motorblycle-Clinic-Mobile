@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '/controller/request/login_request.dart';
 import '/controller/login_controller.dart';
 import 'moto_records.dart';
-import 'principal.dart';
 
 import '../widgets/logo.dart';
 import '../widgets/app_bar_menu.dart';
@@ -34,7 +33,7 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
         title: const Center(
             child: Text(
           "Ingresar",
-          style: TextStyle(fontSize: 23.0),
+          style: TextStyle(fontSize: 22.0),
         )),
         backgroundColor: const Color(0xff4D581C),
         actions: const <Widget>[
@@ -217,6 +216,10 @@ class _CuerpoLoginState extends State<CuerpoLogin> {
             var pref = await _prefs;
             pref.setString("uid", userInfo.id!);
             pref.setString("name", userInfo.name!);
+            //Sí ya tiene la foto la guarda en pref.
+            if (userInfo.photo != null) {
+              pref.setString("photo", userInfo.photo!);
+            }
             pref.setString("lastName", userInfo.lastName!);
             pref.setString("email", userInfo.email!);
             pref.setBool("admin", userInfo.isAdmin!);

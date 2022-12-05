@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
-import 'package:motorcycle_clinic_mobile/model/entity/motorcycle.dart';
 
+import '/controller/response/list_motos_response.dart';
 import '../widgets/app_bar_menu.dart';
 
 class DetailMotorcycle extends StatefulWidget {
-  final MotorcycleEntity? moto;
+  final MotorcycleResponse? moto;
 
   const DetailMotorcycle({
     Key? key,
@@ -29,7 +29,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
         title: Center(
             child: Text(
           "Historial de : ${widget.moto!.plate}",
-          style: const TextStyle(fontSize: 23.0),
+          style: const TextStyle(fontSize: 20.0),
         )),
         backgroundColor: const Color(0xff4D581C),
         actions: const <Widget>[
@@ -84,7 +84,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
       children: [
         Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
               child: Column(
@@ -95,7 +95,9 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     height: 5.0,
                   ),
                   richTextMoto(
-                      "Año de registro: ", "${widget.moto!.registerYear}"),
+                    "Año de registro: ",
+                    "${widget.moto!.registerYear}",
+                  ),
                 ],
               ),
             ),
@@ -126,7 +128,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
         text: text,
         style: const TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 18.0,
+          fontSize: 16.0,
           color: Colors.black,
         ),
         children: [
@@ -134,7 +136,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
             text: value,
             style: const TextStyle(
               fontWeight: FontWeight.normal,
-              fontSize: 18.0,
+              fontSize: 15.0,
               color: Colors.black,
             ),
           ),
@@ -184,7 +186,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
           leftIcon: const Icon(Icons.article_rounded, color: Colors.white),
           header: Text(
             'Ingreso en: ${widget.moto!.serviceOrdersMaps!["$index"]["date"] == null ? widget.moto!.serviceOrdersMaps!["${index + 1}"]["date"] == null ? widget.moto!.serviceOrdersMaps!["${index + 2}"]["date"] : widget.moto!.serviceOrdersMaps!["${index + 3}"]["date"] : widget.moto!.serviceOrdersMaps!["$index"]["date"]}',
-            style: const TextStyle(fontSize: 21.0, color: Colors.white),
+            style: const TextStyle(fontSize: 18.0, color: Colors.white),
           ),
           headerBackgroundColor: const Color(0xff5DA767),
           headerBackgroundColorOpened: const Color(0xffBA5C0B),
@@ -208,7 +210,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                         vertical: 4.0, horizontal: 10.0),
                     header: const Text(
                       'Diagnóstico',
-                      style: TextStyle(fontSize: 21.0, color: Colors.white),
+                      style: TextStyle(fontSize: 18.0, color: Colors.white),
                     ),
                     content: dxDetail(index),
                     contentHorizontalPadding: 1.0,
@@ -221,7 +223,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                         color: Colors.white),
                     header: const Text('Servicios reagistrados',
                         style: TextStyle(
-                          fontSize: 21.0,
+                          fontSize: 18.0,
                           color: Colors.white,
                         )),
                     headerPadding: const EdgeInsets.symmetric(
@@ -257,28 +259,28 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     Text(
                       "Motivo: ",
                       style: TextStyle(
-                        fontSize: 18.0,
+                        fontSize: 15.0,
                       ),
                     ),
                     Text("Kilometraje: ",
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                         )),
                     Text("Gasolina: ",
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                         )),
                     Text("Ruta: ",
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                         )),
                     Text("Anticipo:",
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                         )),
                     Text("Valor Anticipo:",
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -290,17 +292,17 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["reason"]["reason"]}",
                         style: const TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["reason"]["mileage"]}",
                         style: const TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["reason"]["lvlGas"]}",
                         style: const TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                         )),
                     Text(
                         widget.moto!.serviceOrdersMaps!["$index"]["reason"]
@@ -308,7 +310,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                             ? 'Sí'
                             : 'No',
                         style: const TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                         )),
                     Text(
                         widget.moto!.serviceOrdersMaps!["$index"]["reason"]
@@ -316,12 +318,12 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                             ? 'Sí'
                             : 'No',
                         style: const TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["reason"]["advanceValue"]}",
                         style: const TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -338,7 +340,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                   children: const [
                     Text("Detalle motivo:",
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -350,7 +352,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     Text(
                       "${widget.moto!.serviceOrdersMaps!["$index"]["reason"]["reasonDetail"]}",
                       style: const TextStyle(
-                        fontSize: 18.0,
+                        fontSize: 15.0,
                       ),
                       textAlign: TextAlign.end,
                     ),
@@ -385,13 +387,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Indicadores",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["oilState"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -402,13 +404,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Estado de aceite",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["oilState"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -419,13 +421,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Nivel de aceite",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["oilLvl"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -446,13 +448,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Liquido de frenos",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["brakeFluid"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -463,13 +465,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Liquido de embrague",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["clutchFluid"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -480,13 +482,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Liquido refrigerante",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["coolantFluid"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -507,13 +509,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Espejos",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["mirrows"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -524,13 +526,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Claxón",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["horm"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -541,13 +543,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Tanque",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["tank"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -564,7 +566,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                 child: Text("Luces aptas",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 15.0,
                       fontWeight: FontWeight.bold,
                     )),
               ),
@@ -661,10 +663,10 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
           Row(
             children: const [
               Expanded(
-                child: Text("Lllantas aptas",
+                child: Text("Llantas aptas",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 15.0,
                       fontWeight: FontWeight.bold,
                     )),
               ),
@@ -771,13 +773,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Freno delantero",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["forwardBrake"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -788,13 +790,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Freso trasero",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["backBrake"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -805,13 +807,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Embrague",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["clutch"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -832,13 +834,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Cadena",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["chain"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -849,13 +851,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Bujía",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["sparkPlug"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -866,13 +868,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Batería",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["batery"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -893,13 +895,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Motor",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["motor"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -910,13 +912,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Tapas",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["tapes"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -927,13 +929,13 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
                     const Text("Kit de arrastre",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.bold,
                         )),
                     Text(
                         "${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["dargKit"]}",
                         style: const TextStyle(
-                          fontSize: 16.0,
+                          fontSize: 15.0,
                         )),
                   ],
                 ),
@@ -953,7 +955,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
           ),
           Text("${widget.moto!.serviceOrdersMaps!["$index"]["dx"]["detailDx"]}",
               style: const TextStyle(
-                fontSize: 16.0,
+                fontSize: 15.0,
               )),
         ],
       ),
@@ -965,7 +967,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
     List<dynamic> _servicesList = [];
     _servicesList =
         widget.moto!.serviceOrdersMaps!["$index"]["listServices"]["services"];
-
+//TODO: solucionar tema de scrolling
     return ListView.builder(
       shrinkWrap: true,
       itemCount: _servicesList.length,
@@ -981,14 +983,19 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
         );
       },
     );
-    ;
   }
 
   Widget tileServicios(int index, List<dynamic> servicesList) {
     return ListTile(
       tileColor: const Color(0xffFEFAE0),
-      title: Text("${servicesList[index]["nameService"]}"),
-      subtitle: Text("${servicesList[index]["nameProduct"]}"),
+      title: Text(
+        "${servicesList[index]["nameService"]}",
+        style: const TextStyle(fontSize: 15.0),
+      ),
+      subtitle: Text(
+        "${servicesList[index]["nameProduct"]}",
+        style: const TextStyle(fontSize: 15.0),
+      ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
@@ -1011,8 +1018,14 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Text("${servicesList[index]["priceService"]}"),
-              Text("${servicesList[index]["priceProduct"]}"),
+              Text(
+                "${servicesList[index]["priceService"]}",
+                style: const TextStyle(fontSize: 15.0),
+              ),
+              Text(
+                "${servicesList[index]["priceProduct"]}",
+                style: const TextStyle(fontSize: 15.0),
+              ),
             ],
           ),
         ],

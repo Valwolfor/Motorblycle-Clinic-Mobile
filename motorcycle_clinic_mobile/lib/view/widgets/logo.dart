@@ -24,7 +24,7 @@ class Logo extends StatelessWidget {
         borderRadius: BorderRadius.circular(180.0),
         child: Image.asset(
           'assets/logo.png',
-          width: 250.0,
+          width: 220.0,
         ),
       ),
     );

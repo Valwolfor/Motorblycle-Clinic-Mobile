@@ -42,7 +42,7 @@ class _ViewCustomerState extends State<ViewCustomer> {
           const Center(
             child: Text(
               "Por favor ingrese los datos de cliente. Si el cliente ya está registrado, por favor validar.",
-              style: TextStyle(fontSize: 22.0),
+              style: TextStyle(fontSize: 18.0),
               textAlign: TextAlign.center,
             ),
           ),

@@ -29,7 +29,7 @@ class _IconsBarState extends State<IconsBar> {
           ),
         ],
       ),
-      margin: const EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(6.0),
       child: ClipRRect(
         borderRadius: const BorderRadius.all(
           Radius.circular(35.0),
@@ -58,7 +58,7 @@ class _IconsBarState extends State<IconsBar> {
                   const Text(
                     "Llamanos",
                     style: TextStyle(
-                      fontSize: 18.0,
+                      fontSize: 15.0,
                       color: Colors.white,
                     ),
                   ),
@@ -84,7 +84,7 @@ class _IconsBarState extends State<IconsBar> {
                     const Text(
                       "Unete",
                       style: TextStyle(
-                        fontSize: 18.0,
+                        fontSize: 15.0,
                         color: Colors.white,
                       ),
                     ),
@@ -107,7 +107,7 @@ class _IconsBarState extends State<IconsBar> {
                   const Text(
                     "Compartir",
                     style: TextStyle(
-                      fontSize: 18.0,
+                      fontSize: 15.0,
                       color: Colors.white,
                     ),
                   ),

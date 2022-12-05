@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
             return IconButton(
               icon: const Icon(
                 Icons.menu,
-                size: 32.0,
+                size: 30.0,
               ),
               onPressed: () => Scaffold.of(context)
                   .openDrawer(), //función que llama al drawer.
@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
         title: const Center(
           child: Text(
             "Bienvenido",
-            style: TextStyle(fontSize: 23.0),
+            style: TextStyle(fontSize: 22.0),
           ),
         ),
         actions: const <Widget>[AppBMenu()],
@@ -73,7 +73,7 @@ Widget myBody() {
                   child: Text(
                     "Nuestra aplicación busca facilitar el registro de las ordenes de servicios que llevan los taller de mecánica, específicamente los de motocicletas. Con nuestra App podrás llevar registro de histórico de los ingresos de todos los vehículos que ingresan a tu taller, así como ver una historia clinica de todos los diagnósticos y los servicios prestados en las diferentes ocaciones. ",
                     textAlign: TextAlign.justify,
-                    style: TextStyle(fontSize: 18.0),
+                    style: TextStyle(fontSize: 15.0),
                   ),
                 ),
               ],

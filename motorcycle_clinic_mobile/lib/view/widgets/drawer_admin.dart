@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motorcycle_clinic_mobile/view/widgets/camera_avatar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../pages/home.dart';
@@ -16,9 +17,11 @@ class DrawerAdmin extends StatefulWidget {
 class _DrawerAdminState extends State<DrawerAdmin> {
   final _prefs = SharedPreferences.getInstance();
   final _loginController = LoginController();
+  late String _uid = "";
   late String _name = "";
   late String _lastName = "";
   late String _email = "";
+  late String? _photo = "";
   late bool _isAdmin = false;
 
   @override
@@ -28,8 +31,10 @@ class _DrawerAdminState extends State<DrawerAdmin> {
 //then para recibir el resultado.
     _prefs.then((prefs) {
       setState(() {
+        _uid = prefs.getString("uid") ?? "N/A";
         _name = prefs.getString("name") ?? "N/A";
         _lastName = prefs.getString("lastName") ?? "N/A";
+        _photo = prefs.getString("photo") ?? "N/A";
         _email = prefs.getString("email") ?? "N/A";
         _isAdmin = prefs.getBool("isAdmin") ?? false;
       });
@@ -44,14 +49,14 @@ class _DrawerAdminState extends State<DrawerAdmin> {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            drawerHeader(fullName, _email),
+            drawerHeader(fullName, _email, _uid, _photo),
 
             if (_isAdmin)
               ListTile(
                 leading: const Icon(Icons.person),
                 title: const Text(
                   "Mecánicos",
-                  style: TextStyle(fontSize: 18.0),
+                  style: TextStyle(fontSize: 15.0),
                 ),
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -137,7 +142,7 @@ class _DrawerAdminState extends State<DrawerAdmin> {
                 }),
             ListTile(
                 title: const Text(
-                  "App Versión 0.1.0",
+                  "App Versión 1.0.1",
                   style: TextStyle(fontSize: 16.0),
                 ),
                 onTap: () {
@@ -150,20 +155,13 @@ class _DrawerAdminState extends State<DrawerAdmin> {
     );
   }
 
-  Widget drawerHeader(name, email) {
+  Widget drawerHeader(name, email, uid, photo) {
     return DrawerHeader(
       decoration: const BoxDecoration(
         color: Color(0xff4D581C),
-        // borderRadius: BorderRadius.all(
-        //   Radius.circular(15.0),
-        // ),
       ),
       child: ListTile(
-        leading: const Icon(
-          Icons.person,
-          size: 40.0,
-          color: Colors.white70,
-        ),
+        leading: CameraAvatar(uid, photo: photo),
         title: Text(
           name,
           style: const TextStyle(
