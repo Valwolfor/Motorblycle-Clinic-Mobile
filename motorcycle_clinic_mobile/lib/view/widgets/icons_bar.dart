@@ -48,12 +48,25 @@ class _IconsBarState extends State<IconsBar> {
                   IconButton(
                     icon: const Icon(Icons.phone),
                     color: Colors.white,
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text(
-                        //flutter pub add url_launcher
-                        "Próximante dispondrás de está funcionalidad",
-                      )));
+                    onPressed: () async {
+                      var url = Uri(
+                        scheme: "https",
+                        path:
+                            "//wa.me/send?phone=+573108796935&text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n",
+                      );
+
+                      try {
+                        await launchUrl(url);
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                          "No se pudo abrir whatsapp $e",
+                        )));
+                      }
+                      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      //     content: Text(
+                      //   "Próximante dispondrás de está funcionalidad",
+                      // )));
                     },
                   ),
                   const Text(
