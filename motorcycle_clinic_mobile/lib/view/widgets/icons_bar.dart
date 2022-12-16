@@ -13,7 +13,7 @@ class IconsBar extends StatefulWidget {
 //TODO: Volver botones y darles funcionalidad.
 class _IconsBarState extends State<IconsBar> {
   final Uri _url = Uri.parse(
-      'https://api.whatsapp.com/send/?phone=573108796935&text&type=phone_number&app_absent=0');
+      "https://api.whatsapp.com/send?phone=573108796935&text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20aplicaci%C3%B3n.");
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,20 +50,10 @@ class _IconsBarState extends State<IconsBar> {
                     icon: const Icon(Icons.phone),
                     color: Colors.white,
                     onPressed: () async {
-                      var url = Uri(
-                        scheme: "https",
-                        path:
-                            "//wa.me/send?phone=+573108796935&text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n",
-                      );
-
                       try {
                         await launchUrl(
-                          url,
-                          mode: LaunchMode.inAppWebView,
-                          webViewConfiguration: const WebViewConfiguration(
-                              headers: <String, String>{
-                                'my_header_key': 'my_header_value'
-                              }),
+                          _url,
+                          mode: LaunchMode.externalApplication,
                         );
                       } catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
