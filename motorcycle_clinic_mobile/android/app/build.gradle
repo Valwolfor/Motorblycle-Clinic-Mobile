@@ -1,3 +1,8 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
 def localProperties =  new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -30,6 +35,8 @@ def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
+//No vaya eliminar esto. 
+
 
 android {
     compileSdkVersion 33
@@ -75,7 +82,7 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.release
         }
-    }
+    } 
     namespace 'com.motorcycle_clinic_mobile'
 }
 
@@ -85,4 +92,6 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
+    implementation 'com.google.firebase:firebase-analytics'
 }

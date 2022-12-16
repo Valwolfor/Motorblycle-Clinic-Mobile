@@ -9,6 +9,42 @@
       "client_info": {
         "mobilesdk_app_id": "1:234873274464:android:620c155b89dd70fca94305",
         "android_client_info": {
+          "package_name": "com.example.motorcycle_clinic_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234873274464-qrdlua3t6k4tiu9po40brib2nhv19em1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXG22U58jBE2Pr8WCtgXFVxw2xzqml89A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234873274464-qrdlua3t6k4tiu9po40brib2nhv19em1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "234873274464-7p9mccv0ogovtvb6tguuth2csspjqcim.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.motorcycleClinicMobile"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234873274464:android:1c260181cb3eaf3fa94305",
+        "android_client_info": {
           "package_name": "com.motorcycle_clinic_mobile"
         }
       },
@@ -34,7 +70,7 @@
               "client_id": "234873274464-7p9mccv0ogovtvb6tguuth2csspjqcim.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.motorcycleClinicMobile"
+                "bundle_id": "com.example.motorcycleClinicMobile"
               }
             }
           ]
