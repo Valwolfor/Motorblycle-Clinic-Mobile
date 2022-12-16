@@ -963,14 +963,8 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
   }
 
   Widget builderTileServices(int index) {
-<<<<<<< HEAD
-    //TODO: lanzar exception
-    List<dynamic> _servicesList = [];
-    _servicesList =
-=======
     List<dynamic> servicesList = [];
     servicesList =
->>>>>>> 1.0.1
         widget.moto!.serviceOrdersMaps!["$index"]["listServices"]["services"];
 //TODO: solucionar tema de scrolling
     return ListView.builder(

@@ -135,42 +135,6 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
         color: Color(0xff4D581C),
         size: 35.0,
       ),
-<<<<<<< HEAD
-      trailing: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text("${_list[index].brand!}, ${_list[index].model!}"),
-                Text(
-                  _list[index].idUser!,
-                  style: const TextStyle(fontSize: 12.0),
-                ),
-                //todo: VALIDAR con nombre nuevo método.
-              ],
-            ),
-            //TODO: futuro, verificar si está en taller. con alert de confirm
-            //TODO: y bloqueo si confirmación recibe el true desde BD al registrarlos, todos tienen por defecto esto
-            // Switch(
-            // This bool value toggles the switch.
-            // value: _isChecked[indexTile],
-            // activeColor: const Color(0xffBA5C0B),
-            // onChanged: (bool value) {
-            // This is called when the user toggles the switch.
-            // _listServices![indexTile]["Aprobacion"] = value;
-            // _isChecked[indexTile] = _listServices![indexTile]["Aprobacion"];
-            // setState(() {
-            //   _isChecked[indexTile];
-            // }, value: null,);
-            // },
-            // )
-          ],
-        ),
-=======
       trailing: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         mainAxisSize: MainAxisSize.min,
@@ -200,7 +164,6 @@ class _MotorcycleRecordsState extends State<MotorcycleRecords> {
           // },
           // )
         ],
->>>>>>> 1.0.1
       ),
       onLongPress: () {
         var moto = _list[index];

@@ -107,15 +107,9 @@ class _ViewDxState extends State<ViewDx> {
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.ideographic,
                 children: [
-<<<<<<< HEAD
-                  Flexible(child: idicadoresRadioButton()),
-                  Flexible(child: estadoAceiteRadioButton()),
-                  Flexible(child: oilLevelRadioButton()),
-=======
                   idicadoresRadioButton(),
                   oilStateRadioButton(),
                   oilLevelRadioButton(),
->>>>>>> 1.0.1
                 ],
               ),
             ),
