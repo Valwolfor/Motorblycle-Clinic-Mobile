@@ -36,10 +36,10 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
           AppBMenu(),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Container(
               margin: const EdgeInsets.symmetric(
                 vertical: 20.0,
                 horizontal: 10.0,
@@ -54,25 +54,9 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
               height: 200.0,
               child: motoDetail(),
             ),
-            Container(
-              margin: const EdgeInsets.only(
-                left: 5.0,
-                right: 5.0,
-                bottom: 10.0,
-              ),
-              padding: const EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color(0xffBA5C0B),
-                ),
-                color: const Color(0xff5DA767),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              // height: 570.0,
-              child: listBuilderMotos(),
-            ),
-          ],
-        ),
+          ),
+          sliverBuilderMotos(),
+        ],
       ),
     );
   }
@@ -145,101 +129,117 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
     );
   }
 
-  Widget listBuilderMotos() {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: widget.moto!.serviceOrdersMaps!.length,
-      itemBuilder: (context, index) {
-        index = index + 1;
-        return Container(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
-          child: Material(
-            borderOnForeground: true,
-            color: const Color(0xffFEFAE0),
-            elevation: 18,
-            borderRadius: BorderRadius.circular(10.0),
-            shadowColor: Colors.black,
-            child: arcodeonDetail(index),
-          ),
-        );
-      },
+  Widget sliverBuilderMotos() {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          index = index + 1;
+          return expansionTileDetail(index);
+        },
+        childCount: widget.moto!.serviceOrdersMaps!.length,
+      ),
     );
   }
 
-  Widget arcodeonDetail(int index) {
-    return Accordion(
-      maxOpenSections: 1,
-      // headerBackgroundColorOpened: Colors.black54,
-      scaleWhenAnimating: true,
-      openAndCloseAnimation: true,
-      headerPadding:
-          const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-      sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
-      sectionClosingHapticFeedback: SectionHapticFeedback.light,
-      paddingBetweenClosedSections: 5.0,
-      paddingListTop: 5.0,
-      paddingListBottom: 5.0,
-      paddingListHorizontal: 5.0,
-      children: [
-        AccordionSection(
-          isOpen: false,
-          leftIcon: const Icon(Icons.article_rounded, color: Colors.white),
-          header: Text(
-            'Ingreso en: ${widget.moto!.serviceOrdersMaps!["$index"]["date"] == null ? widget.moto!.serviceOrdersMaps!["${index + 1}"]["date"] == null ? widget.moto!.serviceOrdersMaps!["${index + 2}"]["date"] : widget.moto!.serviceOrdersMaps!["${index + 3}"]["date"] : widget.moto!.serviceOrdersMaps!["$index"]["date"]}',
-            style: const TextStyle(fontSize: 18.0, color: Colors.white),
-          ),
-          headerBackgroundColor: const Color(0xff5DA767),
-          headerBackgroundColorOpened: const Color(0xffBA5C0B),
-          contentBorderColor: const Color(0xff5DA767),
-          contentBackgroundColor: const Color(0xffFEFAE0),
-          contentHorizontalPadding: 1.0,
-          content: Column(
+  Widget expansionTileDetail(int index) {
+    return Container(
+      margin: const EdgeInsets.only(left: 5.0, right: 5.0, bottom: 15.0),
+      child: Material(
+        elevation: 5.0,
+        shadowColor: const Color(0xffBA5C0B),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
+          child: ExpansionTile(
+            leading: const Icon(
+              Icons.article_rounded,
+              color: Colors.white,
+            ),
+            title: Text(
+              'Ingreso en: ${widget.moto!.serviceOrdersMaps!["$index"]["date"]}',
+              style: const TextStyle(fontSize: 18.0, color: Colors.white),
+            ),
+            subtitle: Text(
+              "Mecánico: ${widget.moto!.idUser}",
+              style: const TextStyle(color: Colors.white),
+            ),
+            backgroundColor: const Color(0xff4D581C),
+            collapsedBackgroundColor: const Color(0xffBA5C0B),
             children: [
-              reasonDetail(index),
-              Accordion(
-                maxOpenSections: 1,
-                headerBackgroundColorOpened: Colors.black54,
-                children: [
-                  AccordionSection(
-                    isOpen: false,
-                    leftIcon: const Icon(Icons.medical_information,
-                        color: Colors.white),
-                    headerBackgroundColor: const Color(0xffBA5C0B),
-                    headerBackgroundColorOpened: const Color(0xffEEA15E),
-                    headerPadding: const EdgeInsets.symmetric(
-                        vertical: 4.0, horizontal: 10.0),
-                    header: const Text(
-                      'Diagnóstico',
-                      style: TextStyle(fontSize: 18.0, color: Colors.white),
+              Container(
+                color: const Color(0xffFEFAE0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
+                child: Column(
+                  children: [
+                    reasonDetail(index),
+                    const SizedBox(
+                      height: 10.0,
                     ),
-                    content: dxDetail(index),
-                    contentHorizontalPadding: 1.0,
-                    contentBorderColor: Colors.black54,
-                    contentBackgroundColor: const Color(0xffFEFAE0),
-                  ),
-                  AccordionSection(
-                    isOpen: false,
-                    leftIcon: const Icon(Icons.home_repair_service,
-                        color: Colors.white),
-                    header: const Text('Servicios reagistrados',
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.white,
-                        )),
-                    headerPadding: const EdgeInsets.symmetric(
-                        vertical: 4.0, horizontal: 10.0),
-                    headerBackgroundColor: const Color(0xffBA5C0B),
-                    headerBackgroundColorOpened: const Color(0xffEEA15E),
-                    contentBackgroundColor: const Color(0xffFEFAE0),
-                    contentHorizontalPadding: 5.0,
-                    content: builderTileServices(index),
-                  ),
-                ],
+                    //Diagnóstico
+                    Material(
+                      elevation: 5.0,
+                      shadowColor: const Color(0xffBA5C0B),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: ExpansionTile(
+                          title: const Text("Diagnóstico",
+                              style: TextStyle(
+                                  fontSize: 16.0, color: Colors.white)),
+                          backgroundColor: const Color(0xff4D581C),
+                          collapsedBackgroundColor: const Color(0xffBA5C0B),
+                          children: [
+                            Container(
+                              color: const Color(0xffFEFAE0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: dxDetail(index),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    //Servicios registrados
+                    Material(
+                      elevation: 5.0,
+                      shadowColor: const Color(0xffBA5C0B),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: ExpansionTile(
+                          title: const Text("Servicios registrados",
+                              style: TextStyle(
+                                  fontSize: 16.0, color: Colors.white)),
+                          backgroundColor: const Color(0xff4D581C),
+                          collapsedBackgroundColor: const Color(0xffBA5C0B),
+                          children: [
+                            Container(
+                              color: const Color(0xffFEFAE0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: builderTileServices(index),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
         ),
-      ],
+      ),
     );
   }
 
@@ -966,7 +966,7 @@ class _DetailMotorcycleState extends State<DetailMotorcycle> {
     List<dynamic> servicesList = [];
     servicesList =
         widget.moto!.serviceOrdersMaps!["$index"]["listServices"]["services"];
-//TODO: solucionar tema de scrolling
+
     return ListView.builder(
       shrinkWrap: true,
       itemCount: servicesList.length,
