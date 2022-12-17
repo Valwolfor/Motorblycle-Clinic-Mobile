@@ -79,6 +79,8 @@ class MotorcycleRepository {
       var idDoc = plate.id;
       var data = plate.data();
 
+      //TODO: documentar lo del index, no recuerdo cómo lo hice.
+
       int index;
 
       index = data.serviceOrdersMaps.length;

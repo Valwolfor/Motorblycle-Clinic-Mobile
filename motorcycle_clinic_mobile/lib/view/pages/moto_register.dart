@@ -23,7 +23,7 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
     with SingleTickerProviderStateMixin {
   //el with es para darle contexto al this.
   int selectedPage = 0;
-  //TODO:No sé para que es el ScaffoldState
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
   //controllers
   TabController? _tabController;
@@ -104,6 +104,7 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
           padding: const EdgeInsets.only(top: 10.0),
           //Para evitar la funcionalidad de los botones de las tabs
           child: IgnorePointer(
+            //TODO: quitarlo para lanzamientos
             ignoring: false,
             child: TabBar(
               indicator: const BoxDecoration(
@@ -207,7 +208,9 @@ class _RegisterMotorcycleState extends State<RegisterMotorcycle>
         children: [
           SingleChildScrollView(
             child: ViewCustomer(
-                tabController: _tabController, idCustomer: _idCustomer),
+              tabController: _tabController,
+              idCustomer: _idCustomer,
+            ),
           ),
           SingleChildScrollView(
             child: ViewMoto(

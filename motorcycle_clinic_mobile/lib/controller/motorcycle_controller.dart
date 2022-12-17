@@ -32,6 +32,41 @@ class MotorcycleController {
       index = int.parse(query) + 1;
     }
 
+    // if (await _motorcycleRepository.findByPlate(request.plate!) == null) {
+    //   try {
+    //     Map<String, dynamic> serviceOrders;
+    //     serviceOrders = {
+    //       "date": request.serviceOrder!.date,
+    //       "idUser": request.serviceOrder!.idUser,
+    //       "reason": {},
+    //       "dx": {},
+    //       "listServices": []
+    //     };
+
+    //     String key = index.toString();
+    //     Map<String, Map<String, dynamic>>? serviceOrdersMaps = {};
+    //     serviceOrdersMaps[key] = serviceOrders;
+
+    //     _motorcycleRepository.newMotorcycle(
+    //       MotorcycleEntity(
+    //           plate: request.plate,
+    //           idMotor: request.idMotor,
+    //           idchassis: request.idchassis,
+    //           brand: request.brand,
+    //           model: request.model,
+    //           registerYear: request.registerYear,
+    //           idOwner: request.idOwner,
+    //           idUser: request.idUser,
+    //           serviceOrdersMaps: serviceOrdersMaps),
+    //     );
+    //   } catch (e) {
+    //     rethrow;
+    //   }
+    // } else {
+    //   return Future.error(
+    //       "Ya existe una moto con la placa ${request.plate!} registrada");
+    // }
+
     try {
       await _motorcycleRepository.findByPlate(request.plate!);
 
@@ -43,6 +78,7 @@ class MotorcycleController {
       Map<String, dynamic> serviceOrders;
       serviceOrders = {
         "date": request.serviceOrder!.date,
+        "idUser": request.serviceOrder!.idUser,
         "reason": {},
         "dx": {},
         "listServices": []
@@ -69,10 +105,12 @@ class MotorcycleController {
 
   //veriticar existencia del vehículo y agrega nueva OS
   Future<MotorcycleRequest> getMotorcycle(MotorcycleRequest request) async {
-    var bike = await _motorcycleRepository.findByPlate(request.plate!);
+    var bike =
+        await _motorcycleRepository.findByPlate(request.plate!.toUpperCase());
 
     ServiceOrderRequest serviceOrder = ServiceOrderRequest();
     serviceOrder.date = "";
+    serviceOrder.idUser = request.idUser;
     serviceOrder.reason = <String, dynamic>{};
     serviceOrder.dx = <String, dynamic>{};
     serviceOrder.listServices = [<String, dynamic>{}];

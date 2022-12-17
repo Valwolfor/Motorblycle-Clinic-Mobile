@@ -58,13 +58,9 @@ class _IconsBarState extends State<IconsBar> {
                       } catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
-                          "No se pudo abrir whatsapp $e",
+                          "No se pudo abrir whatsapp por el error: $e",
                         )));
                       }
-                      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      //     content: Text(
-                      //   "Próximante dispondrás de está funcionalidad",
-                      // )));
                     },
                   ),
                   const Text(

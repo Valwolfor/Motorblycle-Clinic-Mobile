@@ -40,6 +40,7 @@ class _ViewMotoState extends State<ViewMoto> {
     _prefs.then((pref) {
       setState(() {
         widget.motorcycle!.idUser = pref.getString("uid");
+        widget.serviceOrder!.idUser = pref.getString("uid");
       });
     });
   }
@@ -112,7 +113,7 @@ class _ViewMotoState extends State<ViewMoto> {
       flex: 2,
       child: TextFormField(
         controller: plateController,
-        //TODO: convertir mayúsculas, también motor y chasis
+        textCapitalization: TextCapitalization.characters,
         //se pone azul al selecionarlo
         validator: (value) {
           if (value == null || value.isEmpty) {
@@ -147,7 +148,7 @@ class _ViewMotoState extends State<ViewMoto> {
               borderSide: const BorderSide(color: Color(0xffBA5C0B))),
         ),
         onSaved: (newValue) {
-          widget.motorcycle!.plate = newValue!;
+          widget.motorcycle!.plate = newValue!.toUpperCase();
         },
       ),
     );
@@ -159,7 +160,7 @@ class _ViewMotoState extends State<ViewMoto> {
         padding: const EdgeInsets.only(bottom: 35.0),
         child: IconButton(
           onPressed: () async {
-            //Alista la variable pa la moto.a
+            //Alista la variable pa la moto
             try {
               widget.motorcycle!.plate = plateController.text;
               var msj = ScaffoldMessenger.of(context);
@@ -427,7 +428,7 @@ class _ViewMotoState extends State<ViewMoto> {
           } catch (e) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(e.toString()),
+                content: Text("No se pudo registrar por : ${e.toString()}"),
               ),
             );
           }

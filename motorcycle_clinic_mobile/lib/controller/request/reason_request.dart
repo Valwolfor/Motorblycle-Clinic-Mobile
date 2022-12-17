@@ -1,5 +1,6 @@
 class ReasonRequest {
   late String reason;
+  late String idUser;
   late int mileage;
   late String reasonDetail;
   late String lvlGas;
